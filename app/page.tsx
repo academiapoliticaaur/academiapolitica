@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Users, Shield, LayoutDashboard, GraduationCap, Zap, CheckCircle } from "lucide-react";
+import { BookOpen, Users, Shield, Star, LayoutDashboard, GraduationCap, Zap, CheckCircle } from "lucide-react";
 import { AcademiaGuide } from "@/components/common/academia-guide";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -62,8 +62,8 @@ export default async function HomePage() {
         {/* Banner principal */}
         <section className="w-full">
           <Image
-            src="/banner-academia-aur.png"
-            alt="Academia Politica AUR — Cunoaștem. Înțelegem. Acționăm pentru România!"
+            src="/academiapoliticaaur.png"
+            alt="Academia Politica AUR — Cunoastem. Intelegem. Actionam pentru Romania!"
             width={1516}
             height={530}
             className="w-full h-auto"
@@ -72,64 +72,83 @@ export default async function HomePage() {
         </section>
 
         {/* Hero instituțional */}
-        <section className="py-16 px-4 bg-white border-b text-center">
-          <div className="container mx-auto max-w-3xl">
-            <div className="flex justify-center mb-8">
-              <Image
-                src="/logo-academia-politica.png"
-                alt="Academia Politică Titu Maiorescu"
-                width={220}
-                height={220}
-                className="drop-shadow-md"
-              />
-            </div>
+        <section className="py-16 px-4 bg-white border-b">
+          <div className="container mx-auto max-w-5xl">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
 
-            <p className="text-xl font-black tracking-[0.2em] text-[#1a2b5e] uppercase mb-1">
-              Titu Maiorescu
-            </p>
+              {/* Stânga — text */}
+              <div className="text-center md:text-left">
+                <div className="flex justify-center md:justify-start mb-6">
+                  <Image
+                    src="/logo_academia_politica_titu_maiorescu_transparent.png"
+                    alt="Academia Politică Titu Maiorescu"
+                    width={180}
+                    height={180}
+                    style={{ width: 180, height: "auto" }}
+                    className="drop-shadow-md"
+                  />
+                </div>
 
-            <div className="w-16 h-0.5 bg-yellow-500 mx-auto my-6" />
+                <p className="text-lg font-black tracking-[0.2em] text-[#1a2b5e] uppercase mb-1">
+                  Titu Maiorescu
+                </p>
+                <div className="w-16 h-0.5 bg-yellow-500 mb-6" />
 
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-snug mb-6">
-              Ești pasionat de politică, administrație publică, legislație,
-              relații internaționale, politică externă sau securitate?
-            </h1>
+                <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-snug mb-6">
+                  Ești pasionat de politică, administrație publică, legislație,
+                  relații internaționale, politică externă sau securitate?
+                </h1>
 
-            <p className="text-gray-500 max-w-2xl mx-auto leading-relaxed mb-10">
-              Academia Politică din cadrul Institutului Conservator „Mihai Eminescu" reîncepe
-              modulele de formare, dedicate celor care își doresc să se pregătească pentru o
-              carieră în domeniul public ori să se implice activ în viața comunității și în
-              procesul democratic.
-            </p>
+                <p className="text-gray-500 leading-relaxed mb-8">
+                  Academia Politică din cadrul Institutului Conservator „Mihai Eminescu" reîncepe
+                  modulele de formare, dedicate celor care își doresc să se pregătească pentru o
+                  carieră în domeniul public ori să se implice activ în viața comunității și în
+                  procesul democratic.
+                </p>
 
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-white gap-2" asChild>
-                <Link href="/courses">
-                  <BookOpen size={20} />
-                  Explorează cursurile
-                </Link>
-              </Button>
-              {!user && (
-                <Button size="lg" variant="outline" className="border-gray-300 text-gray-700" asChild>
-                  <Link href="/register">Înscrie-te gratuit</Link>
-                </Button>
-              )}
-              {user && accountType === "member" && profileId && (
-                <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-white gap-2" asChild>
-                  <Link href={`/cursant/${profileId}`}>
-                    <GraduationCap size={20} />
-                    Zona mea de cursuri
-                  </Link>
-                </Button>
-              )}
-              {user && (accountType === "formator" || accountType === "lector") && (
-                <Button size="lg" className="bg-indigo-500 hover:bg-indigo-600 text-white gap-2" asChild>
-                  <Link href="/dashboard/grupuri">
-                    <Users size={20} />
-                    Grupurile mele
-                  </Link>
-                </Button>
-              )}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-white gap-2" asChild>
+                    <Link href="/courses">
+                      <BookOpen size={20} />
+                      Explorează cursurile
+                    </Link>
+                  </Button>
+                  {!user && (
+                    <Button size="lg" variant="outline" className="border-gray-300 text-gray-700" asChild>
+                      <Link href="/register">Înscrie-te gratuit</Link>
+                    </Button>
+                  )}
+                  {user && accountType === "member" && profileId && (
+                    <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-white gap-2" asChild>
+                      <Link href={`/cursant/${profileId}`}>
+                        <GraduationCap size={20} />
+                        Zona mea de cursuri
+                      </Link>
+                    </Button>
+                  )}
+                  {user && (accountType === "formator" || accountType === "lector") && (
+                    <Button size="lg" className="bg-indigo-500 hover:bg-indigo-600 text-white gap-2" asChild>
+                      <Link href="/dashboard/grupuri">
+                        <Users size={20} />
+                        Grupurile mele
+                      </Link>
+                    </Button>
+                  )}
+                </div>
+              </div>
+
+              {/* Dreapta — imagine verticală */}
+              <div className="flex justify-center">
+                <Image
+                  src="/academiapoliticavertical.png"
+                  alt="Academia Politica AUR"
+                  width={420}
+                  height={560}
+                  style={{ width: "100%", maxWidth: 420, height: "auto" }}
+                  className="drop-shadow-xl"
+                />
+              </div>
+
             </div>
           </div>
         </section>
