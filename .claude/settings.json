@@ -1,0 +1,28 @@
+{
+  "model": "claude-sonnet-4-6",
+  "permissions": {
+    "allow": [
+      "Bash(git commit -m ' *)",
+      "WebFetch(domain:ailiteracy.everydai.ro)",
+      "Bash(git commit *)",
+      "Bash(Get-ChildItem -Path \"d:\\\\AI-LITERACY-1MILLION\" -Recurse -Directory)",
+      "Bash(Select-Object -First 20)",
+      "Bash(grep -v \"\\\\.$\")",
+      "Bash(git tag *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\mpand\\\\.claude\\\\projects\\\\d--AI-LITERACY-1MILLION\\\\memory\\\\\" -Filter \"*.md\" -File | Select-Object FullName)",
+      "Bash(ls next.config* instrumentation*)",
+      "Bash(cat next.config.ts)",
+      "Bash(cat next.config.js)",
+      "Bash(npm install *)",
+      "Bash(npm list *)",
+      "Bash(npx vitest *)",
+      "WebFetch(domain:www.googleapis.com)",
+      "Bash(curl -s \"https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://ailiteracy.everydai.ro&strategy=mobile\" -o mobile.json)",
+      "Bash(echo \"Mobile fetch done, status: $?\")",
+      "Bash(curl -s \"https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://ailiteracy.everydai.ro&strategy=desktop\" -o desktop.json)",
+      "Bash(echo \"Desktop fetch done, status: $?\")",
+      "Bash(git rm *)",
+      "Read(//d/AI-LITERACY-1MILLION/lib/admin/**)"
+    ]
+  }
+}

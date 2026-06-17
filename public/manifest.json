@@ -1,0 +1,52 @@
+{
+  "name": "Ami & Moti — Platformă Educațională",
+  "short_name": "Ami & Moti",
+  "description": "Cursuri, lecții și activități interactive pentru copiii din clasele 0–8.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#0d9488",
+  "lang": "ro",
+  "categories": ["education", "kids"],
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Cursuri",
+      "url": "/courses",
+      "description": "Explorează cursurile disponibile"
+    },
+    {
+      "name": "Intră în clasă",
+      "url": "/clasa",
+      "description": "Accesează clasa ca elev"
+    }
+  ]
+}

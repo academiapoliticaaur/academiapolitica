@@ -1,0 +1,43 @@
+name: Cleanup Vercel Deployments
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Vercel deployment
+        run: sleep 120
+
+      - name: Keep only last 2 deployments
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          DEPLOYMENTS=$(curl -s \
+            -H "Authorization: Bearer $VERCEL_TOKEN" \
+            "https://api.vercel.com/v6/deployments?projectId=$VERCEL_PROJECT_ID&limit=50&target=production" \
+            | jq -r '.deployments[].uid')
+
+          if [ -z "$DEPLOYMENTS" ]; then
+            echo "Niciun deployment găsit."
+            exit 0
+          fi
+
+          COUNT=0
+          for DEP_ID in $DEPLOYMENTS; do
+            COUNT=$((COUNT + 1))
+            if [ $COUNT -gt 2 ]; then
+              echo "Șterg deployment: $DEP_ID"
+              curl -s -X DELETE \
+                -H "Authorization: Bearer $VERCEL_TOKEN" \
+                "https://api.vercel.com/v13/deployments/$DEP_ID" \
+                > /dev/null
+            else
+              echo "Păstrez deployment $COUNT: $DEP_ID"
+            fi
+          done
+
+          echo "Gata. Păstrate: 2, șterse: $((COUNT - 2 > 0 ? COUNT - 2 : 0))"

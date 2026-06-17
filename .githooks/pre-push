@@ -1,0 +1,13 @@
+#!/bin/sh
+# pre-push hook — curata cache-ul Turbopack inainte de push
+# Elimina .next/dev/cache (poate ajunge la 800MB+) dar pastreaza build-ul de productie
+
+CACHE_DIR=".next/dev/cache"
+
+if [ -d "$CACHE_DIR" ]; then
+  echo "🧹 Curatare cache dev (.next/dev/cache)..."
+  rm -rf "$CACHE_DIR"
+  echo "✓ Cache sters. Spatiu eliberat."
+fi
+
+exit 0

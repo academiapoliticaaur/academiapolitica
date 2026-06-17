@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git add *)",
+      "Bash(node -e \"require\\('sharp'\\); console.log\\('sharp disponibil'\\)\")",
+      "Bash(npm run *)",
+      "Bash(node -e \"const sharp = require\\('sharp'\\); sharp\\('public/Hello.png'\\).metadata\\(\\).then\\(m => console.log\\(JSON.stringify\\(m, null, 2\\)\\)\\)\")"
+    ]
+  }
+}
