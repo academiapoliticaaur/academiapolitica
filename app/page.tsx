@@ -61,13 +61,11 @@ export default async function HomePage() {
 
         {/* Banner principal */}
         <section className="w-full">
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/academiapoliticaaur.png"
             alt="Academia Politica AUR — Cunoastem. Intelegem. Actionam pentru Romania!"
-            width={1516}
-            height={530}
             className="w-full h-auto"
-            priority
           />
         </section>
 
