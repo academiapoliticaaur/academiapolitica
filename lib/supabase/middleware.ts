@@ -1,4 +1,4 @@
-import { createServerClient } from "@supabase/ssr";
+﻿import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function updateSession(request: NextRequest) {
@@ -33,7 +33,7 @@ export async function updateSession(request: NextRequest) {
 
   const parentRoutes = ["/dashboard"];
   const adminRoutes = ["/admin"];
-  const childRoutes = ["/child"];
+  const childRoutes = ["/cursant"];
 
   const isProtected =
     parentRoutes.some((r) => pathname.startsWith(r)) ||

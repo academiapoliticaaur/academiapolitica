@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -72,7 +72,7 @@ export async function GET() {
   return new NextResponse(JSON.stringify(exportData, null, 2), {
     headers: {
       "Content-Type": "application/json; charset=utf-8",
-      "Content-Disposition": `attachment; filename="datele-mele-ami-moti-${new Date().toISOString().split("T")[0]}.json"`,
+      "Content-Disposition": `attachment; filename="datele-mele-academia-aur-${new Date().toISOString().split("T")[0]}.json"`,
     },
   });
 }

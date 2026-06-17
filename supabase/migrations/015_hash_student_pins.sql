@@ -1,6 +1,6 @@
--- Migration 015: Nulare PIN-uri elevi plain-text
+﻿-- Migration 015: Nulare PIN-uri elevi plain-text
 -- PIN-urile existente nu pot fi recuperate ca hash-uri retroactiv.
--- De la această migrație, student_pin stochează SHA-256('ami-moti-elev:' || pin).
+-- De la această migrație, student_pin stochează SHA-256('academia-aur-elev:' || pin).
 -- Profesorii trebuie să regenereze PIN-urile elevilor (buton RefreshCw din UI).
 
 UPDATE class_students

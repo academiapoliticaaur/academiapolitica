@@ -1,8 +1,8 @@
-import { notFound, redirect } from "next/navigation";
+﻿import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { ArrowLeft, CheckCircle, BookOpen, Trophy, TrendingUp } from "lucide-react";
-import { AmiMotiGuide } from "@/components/common/ami-moti-guide";
+import { AcademiaGuide } from "@/components/common/academia-guide";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Progres detaliat" };
@@ -214,14 +214,14 @@ export default async function ChildProgressPage({ params }: PageProps) {
         )}
       </div>
 
-      <AmiMotiGuide
-        variant={totalThisWeek >= 3 ? "moti" : totalCompleted === 0 ? "ami" : "discovery"}
+      <AcademiaGuide
+        variant={totalThisWeek >= 3 ? "tip" : totalCompleted === 0 ? "info" : "discovery"}
         message={
           totalCompleted === 0
-            ? `${child.display_name} nu a început niciun curs încă. Mergi în zona copilului și porniți prima lecție împreună — primele 10 XP sunt la un click distanță!`
+            ? `${child.display_name} nu a început niciun curs încă. Accesează zona cursantului și pornește prima lecție — primele 10 XP sunt la un click distanță!`
             : totalThisWeek >= 3
-            ? `Bravo! ${child.display_name} a completat ${totalThisWeek} lecții săptămâna aceasta — eu, Moti, sunt impresionat! Continuați ritmul! 🔥`
-            : `Urmărești progresul lui ${child.display_name} — apasă pe un modul pentru a vedea detaliile fiecărei lecții. Fiecare lecție finalizată înseamnă +10 XP!`
+            ? `Bravo! ${child.display_name} a completat ${totalThisWeek} lecții săptămâna aceasta — continuați ritmul! 🔥`
+            : `Urmărești progresul cursantului — apasă pe un modul pentru a vedea detaliile fiecărei lecții. Fiecare lecție finalizată înseamnă +10 XP!`
         }
       />
 

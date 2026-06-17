@@ -1,4 +1,4 @@
-export const runtime = "nodejs";
+﻿export const runtime = "nodejs";
 export const maxDuration = 60;
 
 import { NextRequest, NextResponse } from "next/server";
@@ -116,14 +116,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ error: "Date curriculum invalide" }, { status: 400 });
   }
 
-  const validAudiences = ["children", "invatator", "profesor", "all"];
+  const validAudiences = ["children", "formator", "lector", "all"];
   const audience: string = validAudiences.includes(curriculum.audience) ? curriculum.audience : "children";
 
   function normalizeAgeGroup(raw: string | undefined | null): "0-4" | "5-8" {
     const s = (raw ?? "").toLowerCase();
     if (s.includes("0-4") || s.includes("0–4") || s.includes("primar") || s.includes("0 4")) return "0-4";
     if (s.includes("5-8") || s.includes("5–8") || s.includes("gimna") || s.includes("5 8")) return "5-8";
-    if (audience === "invatator") return "0-4";
+    if (audience === "formator") return "0-4";
     return "5-8";
   }
   const ageGroup = normalizeAgeGroup(curriculum.age_group);

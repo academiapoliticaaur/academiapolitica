@@ -1,11 +1,11 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Shield, Users, Star, BookOpen, GraduationCap, Zap, Heart, CheckCircle } from "lucide-react";
-import { AmiMotiGuide } from "@/components/common/ami-moti-guide";
+import { AcademiaGuide } from "@/components/common/academia-guide";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Despre platformă — Ami & Moti",
+  title: "Despre platformă — Academia Politica AUR",
   description: "Platformă educațională românească pentru copiii din clasele 0–8. Cursuri de AI literacy, lecții video, prezentări și quiz-uri interactive.",
 };
 
@@ -39,9 +39,9 @@ export default function DesprePage() {
             </Button>
           </div>
           <div className="mt-8 max-w-xl mx-auto">
-            <AmiMotiGuide
-              variant="moti"
-              message="Eu, Moti, te ghidez! Platforma Ami & Moti a fost creată special pentru copiii din România — să înveți despre AI poate fi o adevărată aventură!"
+            <AcademiaGuide
+              variant="tip"
+              message="Eu, Moti, te ghidez! Platforma Academia Politica AUR a fost creată special pentru copiii din România — să înveți despre AI poate fi o adevărată aventură!"
             />
           </div>
         </div>
@@ -119,17 +119,17 @@ export default function DesprePage() {
               </div>
             </div>
 
-            {/* Pentru cadre didactice */}
+            {/* Pentru formatori */}
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center">
                   <GraduationCap size={20} className="text-indigo-600" />
                 </div>
-                <h3 className="text-xl font-bold text-indigo-800">Pentru cadre didactice</h3>
+                <h3 className="text-xl font-bold text-indigo-800">Pentru formatori</h3>
               </div>
               <div className="space-y-4">
                 {[
-                  { step: "1", text: "Înregistrezi cont ca Învățător (cls. 0–4) sau Profesor Gimnaziu (cls. 5–8)" },
+                  { step: "1", text: "Înregistrezi cont ca Formator (cls. 0–4) sau Profesor Gimnaziu (cls. 5–8)" },
                   { step: "2", text: "Contul este aprobat de administrator — primești email de confirmare" },
                   { step: "3", text: "Creezi o clasă virtuală cu un cod unic de acces pentru elevi" },
                   { step: "4", text: "Elevii intră pe /clasa cu codul clasei, fără să creeze cont" },
@@ -218,7 +218,7 @@ export default function DesprePage() {
               </p>
               <ul className="space-y-3">
                 {[
-                  "Cod clasă unic ales de profesor (4–12 caractere)",
+                  "Cod grup unic ales de profesor (4–12 caractere)",
                   "Elevi adăugați cu nume și cod personal",
                   "Cursuri asignate din catalogul platformei",
                   "Elevi accesează /clasa → cod → nume → cursuri",
@@ -235,7 +235,7 @@ export default function DesprePage() {
               <p className="text-sm font-bold text-emerald-700 uppercase tracking-wider mb-4">Flux de acces elev</p>
               <div className="space-y-3">
                 {[
-                  { step: "1", text: "Accesează ami-moti.everydai.ro/clasa" },
+                  { step: "1", text: "Accesează academia-aur.ro/clasa" },
                   { step: "2", text: "Introduce codul clasei (ex: CLASA5A)" },
                   { step: "3", text: "Selectează numele din lista clasei" },
                   { step: "4", text: "Accesează cursurile asignate și finalizează lecțiile" },
@@ -250,7 +250,7 @@ export default function DesprePage() {
               </div>
               <div className="mt-6">
                 <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-white" asChild>
-                  <Link href="/clasa">Intră în clasă →</Link>
+                  <Link href="/grup">Intră în grup →</Link>
                 </Button>
               </div>
             </div>
@@ -318,7 +318,7 @@ export default function DesprePage() {
       {/* Grupe și audiență */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Cine folosește Ami & Moti?</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Cine folosește Academia Politica AUR?</h2>
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
             {[
               {
@@ -339,10 +339,10 @@ export default function DesprePage() {
               },
               {
                 icon: "🍎",
-                title: "Învățători",
+                title: "Formatori",
                 color: "emerald",
                 desc: "Resurse didactice pentru predarea AI literacy în clasele primare (0–4).",
-                href: "/cadre-didactice",
+                href: "/formatori",
                 cta: "Resurse",
               },
               {
@@ -350,7 +350,7 @@ export default function DesprePage() {
                 title: "Profesori Gim.",
                 color: "purple",
                 desc: "Materiale pentru competențe digitale și AI în clasele de gimnaziu (5–8).",
-                href: "/cadre-didactice",
+                href: "/formatori",
                 cta: "Resurse",
               },
             ].map((item) => (
@@ -400,7 +400,7 @@ export default function DesprePage() {
           <Heart size={40} className="mx-auto mb-4 text-white/80" />
           <h2 className="text-3xl sm:text-4xl font-extrabold mb-4">Gata să începem?</h2>
           <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">
-            Platforma este complet gratuită. Creează-ți contul acum și lasă-ți copilul să descopere lumea AI alături de Ami și Moti.
+            Platforma este complet gratuită. Creează-ți contul acum și lasă-ți copilul să descopere lumea AI alături de Academia Politica AUR.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50 font-bold" asChild>
@@ -410,7 +410,7 @@ export default function DesprePage() {
               <Link href="/courses">Vezi cursurile</Link>
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" asChild>
-              <Link href="/clasa">Intru în clasă</Link>
+              <Link href="/grup">Intru în clasă</Link>
             </Button>
           </div>
         </div>

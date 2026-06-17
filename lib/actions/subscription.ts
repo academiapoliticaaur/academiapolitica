@@ -1,4 +1,4 @@
-"use server";
+﻿"use server";
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
@@ -68,7 +68,7 @@ async function notifyAdminCancelledSubscription({
     "http://localhost:3000";
 
   await resend.emails.send({
-    from: process.env.EMAIL_FROM ?? "Ami & Moti <noreply@everydai.ro>",
+    from: process.env.EMAIL_FROM ?? "Academia Politica AUR <noreply@academia-aur.ro>",
     to: adminEmails,
     subject: `Abonament anulat — ${fullName} (${userEmail})`,
     html: `<!DOCTYPE html>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { createClient } from "@/lib/supabase/client";
 import { registerSchema, type RegisterFormData } from "@/lib/validation/schemas";
 import { notifyAdminNewTeacher } from "@/lib/actions/notify";
-import { AmiMotiGuide } from "@/components/common/ami-moti-guide";
+import { AcademiaGuide } from "@/components/common/academia-guide";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -31,7 +31,7 @@ export default function RegisterPage() {
     formState: { errors },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
-    defaultValues: { accepted_terms: false, parental_consent: false, account_type: "family" as const },
+    defaultValues: { accepted_terms: false, parental_consent: false, account_type: "member" as const },
   });
 
   const onSubmit = (data: RegisterFormData) => {
@@ -47,7 +47,7 @@ export default function RegisterPage() {
             full_name: data.full_name,
             accepted_terms: data.accepted_terms,
             parental_consent: data.parental_consent,
-            account_type: data.account_type || "family",
+            account_type: data.account_type || "member",
           },
           emailRedirectTo: `${window.location.origin}/auth/callback`,
         },
@@ -63,8 +63,8 @@ export default function RegisterPage() {
         return;
       }
 
-      // Notifică adminul pentru conturi cadre didactice (fire-and-forget)
-      if (data.account_type === "invatator" || data.account_type === "profesor") {
+      // Notifică adminul pentru conturi formatori (fire-and-forget)
+      if (data.account_type === "formator" || data.account_type === "lector") {
         notifyAdminNewTeacher({
           fullName: data.full_name,
           email: data.email,
@@ -92,19 +92,19 @@ export default function RegisterPage() {
           <h2 className="text-xl font-bold text-gray-900 mb-3">Verifică-ți adresa de email!</h2>
           <p className="text-gray-600 mb-4 leading-relaxed">
             Ți-am trimis un email de confirmare la:<br />
-            <span className="font-semibold text-blue-600">{registeredEmail}</span>
+            <span className="font-semibold text-yellow-600">{registeredEmail}</span>
           </p>
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4 text-sm text-blue-700 text-left">
+          <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-4 text-sm text-yellow-800 text-left">
             <p className="font-semibold mb-1">Pașii următori:</p>
             <ol className="list-decimal list-inside space-y-1">
-              <li>Deschide emailul primit de la Ami &amp; Moti</li>
+              <li>Deschide emailul primit de la Academia Politica AUR</li>
               <li>Apasă pe butonul <strong>&bdquo;Confirmă adresa de email&rdquo;</strong></li>
               <li>Vei fi redirecționat automat la contul tău</li>
             </ol>
           </div>
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6 text-sm text-amber-800 text-left">
-            <p className="font-semibold mb-1">⏳ Aprobare necesară</p>
-            <p>Contul tău va fi revizuit de un administrator înainte de a putea accesa platforma. Vei fi notificat pe email când contul este aprobat.</p>
+            <p className="font-semibold mb-1">⏳ Aprobare necesară (formatori)</p>
+            <p>Conturile de formator și lector vor fi revizuite de un administrator. Vei fi notificat pe email când contul este aprobat.</p>
           </div>
           <p className="text-xs text-gray-400">
             Nu ai primit emailul? Verifică dosarul Spam/Junk.
@@ -116,16 +116,16 @@ export default function RegisterPage() {
 
   return (
     <div className="w-full max-w-md space-y-4">
-      <AmiMotiGuide
-        variant="moti"
-        message="Eu, Moti, te ghidez! Înregistrarea durează un minut — după aceea explorăm împreună toate cursurile disponibile."
+      <AcademiaGuide
+        variant="tip"
+        message="Înregistrarea durează un minut — după aceea vei putea accesa toate cursurile și materialele de formare politică."
       />
       <Card className="w-full max-w-md shadow-lg">
       <CardHeader className="text-center pb-4">
-        <div className="text-4xl mb-2">👧🐱</div>
-        <CardTitle className="text-2xl">Creează cont de părinte</CardTitle>
+        <div className="text-4xl mb-2">🎓</div>
+        <CardTitle className="text-2xl">Creează cont</CardTitle>
         <CardDescription>
-          Contul tău de părinte îți permite să gestionezi profilurile copiilor.
+          Alătură-te comunității Academia Politica AUR și accesează resursele de formare.
         </CardDescription>
       </CardHeader>
 
@@ -150,7 +150,7 @@ export default function RegisterPage() {
             <Input
               id="email"
               type="email"
-              placeholder="parinte@exemplu.com"
+              placeholder="ion.popescu@exemplu.com"
               autoComplete="email"
               {...register("email")}
             />
@@ -165,11 +165,11 @@ export default function RegisterPage() {
               id="account_type"
               {...register("account_type")}
               className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background"
-              defaultValue="family"
+              defaultValue="member"
             >
-              <option value="family">Părinte / Tutore</option>
-              <option value="invatator">Învățător (clasele 0–4)</option>
-              <option value="profesor">Profesor gimnaziu (clasele 5–8)</option>
+              <option value="member">Membru AUR / Simpatizant</option>
+              <option value="formator">Formator (necesită aprobare)</option>
+              <option value="lector">Lector / Conferențiar (necesită aprobare)</option>
             </select>
           </div>
 
@@ -236,7 +236,7 @@ export default function RegisterPage() {
                 <Link href="/confidentialitate" className="text-blue-500 hover:underline" target="_blank">
                   politica de confidențialitate
                 </Link>{" "}
-                și îmi dau consimțământul parental
+                și îmi exprim consimțământul pentru prelucrarea datelor
               </label>
             </div>
             {errors.parental_consent && (

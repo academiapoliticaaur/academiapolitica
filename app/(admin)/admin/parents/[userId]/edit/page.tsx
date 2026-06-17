@@ -1,4 +1,4 @@
-import { redirect, notFound } from "next/navigation";
+﻿import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,9 +13,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = { title: "Editează utilizator — Admin" };
 
 const ACCOUNT_TYPE_OPTIONS = [
-  { value: "family", label: "👨‍👩‍👧 Părinte / Tutore", desc: "Cont de familie, acces la cursuri copii" },
-  { value: "invatator", label: "🌈 Învățător", desc: "Clasele 0–4 — Resurse cadre didactice" },
-  { value: "profesor", label: "🚀 Profesor gimnaziu", desc: "Clasele 5–8 — Resurse cadre didactice" },
+  { value: "member", label: "👨‍👩‍👧 Părinte / Tutore", desc: "Cont de familie, acces la cursuri copii" },
+  { value: "formator", label: "🌈 Formator", desc: "Clasele 0–4 — Resurse formatori" },
+  { value: "lector", label: "🚀 Profesor gimnaziu", desc: "Clasele 5–8 — Resurse formatori" },
 ];
 
 async function saveUser(userId: string, formData: FormData) {
@@ -31,8 +31,8 @@ async function saveUser(userId: string, formData: FormData) {
 
   if (!fullName || !email) redirect(`/admin/parents/${userId}/edit?error=campuri${fromParam}`);
 
-  const validTypes = ["family", "invatator", "profesor"];
-  const safeType = validTypes.includes(accountType) ? accountType : "family";
+  const validTypes = ["member", "formator", "lector"];
+  const safeType = validTypes.includes(accountType) ? accountType : "member";
 
   const [profileRes, authRes] = await Promise.all([
     db.from("parent_profiles").update({ full_name: fullName, account_type: safeType }).eq("user_id", userId),
@@ -45,8 +45,8 @@ async function saveUser(userId: string, formData: FormData) {
 
   if (safeFrom) redirect(safeFrom);
 
-  // Dacă e promovat la cadru didactic, redirecționează acolo
-  if (safeType === "invatator" || safeType === "profesor") {
+  // Dacă e promovat la formator, redirecționează acolo
+  if (safeType === "formator" || safeType === "lector") {
     redirect("/admin/teachers");
   }
 
@@ -158,9 +158,9 @@ export default async function EditUserPage({
                   </label>
                 ))}
               </div>
-              {(profile.account_type === "invatator" || profile.account_type === "profesor") && (
+              {(profile.account_type === "formator" || profile.account_type === "lector") && (
                 <p className="text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
-                  ⚠️ Dacă schimbi tipul la <strong>Părinte</strong>, contul dispare din Cadre didactice.
+                  ⚠️ Dacă schimbi tipul la <strong>Părinte</strong>, contul dispare din Formatori.
                 </p>
               )}
             </div>

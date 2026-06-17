@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+﻿import { Suspense } from "react";
 import Link from "next/link";
 import { GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -83,7 +83,7 @@ async function CourseList({ ageGroup, sort }: { ageGroup?: AgeGroup; sort?: Sort
       <div className="text-center py-16">
         <div className="text-6xl mb-4">📚</div>
         <p className="text-gray-500 text-lg">Cursurile sunt în pregătire. Revino curând!</p>
-        <p className="text-gray-400 text-sm mt-2">Ami și Moti lucrează la conținut nou pentru tine.</p>
+        <p className="text-gray-400 text-sm mt-2">Academia Politica AUR lucrează la conținut nou pentru tine.</p>
       </div>
     );
   }
@@ -166,7 +166,7 @@ export default async function CoursesPage({ searchParams }: PageProps) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   let forcedAgeGroup: AgeGroup | undefined;
-  let teacherAccountType: "invatator" | "profesor" | undefined;
+  let teacherAccountType: "formator" | "lector" | undefined;
 
   if (user) {
     const { data: profile } = await supabase
@@ -176,8 +176,8 @@ export default async function CoursesPage({ searchParams }: PageProps) {
       .single();
 
     if (profile?.approved) {
-      if (profile.account_type === "invatator") { forcedAgeGroup = "0-4"; teacherAccountType = "invatator"; }
-      if (profile.account_type === "profesor") { forcedAgeGroup = "5-8"; teacherAccountType = "profesor"; }
+      if (profile.account_type === "formator") { forcedAgeGroup = "0-4"; teacherAccountType = "formator"; }
+      if (profile.account_type === "lector") { forcedAgeGroup = "5-8"; teacherAccountType = "lector"; }
     }
   }
 
@@ -194,7 +194,7 @@ export default async function CoursesPage({ searchParams }: PageProps) {
       <div className="mb-10">
         <h1 className="text-3xl font-bold mb-2">Cursuri disponibile 📚</h1>
         <p className="text-gray-500">
-          Alege grupa potrivită și începe să explorezi împreună cu Ami și Moti.
+          Alege grupa potrivită și începe să explorezi împreună cu Academia Politica AUR.
         </p>
       </div>
 
@@ -233,18 +233,18 @@ export default async function CoursesPage({ searchParams }: PageProps) {
         </div>
       )}
 
-      {/* Banner cadre didactice */}
+      {/* Banner formatori */}
       {teacherAccountType && (
         <div className="mb-8 bg-indigo-50 border border-indigo-200 rounded-2xl p-5 flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-start gap-3">
             <GraduationCap size={22} className="text-indigo-500 shrink-0 mt-0.5" />
             <p className="text-indigo-800 text-sm">
               <span className="font-semibold">Cursurile de mai jos sunt pentru elevii tăi.</span>{" "}
-              Ghidurile și resursele tale de pregătire ca {teacherAccountType === "invatator" ? "învățător" : "profesor"} sunt într-o secțiune dedicată.
+              Ghidurile și resursele tale de pregătire ca {teacherAccountType === "formator" ? "învățător" : "lector"} sunt într-o secțiune dedicată.
             </p>
           </div>
           <Button asChild size="sm" className="bg-indigo-100 hover:bg-indigo-200 text-indigo-700 shrink-0">
-            <Link href="/cadre-didactice">Vezi resursele mele de pregătire →</Link>
+            <Link href="/formatori">Vezi resursele mele de pregătire →</Link>
           </Button>
         </div>
       )}

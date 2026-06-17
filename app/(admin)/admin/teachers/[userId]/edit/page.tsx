@@ -1,4 +1,4 @@
-import { redirect, notFound } from "next/navigation";
+﻿import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,7 @@ import { requireAdmin } from "@/lib/admin/guard";
 import { SubscriptionPanel } from "@/components/admin/subscription-panel";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Editează cadru didactic — Admin" };
+export const metadata: Metadata = { title: "Editează formator — Admin" };
 
 async function saveTeacher(userId: string, formData: FormData) {
   "use server";
@@ -24,7 +24,7 @@ async function saveTeacher(userId: string, formData: FormData) {
   const fromParam = safeFrom ? `&from=${encodeURIComponent(safeFrom)}` : "";
 
   if (!fullName || !email) redirect(`/admin/teachers/${userId}/edit?error=campuri${fromParam}`);
-  if (!["invatator", "profesor"].includes(accountType)) redirect(`/admin/teachers/${userId}/edit?error=tip${fromParam}`);
+  if (!["formator", "lector"].includes(accountType)) redirect(`/admin/teachers/${userId}/edit?error=tip${fromParam}`);
 
   const [profileRes, authRes] = await Promise.all([
     db.from("parent_profiles").update({ full_name: fullName, account_type: accountType }).eq("user_id", userId),
@@ -92,7 +92,7 @@ export default async function EditTeacherPage({
 
       <Card>
         <CardHeader>
-          <CardTitle>Editează cadru didactic</CardTitle>
+          <CardTitle>Editează formator</CardTitle>
         </CardHeader>
         <CardContent>
           <form action={saveAction} className="space-y-4">
@@ -123,8 +123,8 @@ export default async function EditTeacherPage({
               <Label>Tip cont</Label>
               <div className="grid gap-2">
                 {[
-                  { value: "invatator", label: "🌈 Învățător", desc: "Clasele 0–4 — Ciclul primar" },
-                  { value: "profesor", label: "🚀 Profesor gimnaziu", desc: "Clasele 5–8 — Ciclul gimnazial" },
+                  { value: "formator", label: "🌈 Formator", desc: "Clasele 0–4 — Ciclul primar" },
+                  { value: "lector", label: "🚀 Profesor gimnaziu", desc: "Clasele 5–8 — Ciclul gimnazial" },
                 ].map((opt) => (
                   <label
                     key={opt.value}

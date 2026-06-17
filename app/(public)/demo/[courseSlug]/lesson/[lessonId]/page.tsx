@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { lessonId } = await params;
   const db = createAdminClient();
   const { data } = await db.from("lessons").select("title").eq("id", lessonId).single();
-  return { title: data?.title ? `${data.title} — Demo Ami & Moti` : "Lecție demo" };
+  return { title: data?.title ? `${data.title} — Demo Academia Politica AUR` : "Lecție demo" };
 }
 
 export default async function DemoLessonPage({ params }: PageProps) {

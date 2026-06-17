@@ -1,10 +1,10 @@
-# Descriere funcțională completă — Ami & Moti MVP
+﻿# Descriere funcțională completă — Academia Politica AUR MVP
 **Versiune:** 1.0 MVP  
 **Data:** 2026-05-22  
-**Platforma:** https://ami-moti.everydai.ro  
+**Platforma:** https://academia-aur.ro  
 **Repository:** bazat pe template v1.0 (tag `v1.0-template`)
 
-> Acest document descrie **toate funcționalitățile implementate** în MVP-ul platformei Ami & Moti.  
+> Acest document descrie **toate funcționalitățile implementate** în MVP-ul platformei Academia Politica AUR.  
 > Se actualizează la fiecare extindere majoră a proiectului.  
 > Serve drept referință pentru proiectul derivat **AILiteracy**.
 
@@ -36,18 +36,18 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 | Tip | Câmp DB | Aprobare | Descriere |
 |-----|---------|----------|-----------|
 | **Vizitator** | — | Nu | Browsează catalog public, fără cont |
-| **Părinte/Tutore** | `family` | Nu | Gestionează profiluri copii, urmărește progres |
-| **Profil copil** | — | Nu | Legat de cont părinte, accesează cursuri |
-| **Învățător** | `invatator` | **Da** (admin) | Resurse cls. 0–4, gestionează clase |
+| **Părinte/Tutore** | `family` | Nu | Gestionează profiluri cursanți, urmărește progres |
+| **Profil cursant** | — | Nu | Legat de cont părinte, accesează cursuri |
+| **Formator** | `formator` | **Da** (admin) | Resurse cls. 0–4, gestionează clase |
 | **Profesor gimnaziu** | `profesor` | **Da** (admin) | Resurse cls. 5–8, gestionează clase |
-| **Elev din clasă** | — | Nu | Acces fără cont prin cod clasă + cod personal |
+| **Elev din clasă** | — | Nu | Acces fără cont prin cod grup + cod personal |
 | **Admin** | ADMIN_EMAILS | — | Control total platformă |
 
 ### Model de acces per tip de cont
 - **Vizitator**: vede titlurile și descrierile cursurilor; nu poate accesa conținut lecții
 - **Părinte `family`**: acces imediat după înregistrare; gestionează copii, vizualizează lecții în modul preview (fără progres)
-- **Cadru didactic neaprobat**: se poate înregistra și loga; vede titlurile cursurilor și o pagina goală; un banner îl informează că urmează aprobare
-- **Cadru didactic aprobat**: acces complet la cursurile corespunzătoare rolului său; poate crea și gestiona clase
+- **Formator neaprobat**: se poate înregistra și loga; vede titlurile cursurilor și o pagina goală; un banner îl informează că urmează aprobare
+- **Formator aprobat**: acces complet la cursurile corespunzătoare rolului său; poate crea și gestiona clase
 - **Admin**: acces complet la toate funcțiile platformei, inclusiv panou de administrare
 
 ---
@@ -56,9 +56,9 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 
 ### 2.1 Pagina principală (`/`)
 - Hero section cu titlu, descriere și CTA (Înregistrare / Explorare cursuri)
-- 4 carduri de acces rapid: **Elevi 0–4**, **Elevi 5–8**, **Învățător** (cls. 0–4), **Profesor Gimnaziu** (cls. 5–8)
-- Fiecare card duce la ruta relevantă (cursuri filtrate sau pagina cadre didactice)
-- Design adaptat pentru părinți și cadre didactice ca audiență primară
+- 4 carduri de acces rapid: **Elevi 0–4**, **Elevi 5–8**, **Formator** (cls. 0–4), **Profesor Gimnaziu** (cls. 5–8)
+- Fiecare card duce la ruta relevantă (cursuri filtrate sau pagina formatori)
+- Design adaptat pentru părinți și formatori ca audiență primară
 
 ### 2.2 Catalog cursuri (`/courses`)
 - Listare cursuri publicate (status `published`, audience `children` sau `all`)
@@ -67,7 +67,7 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 - **Filtre tip lecție**: Video 🎬 / Prezentări 📋 / Activități 📝 / Quiz-uri 🎯
 - La filtrare pe tip: se afișează pagina descriptivă a acelui tip (titlu, 2 paragrafe descriere, 5 itemi "Ce găsești aici")
 - Sortare alfabetică implicită (A→Z)
-- Cadre didactice autentificate: filtrele de grupă sunt ascunse, grupa este forțată automat pe baza rolului (`invatator`→0-4, `profesor`→5-8)
+- Formatori autentificate: filtrele de grupă sunt ascunse, grupa este forțată automat pe baza rolului (`formator`→0-4, `profesor`→5-8)
 - Badge colorat informează cadrul didactic de filtrarea automată
 
 ### 2.3 Detaliu curs (`/courses/[slug]`)
@@ -75,32 +75,32 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 - Lista modulelor și lecțiilor (titluri vizibile, conținut blocat pentru vizitatori)
 - Buton "Încearcă" → redirect la login
 
-### 2.4 Pagina Cadre Didactice (`/cadre-didactice`)
+### 2.4 Pagina Cadre Didactice (`/formatori`)
 - Resurse separate per rol:
-  - **Invatator**: vede DOAR cursuri cu `audience = invatator` (cu check `isApproved`)
+  - **Formator**: vede DOAR cursuri cu `audience = formator` (cu check `isApproved`)
   - **Profesor**: vede DOAR cursuri cu `audience = profesor` (cu check `isApproved`)
   - **Neautentificat/family**: vede toate resursele disponibile ca preview
-- Conținut lecții blocat pentru cadre didactice neaprobate
+- Conținut lecții blocat pentru formatori neaprobate
 
 ### 2.5 Pagini statice informaționale
-- **`/despre`** — Prezentarea platformei, personajele Ami și Moti
+- **`/despre`** — Prezentarea platformei, personajele Academia Politica AUR
 - **`/help`** — Centru de ajutor complet cu 6 secțiuni acordeon:
   - Contul meu (Părinți)
-  - Cadre didactice
+  - Formatori
   - Copiii mei
   - Cursuri și lecții
   - Tehnic
-  - Elevi din clase
+  - Membri din grupuri
 - Formular de contact în pagina /help → email livrat la ADMIN_EMAIL via Resend
 - **`/paths`** — Trasee de instruire publice (lista)
 - **`/paths/[slug]`** — Detaliu traseu: descriere, cursuri incluse în ordine
 - **`/webinars`** — Lista webinariilor publice (titlu, dată, URL înregistrare)
 
-### 2.6 Zona elevi din clase (`/clasa/*`)
-- **`/clasa`** — Landing page: elev introduce codul clasei (4-12 caractere alfanumerice)
-- Validare cod în timp real via `GET /api/clasa/verify?code=X`
-- **`/clasa/[code]`** — Lista elevilor din acea clasă (selectare după display_name)
-- **`/clasa/[code]/[studentCode]`** — Zona personală a elevului: lista cursurilor asignate clasei, acces la lecții
+### 2.6 Zona membri din grupuri (`/grup/*`)
+- **`/grup`** — Landing page: elev introduce codul clasei (4-12 caractere alfanumerice)
+- Validare cod în timp real via `GET /api/grup/verify?code=X`
+- **`/grup/[code]`** — Lista elevilor din acea clasă (selectare după display_name)
+- **`/grup/[code]/[studentCode]`** — Zona personală a elevului: lista cursurilor asignate clasei, acces la lecții
 
 ---
 
@@ -108,11 +108,11 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 
 ### 3.1 Înregistrare (`/register`)
 - Formularul colectează: **Nume complet**, **Email**, **Parolă**, **Tip cont** (radio)
-- Tipuri de cont selectabile: Părinte/Tutore / Învățător cls. 0–4 / Profesor cls. 5–8
+- Tipuri de cont selectabile: Părinte/Tutore / Formator cls. 0–4 / Profesor cls. 5–8
 - La submit: `supabase.auth.signUp()` + creare `parent_profiles` (via callback)
 - Email de confirmare trimis automat de Supabase Auth
 - Conturi `family`: activ imediat după confirmare email
-- Conturi `invatator`/`profesor`: active dar cu acces restricționat până la aprobare admin
+- Conturi `formator`/`profesor`: active dar cu acces restricționat până la aprobare admin
 
 ### 3.2 Login (`/login`)
 - Email + parolă
@@ -139,16 +139,16 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 - **`/admin/mfa-verify`** — Verificare cod TOTP la fiecare login admin
 - MFA obligatoriu pentru accesul la panoul de administrare
 
-### 3.6 PIN profil copil
-- PIN opțional de 4 cifre per profil copil
+### 3.6 PIN profil cursant
+- PIN opțional de 4 cifre per profil cursant
 - Stocat ca hash în `child_profiles.pin_hash`
-- **`/child/[profileId]/pin`** — Ecran de introducere PIN
+- **`/cursant/[profileId]/pin`** — Ecran de introducere PIN
 - Sesiunea PIN salvată în `sessionStorage` cu expirare 8 ore
 - Fără PIN: acces direct
 - Cu PIN activat: la fiecare nouă sesiune sau după expirare se solicită re-introducerea
 
 ### 3.7 Middleware de protecție rute
-- `middleware.ts` protejează: `/dashboard/*`, `/admin/*`, `/child/*`
+- `middleware.ts` protejează: `/dashboard/*`, `/admin/*`, `/cursant/*`
 - Utilizatorii neautentificați sunt redirectați la `/login`
 - Admini fără MFA completat sunt redirectați la `/admin/mfa-verify`
 
@@ -159,15 +159,15 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 ### 4.1 Overview dashboard (`/dashboard`)
 - Lista profilurilor de copii adăugate (CardCopil cu XP total și progres)
 - XP total al fiecărui copil (din `certificates.total_points` — permanent)
-- Buton "Adaugă profil copil"
-- **Banner informativ** pentru cadre didactice neaprobate: "Contul tău este în așteptare de aprobare"
+- Buton "Adaugă profil cursant"
+- **Banner informativ** pentru formatori neaprobate: "Contul tău este în așteptare de aprobare"
 - Sidebar cu navigație adaptată per tip cont:
   - `family`: Dashboard, Cursuri disponibile, Ajutor
-  - `invatator`/`profesor`: Clasele mele, Cursurile mele, Ajutor
+  - `formator`/`profesor`: Grupurile mele, Cursurile mele, Ajutor
 
-### 4.2 Gestionare profiluri copii
-- **Adăugare** (`/dashboard/add-child`): display_name, grupă vârstă (0-4 sau 5-8), PIN opțional
-- **Editare** (`/dashboard/edit-child/[profileId]`): actualizare display_name, grupă, PIN (schimbare/ștergere)
+### 4.2 Gestionare profiluri cursanți
+- **Adăugare** (`/dashboard/profil`): display_name, grupă vârstă (0-4 sau 5-8), PIN opțional
+- **Editare** (`/dashboard/edit-cursant/[profileId]`): actualizare display_name, grupă, PIN (schimbare/ștergere)
 - **Ștergere** profil cu confirmare (cascade: progres, certificate, quiz attempts)
 
 ### 4.3 Progres detaliat (`/dashboard/progress/[childId]`)
@@ -178,7 +178,7 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 ### 4.4 Editare cont (`/dashboard/profile`)
 - Actualizare nume complet
 - Schimbare parolă
-- Afișare tip cont și stare aprobare (pentru cadre didactice)
+- Afișare tip cont și stare aprobare (pentru formatori)
 
 ### 4.5 Preview lecții pentru părinți (`/dashboard/preview/[courseId]/lesson/[lessonId]`)
 - Părintele poate vizualiza orice lecție din cursurile copilului
@@ -186,16 +186,16 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 - **Fără înregistrare progres sau XP** — exclusiv pentru verificare parentală
 - Acces din pagina cursului cu buton "Previzualizează lecția"
 
-### 4.6 Gestionare clase (pentru cadre didactice)
-- **`/dashboard/classes`** — Lista claselor active și arhivate
-- **`/dashboard/classes/new`** — Creare clasă nouă (detalii în secțiunea 7)
-- **`/dashboard/classes/[id]`** — Detaliu clasă (detalii în secțiunea 7)
+### 4.6 Gestionare clase (pentru formatori)
+- **`/dashboard/grupuri`** — Lista claselor active și arhivate
+- **`/dashboard/grupuri/new`** — Creare clasă nouă (detalii în secțiunea 7)
+- **`/dashboard/grupuri/[id]`** — Detaliu clasă (detalii în secțiunea 7)
 
 ---
 
 ## 5. Zona Copilului
 
-### 5.1 Pagina principală copil (`/child/[profileId]`)
+### 5.1 Pagina principală copil (`/cursant/[profileId]`)
 - Salut personalizat cu display_name
 - **XP total** acumulat (din `certificates` — permanent, nu scade la replay)
 - **Daily streak**: numărul zilelor consecutive de activitate (afișat cu flacără 🔥)
@@ -203,16 +203,16 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 - **Badges câștigate**: grid cu 9 insigne posibile (afișate colorat dacă câștigate, gri dacă nu)
 - Link la transcript și certificate
 
-### 5.2 Curs cu module și lecții (`/child/[profileId]/course/[courseId]`)
+### 5.2 Curs cu module și lecții (`/cursant/[profileId]/course/[courseId]`)
 - Titlu și descriere curs
 - Lista modulelor în ordine cu lecțiile lor
 - Per lecție: iconă tip, titlu, status (Completată ✓ / În progress / Blocată 🔒)
 - Lecțiile blocate: vizibile dar nu accesibile până la completarea celor precedente (acces secvențial)
-- **Banner** pentru cadre didactice neaprobate: "Contul tău nu a fost aprobat"
+- **Banner** pentru formatori neaprobate: "Contul tău nu a fost aprobat"
 - Progress bar per modul (lecții completate / total)
 
-### 5.3 Player lecție (`/child/[profileId]/course/[courseId]/lesson/[lessonId]`)
-- **Layout server-side**: verifică aprobare cont înainte de randare (cadre didactice neaprobate → redirect)
+### 5.3 Player lecție (`/cursant/[profileId]/course/[courseId]/lesson/[lessonId]`)
+- **Layout server-side**: verifică aprobare cont înainte de randare (formatori neaprobate → redirect)
 - Conținut adaptat per tip de lecție:
 
 #### Video
@@ -256,12 +256,12 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 - **XP din diplome rămâne permanent** — nu se pierde la replay (stocat în `certificates.total_points`)
 - Util pentru recapitulare sau re-parcurgere cu un copil diferit
 
-### 5.6 Transcript (`/child/[profileId]/transcript`)
+### 5.6 Transcript (`/cursant/[profileId]/transcript`)
 - Lista completă a cursurilor parcurse cu progres
 - Per curs: procent de completare, data completării, XP câștigat
 - Link la diploma de absolvire (dacă cursul e finalizat)
 
-### 5.7 Diplomă printabilă (`/child/[profileId]/certificate/[certificateId]`)
+### 5.7 Diplomă printabilă (`/cursant/[profileId]/certificate/[certificateId]`)
 - Diplomă individualizată cu: display_name, titlul cursului, data finalizării
 - Design pregătit pentru imprimare (CSS print)
 - Buton "Tipărește diploma"
@@ -272,7 +272,7 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 ## 6. Cadre Didactice
 
 ### 6.1 Flux de înregistrare și aprobare
-1. Cadrul didactic se înregistrează la `/register` (selectează tip: Învățător sau Profesor)
+1. Cadrul didactic se înregistrează la `/register` (selectează tip: Formator sau Profesor)
 2. Primește email de confirmare Supabase
 3. Se autentifică: vede dashboard-ul cu banner "Cont în așteptare"
 4. Lecțiile sunt blocate (vizibile, dar fără acces la conținut)
@@ -280,18 +280,18 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 6. Din momentul aprobării: acces complet la cursuri + sistem de clase
 
 ### 6.2 Accesul la resurse didactice
-- **`/cadre-didactice`** — Pagina publică cu cursuri specifice:
-  - Invatator (aprobat): vede DOAR cursuri cu `audience = invatator`
+- **`/formatori`** — Pagina publică cu cursuri specifice:
+  - Formator (aprobat): vede DOAR cursuri cu `audience = formator`
   - Profesor (aprobat): vede DOAR cursuri cu `audience = profesor`
   - Neaprobat: vede titlurile, conținut blocat cu mesaj informativ
 - **`/courses`** — Catalogul de cursuri pentru copii:
-  - Invatator: vede cursuri `children` + `all` din grupa `0-4`, filtrare automată
+  - Formator: vede cursuri `children` + `all` din grupa `0-4`, filtrare automată
   - Profesor: vede cursuri `children` + `all` din grupa `5-8`, filtrare automată
   - Filtrul de grupă e ascuns (forțat automat)
 
-### 6.3 Dashboard adaptat pentru cadre didactice
-- Sidebar special: **Clasele mele** + **Cursurile mele** (în loc de "Cursuri disponibile")
-- Header: link-ul "Copii" este ascuns (cadru didactic nu gestionează profiluri de copii)
+### 6.3 Dashboard adaptat pentru formatori
+- Sidebar special: **Grupurile mele** + **Cursurile mele** (în loc de "Cursuri disponibile")
+- Header: link-ul "Copii" este ascuns (formator nu gestionează profiluri de copii)
 - Banner aprobare vizibil pe tot dashboard-ul până la aprobare
 
 ### 6.4 Vizualizare cursuri și lecții
@@ -303,14 +303,14 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 
 ## 7. Sistemul de Clase
 
-### 7.1 Creare clasă (`/dashboard/classes/new`)
+### 7.1 Creare clasă (`/dashboard/grupuri/new`)
 - Formularul: Denumire clasă, Cod de acces (4-12 caractere alfanumerice)
 - Codul de acces este **unic global** — validat împotriva bazei de date la creare
 - Codul e ales de profesor (nu generat automat) — recomandare: denumire scurtă + an (ex: `4A2026`)
 - Clasa se creează cu status `active`, legată de user-id-ul profesorului
 
-### 7.2 Gestionare clasă (`/dashboard/classes/[id]`)
-**Tab Elevi:**
+### 7.2 Gestionare clasă (`/dashboard/grupuri/[id]`)
+**Tab Membri:**
 - Lista elevilor din clasă (display_name, cod personal, grupă vârstă)
 - Formular adăugare elev: display_name, cod elev (unic în clasă), grupă vârstă
 - Ștergere elev cu confirmare
@@ -325,16 +325,16 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 **Arhivare clasă:**
 - Buton "Arhivează clasa" (schimbă status → `archived`)
 - Clasa arhivată dispare din lista activă dar datele rămân
-- Elevii nu mai pot accesa /clasa/[code] (codul devine invalid după arhivare)
+- Elevii nu mai pot accesa /grup/[code] (codul devine invalid după arhivare)
 
-### 7.3 Accesul elevilor (`/clasa/*`)
+### 7.3 Accesul elevilor (`/grup/*`)
 
 **Flow complet:**
-1. Elevul accesează `/clasa` → introduce codul clasei (ex: `4A2026`)
-2. Cod validat client-side via `GET /api/clasa/verify?code=X`
-3. Redirect la `/clasa/4A2026` — lista elevilor din acea clasă
+1. Elevul accesează `/grup` → introduce codul clasei (ex: `4A2026`)
+2. Cod validat client-side via `GET /api/grup/verify?code=X`
+3. Redirect la `/grup/4A2026` — lista elevilor din acea clasă
 4. Elevul selectează propriul nume din lista afișată
-5. Redirect la `/clasa/4A2026/CODPERSONAL` — zona personală
+5. Redirect la `/grup/4A2026/CODPERSONAL` — zona personală
 
 **Zona personală a elevului:**
 - Salut cu display_name
@@ -348,7 +348,7 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 - **Fără gamificare** — elevii din clase nu acumulează XP sau badges
 - **Progres izolat** — în `class_student_progress`, nu afectează `progress` al profilurilor de copii
 
-### 7.4 Diplome pentru elevi din clase
+### 7.4 Diplome pentru membri din grupuri
 - Tabel `class_student_certificates` (migration 007)
 - Generare diplomă la finalizare curs din clasă
 - Diplomă printabilă accesibilă din zona elevului
@@ -393,7 +393,7 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 ### 8.4 Diplomă de absolvire
 - **Generare automată** la completarea tuturor lecțiilor dintr-un curs
 - Stocată în tabelul `certificates`
-- Accesibilă la `/child/[profileId]/certificate/[certificateId]`
+- Accesibilă la `/cursant/[profileId]/certificate/[certificateId]`
 - **Design printabil** cu CSS @media print dedicat
 - Conține: display_name copil, titlul cursului, data finalizării, logo platformă
 - **Email automat** trimis la adresa de email a părintelui cu link la diplomă
@@ -410,13 +410,13 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 - Grafice simple (conturi noi, activitate recentă)
 
 ### 9.2 Statistici detaliate (`/admin/stats`)
-- Utilizatori per tip cont (family, invatator, profesor)
+- Utilizatori per tip cont (family, formator, profesor)
 - Cursuri per status (draft, published) și audiență
 - Progres: lecții completate în ultimele 7/30 zile
 - Diplome emise total și recent
 
 ### 9.3 Gestionare utilizatori (`/admin/parents`)
-- Tabel cu toți utilizatorii (family, invatator, profesor)
+- Tabel cu toți utilizatorii (family, formator, profesor)
 - Coloane: Nume, Email, Tip cont, Aprobat, Data înregistrării
 - **Aprobare inline**: buton "Aprobă" direct în tabel (fără pagină separată)
 - **Editare cont** → `/admin/parents/[userId]/edit`
@@ -425,22 +425,22 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 
 ### 9.4 Editare cont utilizator (`/admin/parents/[userId]/edit`)
 - Modificare Nume complet și Email
-- **Schimbare tip cont**: family ↔ invatator ↔ profesor
+- **Schimbare tip cont**: family ↔ formator ↔ profesor
 - Setare status aprobare (bifă Aprobat)
 - Salvare cu validare Zod
 
-### 9.5 Gestionare cadre didactice (`/admin/teachers`)
-- Lista distinctă pentru conturi `invatator` și `profesor`
+### 9.5 Gestionare formatori (`/admin/teachers`)
+- Lista distinctă pentru conturi `formator` și `profesor`
 - Aceleași funcții ca `/admin/parents`
-- **Editare cont profesor** → `/admin/teachers/[userId]/edit`: full_name, email, account_type (invatator↔profesor)
-- Ștergere cont cadru didactic cu confirmare
+- **Editare cont profesor** → `/admin/teachers/[userId]/edit`: full_name, email, account_type (formator↔profesor)
+- Ștergere cont formator cu confirmare
 
 ### 9.6 Aprobare conturi (`/admin/approvals`)
-- Lista conturilor de cadre didactice cu `approved = false`
+- Lista conturilor de formatori cu `approved = false`
 - Aprobare rapidă cu un singur buton
 - Email de notificare planificat (WP15, în backlog)
 
-### 9.7 Gestionare profiluri copii (`/admin/children`)
+### 9.7 Gestionare profiluri cursanți (`/admin/children`)
 - Lista tuturor profilurilor de copii
 - Informații: display_name, grupă vârstă, cont părinte
 - Ștergere profil (cascade: progres, certificate)
@@ -465,7 +465,7 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 - Tabel cu toate cursurile (draft + publicate), organizat pe categorii:
   - Copii Clasele 0–4
   - Copii Clasele 5–8
-  - Resurse Învățători
+  - Resurse Formatori
   - Resurse Profesori Gimnaziu
 - **Filtre per coloană**: căutare text în titlu (instant), select status (Draft/Publicat/Toate), select grupă vârstă
 - **Toggle status inline** (StatusToggleBadge): click pe badge "Publicat"/"Draft" schimbă statusul fără reload
@@ -473,12 +473,12 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 - Buton creare curs nou
 
 **Creare** (`/admin/courses/new`):
-- Câmpuri: Titlu, Slug (auto-generat din titlu), Descriere, Grupă vârstă (0-4/5-8), **Audiență** (children/invatator/profesor/all), Durată estimată, Status (draft/published)
+- Câmpuri: Titlu, Slug (auto-generat din titlu), Descriere, Grupă vârstă (0-4/5-8), **Audiență** (children/formator/profesor/all), Durată estimată, Status (draft/published)
 - Validare Zod: titlu minim 3 caractere, slug format URL valid
 
 **Editare** (`/admin/courses/[id]/edit`):
 - Toate câmpurile de la creare
-- Modificare audiență (ex: din `children` în `invatator`)
+- Modificare audiență (ex: din `children` în `formator`)
 - Buton **Șterge curs** cu confirmare → redirect la `/admin/courses` (nu 404)
 
 **Detaliu curs** (`/admin/courses/[id]`):
@@ -640,9 +640,9 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 - Confirmare vizuală la trimitere reușită
 
 ### 13.4 Emailuri planificate (backlog — WP15)
-- Email de aprobare cont cadru didactic (la momentul aprobării de admin)
+- Email de aprobare cont formator (la momentul aprobării de admin)
 - Email de bun venit la înregistrare
-- Notificare admin la înregistrare cont nou de cadru didactic
+- Notificare admin la înregistrare cont nou de formator
 
 ---
 
@@ -656,10 +656,10 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 |------|----------------|
 | Despre platformă | Toți |
 | Cursuri | Toți |
-| Cadre didactice | Toți |
+| Formatori | Toți |
 | Ajutor | Toți |
-| **Intră în clasă** (verde) | Toți (desktop + mobil) |
-| Copii | Doar `family` (ascuns pentru `invatator`/`profesor`) |
+| **Intră în grup** (verde) | Toți (desktop + mobil) |
+| Copii | Doar `family` (ascuns pentru `formator`/`profesor`) |
 | Admin | Doar admini |
 | Dashboard | Utilizatori autentificați |
 | Login / Înregistrare | Vizitatori |
@@ -670,7 +670,7 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 - Widget flotant în colțul dreapta-jos, pe toate paginile publice
 - **Zero API**: răspunsuri statice, nu apelează niciun LLM
 - Interfață de chat simulată (bule de mesaj, timestamps)
-- 4 sugestii rapide: "Cum creez un cont?", "Ce sunt clasele virtuale?", "Cum funcționează quiz-ul?", "Resurse cadre didactice"
+- 4 sugestii rapide: "Cum creez un cont?", "Ce sunt clasele virtuale?", "Cum funcționează quiz-ul?", "Resurse formatori"
 - 12+ întrebări frecvente preconfigurate cu răspunsuri complete
 - Linkuri interne la `/help` pentru detalii
 
@@ -689,7 +689,7 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 - **Tailwind CSS v4** cu utility classes
 - **shadcn/ui** pentru componente UI de bază (Button, Input, Select, Dialog, etc.)
 - Paletă de culori:
-  - Teal/verde: elevi 0–4 și butonul "Intră în clasă"
+  - Teal/verde: elevi 0–4 și butonul "Intră în grup"
   - Indigo/albastru: elevi 5–8
   - Amber/orange: accente și gamificare
   - Gray: neutru, stări disabled
@@ -709,22 +709,22 @@ Platforma suportă 6 tipuri de utilizatori cu drepturi distincte:
 
 | Tabel | Scop |
 |-------|------|
-| `parent_profiles` | Conturi utilizatori (family/invatator/profesor), câmpul `approved` |
-| `child_profiles` | Profiluri copii legate de parent, PIN hash, grupă vârstă |
+| `parent_profiles` | Conturi utilizatori (family/formator/profesor), câmpul `approved` |
+| `child_profiles` | Profiluri cursanți legate de parent, PIN hash, grupă vârstă |
 | `courses` | Cursuri cu status, audiență, grupă vârstă, slug |
 | `modules` | Module ale cursurilor cu ordine |
 | `lessons` | Lecții cu tip, URL-uri conținut, status editorial |
 | `quizzes` | Quiz-uri legate de lecții |
 | `quiz_questions` | Întrebările din quiz-uri |
 | `quiz_answers` | Variantele de răspuns (cu is_correct) |
-| `quiz_attempts` | Încercări quiz per profil copil cu scor |
-| `progress` | Progres lecție per profil copil (not_started/in_progress/completed) |
+| `quiz_attempts` | Încercări quiz per profil cursant cu scor |
+| `progress` | Progres lecție per profil cursant (not_started/in_progress/completed) |
 | `certificates` | Diplome de absolvire curs + XP total permanent |
-| `classes` | Clasele create de cadre didactice (cod acces unic) |
+| `classes` | Clasele create de formatori (cod acces unic) |
 | `class_students` | Elevii dintr-o clasă (display_name + cod personal) |
 | `class_courses` | Cursurile asignate unei clase |
 | `class_student_progress` | Progresul elevilor din clase (separat de `progress`) |
-| `class_student_certificates` | Diplome pentru elevi din clase |
+| `class_student_certificates` | Diplome pentru membri din grupuri |
 | `learning_paths` | Trasee de instruire |
 | `learning_path_courses` | Cursurile dintr-un traseu cu ordine |
 | `webinars` | Webinariile platformei |

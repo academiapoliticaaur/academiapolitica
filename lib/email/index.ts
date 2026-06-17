@@ -1,4 +1,4 @@
-import { Resend } from "resend";
+﻿import { Resend } from "resend";
 
 // Inițializare lazy — evitare eroare la build fără RESEND_API_KEY
 function getResend() {
@@ -30,7 +30,7 @@ export async function sendDiplomaEmail({
 
   const resend = getResend();
   await resend.emails.send({
-    from: process.env.EMAIL_FROM || "Ami & Moti <noreply@everydai.ro>",
+    from: process.env.EMAIL_FROM || "Academia Politica AUR <noreply@academia-aur.ro>",
     to: parentEmail,
     subject: `🎓 ${childName} a finalizat cursul "${courseName}"!`,
     html: diplomaEmailHtml({ parentName, childName, courseName, diplomaUrl: fullDiplomaUrl, totalPoints }),
@@ -56,7 +56,7 @@ export async function sendSubscriptionRequestToAdmin({
   };
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? siteUrl;
   await resend.emails.send({
-    from: process.env.EMAIL_FROM || "Ami & Moti <noreply@everydai.ro>",
+    from: process.env.EMAIL_FROM || "Academia Politica AUR <noreply@academia-aur.ro>",
     to: adminEmail,
     subject: `Cerere abonament nouă — ${userName}`,
     html: `<!DOCTYPE html><html lang="ro"><head><meta charset="UTF-8"></head>
@@ -97,7 +97,7 @@ export async function sendSubscriptionResponseEmail({
   };
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? siteUrl;
   const subject = approved
-    ? "Abonamentul tău Ami & Moti a fost activat!"
+    ? "Abonamentul tău Academia Politica AUR a fost activat!"
     : "Cererea ta de abonament a fost respinsă";
   const html = approved
     ? `<!DOCTYPE html><html lang="ro"><head><meta charset="UTF-8"></head>
@@ -125,7 +125,7 @@ export async function sendSubscriptionResponseEmail({
 </body></html>`;
 
   await resend.emails.send({
-    from: process.env.EMAIL_FROM || "Ami & Moti <noreply@everydai.ro>",
+    from: process.env.EMAIL_FROM || "Academia Politica AUR <noreply@academia-aur.ro>",
     to: userEmail,
     subject,
     html,

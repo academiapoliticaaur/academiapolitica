@@ -1,4 +1,4 @@
-# Architecture Decisions
+﻿# Architecture Decisions
 
 ## ADR-001 — Framework: Next.js + TypeScript
 App Router, server components by default. Server actions for mutations.
@@ -8,13 +8,13 @@ shadcn components sunt copiate în `components/ui/`. Nu face upgrade shadcn făr
 
 ## ADR-003 — Auth și database: Supabase
 - SSR client pattern: separate `client.ts`, `server.ts`, `middleware.ts` în `lib/supabase/`
-- Supabase Auth pentru conturi parent (family/invatator/profesor)
+- Supabase Auth pentru conturi parent (family/formator/profesor)
 - PostgreSQL via Supabase pentru toate datele
 - `createAdminClient()` (service role) pentru operații admin — bypass RLS
 - `createClient()` (anon/user) pentru operații user-facing — cu RLS
 
 ## ADR-004 — Child identity model
-Copiii nu au conturi email. Un părinte creează profiluri copii legate de user_id propriu. Profilurile copii au PIN opțional (4 cifre, sessionStorage, expiră 8h).
+Copiii nu au conturi email. Un părinte creează profiluri cursanți legate de user_id propriu. Profilurile copii au PIN opțional (4 cifre, sessionStorage, expiră 8h).
 
 ## ADR-005 — Video: YouTube unlisted
 URL-uri YouTube Unlisted embed via componenta `VideoEmbed`. Risc cunoscut: linkurile pot fi distribuite. Acceptat pentru MVP.

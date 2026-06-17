@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 /**
  * generate-notebooklm-tasks.mjs
  * Genereaza fisiere .md cu prompturi NotebookLM pentru toate lectiile cursului.
@@ -15,7 +15,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 
 const COURSE = {
-  id: "prieteni-de-incredere-ami-moti",
+  id: "prieteni-de-incredere-academia-aur",
   title: "Prieteni de Incredere cu Ami si Moti",
   age_group: "clasele 0-4",
   modules: [

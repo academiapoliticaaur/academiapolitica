@@ -1,4 +1,4 @@
-# CONTENT_GUIDE.md — Ghid pentru crearea și gestionarea conținutului
+﻿# CONTENT_GUIDE.md — Ghid pentru crearea și gestionarea conținutului
 
 ## 1. Structura unui curs
 
@@ -126,9 +126,9 @@ Orice lecție generată cu AI trebuie:
 | Reviewed | Verificat, gata de publicare |
 | Published | Vizibil pentru copii autentificați |
 
-## 10. Personajele Ami și Moti — ghid vizual
+## 10. Personajele Academia Politica AUR — ghid vizual
 
-Folosește componenta `<AmiMotiGuide>` cu variantele:
+Folosește componenta `<AcademiaGuide>` cu variantele:
 - `ami`: Ami îți explică (verde)
 - `moti`: Moti te provoacă (portocaliu)
 - `mission`: Misiunea lecției (violet)

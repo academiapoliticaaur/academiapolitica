@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useTransition, useMemo } from "react";
 import { Search, UserCheck, Pencil, ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -10,7 +10,7 @@ import { approveUser, deleteTeacher } from "@/lib/admin/actions";
 const PAGE_SIZE = 25;
 
 const TEACHER_LABELS: Record<string, string> = {
-  invatator: "Învățător (cls. 0–4)",
+  formator: "Formator (cls. 0–4)",
   profesor: "Profesor gimnaziu (cls. 5–8)",
 };
 
@@ -94,7 +94,7 @@ export function TeachersTable({ rows }: { rows: TeacherRow[] }) {
                     <td className="px-5 py-4 text-gray-500">{t.email}</td>
                     <td className="px-5 py-4">
                       <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                        t.account_type === "invatator"
+                        t.account_type === "formator"
                           ? "bg-indigo-100 text-indigo-700"
                           : "bg-purple-100 text-purple-700"
                       }`}>
@@ -130,7 +130,7 @@ export function TeachersTable({ rows }: { rows: TeacherRow[] }) {
                           </Link>
                         </Button>
                         <DeleteButton
-                          confirmMessage={`Ștergi contul lui ${t.full_name || "acest cadru didactic"}? Această acțiune este ireversibilă.`}
+                          confirmMessage={`Ștergi contul lui ${t.full_name || "acest formator"}? Această acțiune este ireversibilă.`}
                           action={deleteTeacher.bind(null, t.user_id)}
                         />
                       </div>
@@ -143,7 +143,7 @@ export function TeachersTable({ rows }: { rows: TeacherRow[] }) {
 
           {pageCount > 1 && (
             <div className="flex items-center justify-between text-sm text-gray-500">
-              <p>{filtered.length} cadre didactice · pagina {page + 1} din {pageCount}</p>
+              <p>{filtered.length} formatori · pagina {page + 1} din {pageCount}</p>
               <div className="flex gap-2">
                 <Button size="sm" variant="outline" onClick={() => setPage((p) => p - 1)} disabled={page === 0}>
                   <ChevronLeft size={14} />

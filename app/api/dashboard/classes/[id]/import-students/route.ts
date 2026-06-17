@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createHash } from "crypto";
@@ -8,7 +8,7 @@ function generatePin(): string {
 }
 
 function hashStudentPin(pin: string): string {
-  return createHash("sha256").update(`ami-moti-elev:${pin}`).digest("hex");
+  return createHash("sha256").update(`academia-aur-elev:${pin}`).digest("hex");
 }
 
 function generateStudentCode(name: string): string {

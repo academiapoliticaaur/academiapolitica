@@ -1,4 +1,4 @@
-"use server";
+﻿"use server";
 import { createHash } from "crypto";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 function hashPin(pin: string): string {
-  return createHash("sha256").update(`ami-moti-pin:${pin}`).digest("hex");
+  return createHash("sha256").update(`academia-aur-pin:${pin}`).digest("hex");
 }
 
 export async function verifyChildPin(profileId: string, pin: string): Promise<boolean> {

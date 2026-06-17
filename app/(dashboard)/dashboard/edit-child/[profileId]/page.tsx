@@ -1,14 +1,14 @@
-import { notFound, redirect } from "next/navigation";
+﻿import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { updateChildProfile } from "@/lib/actions/child-profile";
-import { DeleteChildButton } from "@/components/child/delete-child-button";
+import { DeleteChildButton } from "@/components/cursant/delete-child-button";
 import Link from "next/link";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Editează profil copil" };
+export const metadata: Metadata = { title: "Editează profil cursant" };
 
 interface PageProps {
   params: Promise<{ profileId: string }>;

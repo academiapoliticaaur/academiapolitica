@@ -1,4 +1,4 @@
-"use server";
+﻿"use server";
 
 import { Resend } from "resend";
 
@@ -16,7 +16,7 @@ function getSiteUrl() {
 }
 
 const ACCOUNT_TYPE_LABELS: Record<string, string> = {
-  invatator: "Învățător (cl. 0–4)",
+  formator: "Formator (cl. 0–4)",
   profesor: "Profesor gimnaziu (cl. 5–8)",
 };
 
@@ -43,7 +43,7 @@ export async function notifyAdminNewTeacher({
   const typeLabel = ACCOUNT_TYPE_LABELS[accountType] ?? accountType;
 
   await resend.emails.send({
-    from: process.env.EMAIL_FROM ?? "Ami & Moti <noreply@everydai.ro>",
+    from: process.env.EMAIL_FROM ?? "Academia Politica AUR <noreply@academia-aur.ro>",
     to: adminEmails,
     subject: `Cont nou de aprobat — ${fullName} (${typeLabel})`,
     html: buildAdminNotifyHtml({ fullName, email, typeLabel, approvalUrl, siteUrl }),
@@ -64,13 +64,13 @@ export async function sendWelcomeEmail({
 
   const siteUrl = getSiteUrl();
   const dashboardUrl = `${siteUrl}/dashboard`;
-  const isTeacher = accountType === "invatator" || accountType === "profesor";
+  const isTeacher = accountType === "formator" || accountType === "lector";
   const typeLabel = ACCOUNT_TYPE_LABELS[accountType] ?? null;
 
   await resend.emails.send({
-    from: process.env.EMAIL_FROM ?? "Ami & Moti <noreply@everydai.ro>",
+    from: process.env.EMAIL_FROM ?? "Academia Politica AUR <noreply@academia-aur.ro>",
     to: email,
-    subject: `Bun venit pe Ami & Moti, ${fullName.split(" ")[0]}!`,
+    subject: `Bun venit pe Academia Politica AUR, ${fullName.split(" ")[0]}!`,
     html: buildWelcomeHtml({ fullName, dashboardUrl, siteUrl, isTeacher, typeLabel }),
   });
 }
@@ -168,13 +168,13 @@ function buildAdminNotifyHtml({
         <tr>
           <td style="background:linear-gradient(135deg,#6366f1,#a855f7);padding:28px 24px;text-align:center;">
             <div style="color:#ffffff;font-size:22px;font-weight:bold;">Ami &amp; Moti 👧🐱</div>
-            <div style="color:#e0e7ff;font-size:13px;margin-top:6px;">Cont nou de cadru didactic — necesită aprobare</div>
+            <div style="color:#e0e7ff;font-size:13px;margin-top:6px;">Cont nou de formator — necesită aprobare</div>
           </td>
         </tr>
         <tr>
           <td style="padding:28px 28px 8px;">
             <p style="color:#374151;font-size:16px;margin:0 0 20px;">
-              Un cadru didactic și-a creat cont și așteaptă aprobare:
+              Un formator și-a creat cont și așteaptă aprobare:
             </p>
             <table style="width:100%;border-collapse:collapse;margin-bottom:28px;border-radius:8px;overflow:hidden;">
               <tr>

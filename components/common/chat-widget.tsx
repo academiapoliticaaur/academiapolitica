@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
@@ -13,17 +13,17 @@ interface Message {
 const FAQ: { keywords: string[]; answer: string; helpLink?: string }[] = [
   {
     keywords: ["cont", "inregistrare", "register", "creare", "inregistrez", "creez"],
-    answer: "Exista 3 tipuri de cont:\n• Parinte/tutore — acces la cursuri pentru copii\n• Invatator (cls. 0-4) — resurse didactice, necesita aprobare\n• Profesor gimnaziu (cls. 5-8) — resurse didactice, necesita aprobare\nApasa Creeaza cont pe pagina principala si alege tipul potrivit.",
+    answer: "Exista 3 tipuri de cont:\n• Parinte/tutore — acces la cursuri pentru copii\n• Formator (cls. 0-4) — resurse didactice, necesita aprobare\n• Profesor gimnaziu (cls. 5-8) — resurse didactice, necesita aprobare\nApasa Creeaza cont pe pagina principala si alege tipul potrivit.",
     helpLink: "/help#parinti",
   },
   {
-    keywords: ["copil", "profil copil", "adaug copil", "nou copil", "child"],
-    answer: "Dupa autentificare, mergi la Dashboard si apasa Adauga profil copil. Completezi numele, grupa de varsta (0-4 sau 5-8) si optional un PIN de 4 cifre. Poti adauga mai multi copii pe acelasi cont.",
+    keywords: ["copil", "profil cursant", "adaug copil", "nou copil", "child"],
+    answer: "Dupa autentificare, mergi la Dashboard si apasa Adauga profil cursant. Completezi numele, grupa de varsta (0-4 sau 5-8) si optional un PIN de 4 cifre. Poti adauga mai multi copii pe acelasi cont.",
     helpLink: "/help#parinti",
   },
   {
     keywords: ["curs", "cursuri", "ce cursuri", "disponibil", "oferta"],
-    answer: "Cursurile pentru elevi sunt pe pagina /courses, filtrate dupa grupa (0-4 sau 5-8). Cadrele didactice aprobate au acces la resurse suplimentare pe pagina /cadre-didactice. Toate cursurile sunt listate alfabetic.",
+    answer: "Cursurile pentru elevi sunt pe pagina /courses, filtrate dupa grupa (0-4 sau 5-8). Cadrele didactice aprobate au acces la resurse suplimentare pe pagina /formatori. Toate cursurile sunt listate alfabetic.",
     helpLink: "/help#cursuri",
   },
   {
@@ -73,12 +73,12 @@ const FAQ: { keywords: string[]; answer: string; helpLink?: string }[] = [
   },
   {
     keywords: ["pret", "gratuit", "cost", "plata", "abonament"],
-    answer: "Platforma Ami & Moti este complet gratuita — pentru parinti, copii si cadre didactice. Nu exista abonamente sau costuri ascunse.",
+    answer: "Platforma Academia Politica AUR este complet gratuita — pentru parinti, copii si formatori. Nu exista abonamente sau costuri ascunse.",
     helpLink: "/help#cursuri",
   },
   {
     keywords: ["contact", "ajutor", "problema", "eroare", "suport"],
-    answer: "Pentru probleme tehnice sau intrebari, consulta Centrul de ajutor (/help). Poti trimite si un mesaj direct la suport@amisimoti.ro sau prin formularul de contact din pagina Ajutor.",
+    answer: "Pentru probleme tehnice sau intrebari, consulta Centrul de ajutor (/help). Poti trimite si un mesaj direct la suport@academia-aur.ro sau prin formularul de contact din pagina Ajutor.",
     helpLink: "/help#tehnic",
   },
   {
@@ -97,7 +97,7 @@ const FAQ: { keywords: string[]; answer: string; helpLink?: string }[] = [
   },
   {
     keywords: ["instalare", "instaleaza", "aplicatie", "ecran principal", "pwa", "iphone", "ipad", "android", "telefon"],
-    answer: "Poti adauga Ami & Moti pe ecranul principal ca aplicatie:\n• Pe Android/Chrome: apasa butonul Instaleaza care apare automat in josul ecranului.\n• Pe iPhone/iPad (Safari): apasa butonul Distribuie (patratul cu sageata in sus), apoi Adauga pe ecranul principal — pe iOS nu apare un buton automat de instalare, dar functioneaza la fel de bine prin acest pas manual.",
+    answer: "Poti adauga Academia Politica AUR pe ecranul principal ca aplicatie:\n• Pe Android/Chrome: apasa butonul Instaleaza care apare automat in josul ecranului.\n• Pe iPhone/iPad (Safari): apasa butonul Distribuie (patratul cu sageata in sus), apoi Adauga pe ecranul principal — pe iOS nu apare un buton automat de instalare, dar functioneaza la fel de bine prin acest pas manual.",
     helpLink: "/help#tehnic",
   },
   {
@@ -116,8 +116,8 @@ const FAQ: { keywords: string[]; answer: string; helpLink?: string }[] = [
     helpLink: "/help#cursuri",
   },
   {
-    keywords: ["invatator", "profesor", "cadre", "didactic", "aprobare", "aprobat", "resurse"],
-    answer: "Conturile de Invatator si Profesor necesita aprobare manuala de administrator. Dupa aprobare, ai acces la resurse didactice de pe /cadre-didactice, filtrate pe grupa ta (0-4 sau 5-8). Daca esti aprobat dar nu vezi resursele, deconecteaza-te si reconecteaza-te.",
+    keywords: ["formator", "lector", "cadre", "didactic", "aprobare", "aprobat", "resurse"],
+    answer: "Conturile de Formator si Profesor necesita aprobare manuala de administrator. Dupa aprobare, ai acces la resurse didactice de pe /formatori, filtrate pe grupa ta (0-4 sau 5-8). Daca esti aprobat dar nu vezi resursele, deconecteaza-te si reconecteaza-te.",
     helpLink: "/help#cadre",
   },
   {
@@ -137,10 +137,10 @@ const FAQ: { keywords: string[]; answer: string; helpLink?: string }[] = [
   },
 ];
 
-const WELCOME = "Buna! Sunt asistentul platformei Ami & Moti 🌟\nCu ce te pot ajuta?\n\n• Parinti: conturi copii, progres, XP, diplome\n• Cadre didactice: aprobare cont, clase virtuale, resurse\n• Elevi: acces cu cod clasa, quiz-uri, certificate\n\nPentru raspunsuri complete consulta Centrul de ajutor.";
-const FALLBACK_TEXT = "Nu am informatii despre acest subiect. Consulta Centrul de ajutor (/help) pentru raspunsuri complete, sau scrie-ne la suport@amisimoti.ro.";
+const WELCOME = "Buna! Sunt asistentul platformei Academia Politica AUR 🌟\nCu ce te pot ajuta?\n\n• Parinti: conturi copii, progres, XP, diplome\n• Formatori: aprobare cont, clase virtuale, resurse\n• Elevi: acces cu cod clasa, quiz-uri, certificate\n\nPentru raspunsuri complete consulta Centrul de ajutor.";
+const FALLBACK_TEXT = "Nu am informatii despre acest subiect. Consulta Centrul de ajutor (/help) pentru raspunsuri complete, sau scrie-ne la suport@academia-aur.ro.";
 const FALLBACK_LINK = "/help";
-const SUGGESTIONS = ["Cum creez un cont?", "Ce sunt clasele virtuale?", "Cum functioneaza quiz-ul?", "Resurse cadre didactice"];
+const SUGGESTIONS = ["Cum creez un cont?", "Ce sunt clasele virtuale?", "Cum functioneaza quiz-ul?", "Resurse formatori"];
 
 interface AnswerResult {
   text: string;
@@ -192,7 +192,7 @@ export function ChatWidget() {
         <button
           onClick={() => setOpen(true)}
           className="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg flex items-center justify-center transition-all hover:scale-105"
-          title="Asistent Ami & Moti"
+          title="Asistent Academia Politica AUR"
         >
           <MessageCircle size={26} />
         </button>
@@ -207,7 +207,7 @@ export function ChatWidget() {
             <div className="flex items-center gap-2">
               <span className="text-lg">🌟</span>
               <div>
-                <p className="font-semibold text-sm leading-tight">Asistent Ami & Moti</p>
+                <p className="font-semibold text-sm leading-tight">Asistent Academia Politica AUR</p>
                 <p className="text-xs text-blue-200 leading-tight">Informatii despre platforma</p>
               </div>
             </div>

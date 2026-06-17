@@ -1,4 +1,4 @@
-"use server";
+﻿"use server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { revalidatePath } from "next/cache";
@@ -27,5 +27,5 @@ export async function resetCourseProgress(profileId: string, courseId: string) {
 
   if (error) throw new Error(`Eroare la resetare progres: ${error.message}`);
 
-  revalidatePath(`/child/${profileId}/course/${courseId}`);
+  revalidatePath(`/cursant/${profileId}/course/${courseId}`);
 }

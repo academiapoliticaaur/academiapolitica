@@ -1,4 +1,4 @@
-import { createAdminClient } from "@/lib/supabase/admin";
+﻿import { createAdminClient } from "@/lib/supabase/admin";
 import { GraduationCap, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -6,9 +6,9 @@ import { TeachersTable, type TeacherRow } from "@/components/admin/teachers-tabl
 import { Pagination } from "@/components/admin/pagination";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Cadre didactice" };
+export const metadata: Metadata = { title: "Formatori" };
 
-const TEACHER_TYPES = ["invatator", "profesor"] as const;
+const TEACHER_TYPES = ["formator", "lector"] as const;
 const PAGE_SIZE = 25;
 
 interface PageProps {
@@ -56,17 +56,17 @@ export default async function AdminTeachersPage({ searchParams }: PageProps) {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold flex items-center gap-2">
           <GraduationCap size={24} className="text-indigo-500" />
-          Cadre didactice{count != null ? ` (${count})` : ""}
+          Formatori{count != null ? ` (${count})` : ""}
         </h1>
       </div>
 
       {rows.length === 0 ? (
         <div className="bg-white rounded-xl border p-12 text-center">
           <GraduationCap className="mx-auto mb-3 text-gray-300" size={40} />
-          <p className="text-gray-400 mb-2">Niciun cadru didactic înregistrat încă.</p>
+          <p className="text-gray-400 mb-2">Niciun formator înregistrat încă.</p>
           <p className="text-sm text-gray-400">
             Cadrele didactice se înregistrează selectând tipul de cont{" "}
-            <strong>Învățător</strong> sau <strong>Profesor gimnaziu</strong> la creare cont.
+            <strong>Formator</strong> sau <strong>Profesor gimnaziu</strong> la creare cont.
           </p>
         </div>
       ) : (

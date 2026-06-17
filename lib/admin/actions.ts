@@ -1,4 +1,4 @@
-"use server";
+﻿"use server";
 
 import { revalidatePath, revalidateTag } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
@@ -25,9 +25,9 @@ export async function approveUser(userId: string, email: string, fullName: strin
 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "";
   await resend.emails.send({
-    from: process.env.EMAIL_FROM ?? "Ami & Moti <noreply@everydai.ro>",
+    from: process.env.EMAIL_FROM ?? "Academia Politica AUR <noreply@academia-aur.ro>",
     to: email,
-    subject: "Contul tău Ami & Moti a fost aprobat!",
+    subject: "Contul tău Academia Politica AUR a fost aprobat!",
     html: `
 <!DOCTYPE html><html lang="ro"><head><meta charset="UTF-8"></head>
 <body style="font-family:sans-serif;background:#f9fafb;padding:32px;color:#1f2937">

@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+﻿import { describe, it, expect } from "vitest";
 import { loginSchema, registerSchema, childProfileSchema, courseSchema } from "@/lib/validation/schemas";
 
 describe("loginSchema", () => {
@@ -25,7 +25,7 @@ describe("registerSchema", () => {
   const validData = {
     full_name: "Ion Ionescu",
     email: "ion@example.com",
-    account_type: "family" as const,
+    account_type: "member" as const,
     password: "parola_sigura",
     confirm_password: "parola_sigura",
     accepted_terms: true,
@@ -50,9 +50,9 @@ describe("registerSchema", () => {
     expect(result.success).toBe(false);
   });
 
-  it("acceptă tipuri de cont valide: invatator și profesor", () => {
-    expect(registerSchema.safeParse({ ...validData, account_type: "invatator" }).success).toBe(true);
-    expect(registerSchema.safeParse({ ...validData, account_type: "profesor" }).success).toBe(true);
+  it("acceptă tipuri de cont valide: formator și profesor", () => {
+    expect(registerSchema.safeParse({ ...validData, account_type: "formator" }).success).toBe(true);
+    expect(registerSchema.safeParse({ ...validData, account_type: "lector" }).success).toBe(true);
   });
 
   it("respinge tip de cont invalid", () => {
@@ -122,7 +122,7 @@ describe("courseSchema", () => {
   });
 
   it("acceptă audience opțional", () => {
-    const result = courseSchema.safeParse({ ...validCourse, audience: "invatator" });
+    const result = courseSchema.safeParse({ ...validCourse, audience: "formator" });
     expect(result.success).toBe(true);
   });
 });

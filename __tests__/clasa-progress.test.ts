@@ -1,13 +1,13 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+﻿import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { NextRequest } from "next/server";
 
 const { mockFrom } = vi.hoisted(() => ({ mockFrom: vi.fn() }));
 vi.mock("@/lib/supabase/admin", () => ({ createAdminClient: () => ({ from: mockFrom }) }));
 
-import { POST } from "@/app/api/clasa/progress/route";
+import { POST } from "@/app/api/grup/progress/route";
 
 function makeReq(body: object): NextRequest {
-  return new Request("http://localhost/api/clasa/progress", {
+  return new Request("http://localhost/api/grup/progress", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -37,7 +37,7 @@ function chain(data: unknown) {
 
 beforeEach(() => vi.clearAllMocks());
 
-describe("POST /api/clasa/progress", () => {
+describe("POST /api/grup/progress", () => {
   it("returnează 400 dacă lipsesc câmpuri obligatorii", async () => {
     const res = await POST(makeReq({ classCode: "ABC1" }));
     expect(res.status).toBe(400);

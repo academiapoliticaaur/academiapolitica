@@ -1,8 +1,8 @@
-# Plan de testare — Platforma Ami & Moti
+﻿# Plan de testare — Platforma Academia Politica AUR
 
 > Versiune: 2026-06-14 | Total: 196 teste manuale  
 > Stack: Next.js 16 + Supabase + TypeScript + Tailwind  
-> Tipuri conturi: `family` | `invatator` | `profesor` | `admin`
+> Tipuri conturi: `family` | `formator` | `profesor` | `admin`
 
 ---
 
@@ -25,7 +25,7 @@
 | # | Test | Date intrare | Rezultat așteptat | Status |
 |---|------|-------------|-------------------|--------|
 | T1 | Înregistrare cont `family` | email valid, parolă 8+ caractere | Email confirmare trimis, redirect `/login` | |
-| T2 | Înregistrare cont `invatator` | email valid, tip invatator | Email admin trimis, cont în așteptare aprobare | |
+| T2 | Înregistrare cont `formator` | email valid, tip formator | Email admin trimis, cont în așteptare aprobare | |
 | T3 | Înregistrare cont `profesor` | email valid, tip profesor | Email admin trimis, cont în așteptare aprobare | |
 | T4 | Email deja existent | email existent în DB | Eroare afișată, fără cont duplicat | |
 | T5 | Parolă prea scurtă | parolă < 8 caractere | Validare blocată, mesaj eroare specific | |
@@ -40,14 +40,14 @@
 | T9 | Link confirmare expirat (>24h) | Redirect `/login?error=confirmare_esuata` | |
 | T10 | Link confirmare folosit deja (replay) | Eroare graceful, redirect login fără crash | |
 | T11 | Verificare trial activat în DB (family) | `subscription_plan='trial'`, `subscription_expires_at = now+7d` | |
-| T12 | Verificare trial NU activat (invatator) | `subscription_plan=null` pentru cont profesor/invatator | |
+| T12 | Verificare trial NU activat (formator) | `subscription_plan=null` pentru cont profesor/formator | |
 
 ### 1.3 Autentificare
 
 | # | Test | Rezultat așteptat | Status |
 |---|------|-------------------|--------|
 | T13 | Login corect cont family | Redirect `/dashboard` | |
-| T14 | Login corect cont profesor/invatator | Redirect `/dashboard/classes` | |
+| T14 | Login corect cont profesor/formator | Redirect `/dashboard/grupuri` | |
 | T15 | Login corect admin | Redirect `/dashboard` (buton Admin vizibil în header) | |
 | T16 | Parolă greșită | Eroare "credențiale invalide", fără detalii tehnice | |
 | T17 | Email inexistent | Eroare fără a dezvălui existența contului | |
@@ -82,9 +82,9 @@
 
 | # | Test | Rezultat așteptat | Status |
 |---|------|-------------------|--------|
-| T30 | Adaugă copil cu date valide (nume + grupă vârstă) | Copil creat, apare imediat în dashboard | |
-| T31 | Adaugă copil fără nume | Eroare validare, formular respins | |
-| T32 | Editare profil copil (nume, grupă vârstă) | Date actualizate, afișate corect | |
+| T30 | Profil cursant cu date valide (nume + grupă vârstă) | Copil creat, apare imediat în dashboard | |
+| T31 | Profil cursant fără nume | Eroare validare, formular respins | |
+| T32 | Editare profil cursant (nume, grupă vârstă) | Date actualizate, afișate corect | |
 | T33 | Setare PIN parental 4 cifre | PIN setat (hash SHA256 în DB), confirmat la intrare zonă copil | |
 | T34 | Schimbare PIN existent | Noul PIN funcționează, vechiul PIN respins | |
 | T35 | Ștergere copil cu confirm dialog | Copil + progres + certificate șterse în cascadă | |
@@ -100,13 +100,13 @@
 
 ---
 
-## 3. ZONA COPILULUI (`/child/[profileId]`)
+## 3. ZONA COPILULUI (`/cursant/[profileId]`)
 
 ### 3.1 Acces cu PIN parental
 
 | # | Test | Rezultat așteptat | Status |
 |---|------|-------------------|--------|
-| T40 | PIN corect | Cookie `child_session` setat 8h, acces la zona copilului | |
+| T40 | PIN corect | Cookie `child_session` setat 8h, acces la zona cursantului | |
 | T41 | PIN greșit (3 cifre, altele) | Eroare afișată, fără acces | |
 | T42 | PIN setat, cookie expirat (>8h) | Redirect la pagina PIN entry | |
 | T43 | Fără PIN setat | Acces direct fără PIN entry | |
@@ -159,20 +159,20 @@
 |---|------|-------------------|--------|
 | T66 | Finalizare ultimei lecții din curs | Overlay certificat afișat automat | |
 | T67 | Certificat creat în DB | Row în `certificates` cu `issued_at` | |
-| T68 | Pagina certificat accesibilă | `/child/[id]/certificate/[certId]` randează certificatul | |
+| T68 | Pagina certificat accesibilă | `/cursant/[id]/certificate/[certId]` randează certificatul | |
 | T69 | Buton print certificat | Dialog print browser deschis | |
 
 ---
 
-## 4. ZONA CLASĂ (`/clasa/*`) — Fără autentificare
+## 4. ZONA CLASĂ (`/grup/*`) — Fără autentificare
 
 ### 4.1 Intrare clasă
 
 | # | Test | Rezultat așteptat | Status |
 |---|------|-------------------|--------|
-| T70 | Cod clasă valid și activ | Lista elevi afișată | |
-| T71 | Cod clasă invalid (inexistent) | Eroare "Clasă negăsită" | |
-| T72 | Cod clasă arhivat | Acces blocat cu mesaj | |
+| T70 | Cod grup valid și activ | Lista elevi afișată | |
+| T71 | Cod grup invalid (inexistent) | Eroare "Clasă negăsită" | |
+| T72 | Cod grup arhivat | Acces blocat cu mesaj | |
 | T73 | Selectare elev din listă | Dacă PIN setat → input PIN; altfel → acces direct | |
 | T74 | PIN elev corect | Cookie sesiune clasă setat, acces la cursuri | |
 | T75 | PIN elev greșit | Eroare, fără acces | |
@@ -181,7 +181,7 @@
 
 | # | Test | Rezultat așteptat | Status |
 |---|------|-------------------|--------|
-| T76 | Finalizare lecție → `POST /api/clasa/progress` | Row în `class_student_progress` cu `status=completed` | |
+| T76 | Finalizare lecție → `POST /api/grup/progress` | Row în `class_student_progress` cu `status=completed` | |
 | T77 | Progres persistent la revenire în clasă | Lecție marcată completă, nu se poate reimarca | |
 | T78 | Certificat student la finalizare curs | Row în `class_student_certificates` | |
 | T79 | URL manipulation (alt studentCode) | Cookie validat per student, acces blocat | |
@@ -202,7 +202,7 @@
 | T85 | Editare elev (nume, grupă) | Date actualizate | |
 | T86 | Regenerare PIN elev | PIN nou generat, PIN vechi invalid | |
 | T87 | Ștergere elev | Elev + progres clasei șterse | |
-| T88 | Asignare curs la clasă | Curs apare în clasă și la elevi pe `/clasa` | |
+| T88 | Asignare curs la clasă | Curs apare în clasă și la elevi pe `/grup` | |
 | T89 | Reordonare cursuri (buton sus/jos) | `order_index` swap-at, ordinea persistată | |
 | T90 | Scoatere curs din clasă | Curs nu mai apare la elevi | |
 
@@ -269,13 +269,13 @@
 
 | # | Test | Rezultat așteptat | Status |
 |---|------|-------------------|--------|
-| T121 | Aprobare cont `invatator` | `approved=true`, email confirmare trimis utilizatorului | |
+| T121 | Aprobare cont `formator` | `approved=true`, email confirmare trimis utilizatorului | |
 | T122 | Aprobare bulk 5 conturi simultan | Toate aprobate, fiecare înregistrat în audit log | |
 | T123 | Respingere cerere abonament | `status=rejected`, email notificare utilizator | |
 | T124 | Aprobare cerere abonament `monthly` | Abonament activat 30 zile, email utilizator | |
 | T125 | Aprobare bulk 3 cereri abonament | Toate activate, toate înregistrate în audit | |
 | T126 | Ștergere părinte | Cascadă: copii + progres + certificate + auth user | |
-| T127 | Ștergere cadru didactic | Profil + auth user șterse | |
+| T127 | Ștergere formator | Profil + auth user șterse | |
 | T128 | Search părinți (filtru text live) | Filtrare în timp real după nume/email | |
 | T129 | Paginare tabel (25 rânduri/pagină) | Navigare prev/next funcțională, count corect | |
 
@@ -356,7 +356,7 @@
 | T166 | Pagina Learning Paths `/paths` | Trasee cu `status=published` afișate | |
 | T167 | Pagina Webinare `/webinars` | Webinare cu `status=published` afișate | |
 | T168 | Formular Contact `/help` | Email trimis la admin via Resend | |
-| T169 | Pagina Cadre Didactice `/cadre-didactice` | Accesibilă public, CTA înregistrare | |
+| T169 | Pagina Cadre Didactice `/formatori` | Accesibilă public, CTA înregistrare | |
 
 ---
 
@@ -381,9 +381,9 @@
 |---|------|-------------------|--------|
 | T178 | `POST /api/auth/activate-trial` fără sesiune | 401 Unauthorized | |
 | T179 | `POST /api/auth/activate-trial` cont cu plan existent | `{activated: false}`, plan nemodificat | |
-| T180 | `POST /api/auth/activate-trial` cont invatator/profesor | `{activated: false}`, trial doar pentru family | |
-| T181 | `GET /api/dashboard/classes/[id]/progress-csv` alt profesor | 403 sau 404 | |
-| T182 | `POST /api/clasa/progress` cu student_id invalid | 400/404 graceful | |
+| T180 | `POST /api/auth/activate-trial` cont formator/profesor | `{activated: false}`, trial doar pentru family | |
+| T181 | `GET /api/dashboard/grupuri/[id]/progress-csv` alt profesor | 403 sau 404 | |
+| T182 | `POST /api/grup/progress` cu student_id invalid | 400/404 graceful | |
 | T183 | `GET /api/export-my-data` fără sesiune | 401 Unauthorized | |
 | T184 | `GET /api/export-my-data` autentificat | JSON cu datele proprii ale utilizatorului | |
 | T185 | Server Actions admin fără sesiune admin | `requireAdmin()` aruncă eroare, return `{error}` | |
@@ -411,7 +411,7 @@
 |---|------|-------------------|--------|
 | T194 | `GET /dashboard/*` fără sesiune | Redirect `/login` | |
 | T195 | `GET /admin/*` fără sesiune | Redirect `/login` | |
-| T196 | `GET /child/*` fără sesiune parent | Redirect `/login` | |
+| T196 | `GET /cursant/*` fără sesiune parent | Redirect `/login` | |
 
 ---
 
@@ -436,7 +436,7 @@ Rulează aceste 10 teste după fiecare deploy major:
 | # | Test rapid | Durată estimată |
 |---|-----------|----------------|
 | S1 | Înregistrare cont family nou → trial activat | 3 min |
-| S2 | Login → dashboard → adaugă copil → zonă copil | 3 min |
+| S2 | Login → dashboard → profil cursant → zonă copil | 3 min |
 | S3 | Lecție video → finalizare → progres salvat | 2 min |
 | S4 | Quiz → răspuns corect → score salvat | 2 min |
 | S5 | Finalizare curs → certificat generat | 2 min |

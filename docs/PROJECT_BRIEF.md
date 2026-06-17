@@ -1,4 +1,4 @@
-# Project Brief — Ami & Moti Educational Platform
+﻿# Project Brief — Academia Politica AUR Educational Platform
 
 ## Product
 Platformă educațională web pentru copii (piața română). Cursuri generate cu AI, revizuite de oameni. Două personaje: Ami (fetiță de 11 ani) și Moti (pisică portocalie). Platforma este gratuită integral.
@@ -7,11 +7,11 @@ Platformă educațională web pentru copii (piața română). Cursuri generate c
 | Rol | Descriere |
 |------|-------------|
 | Vizitator | Browsează catalogul public de cursuri, fără cont |
-| Părinte/tutore | Creează cont (`family`), gestionează profiluri copii, urmărește progresul |
-| Profil copil | Legat de cont părinte, fără email, accesează cursuri |
-| Cadru didactic (Învățător) | Cont `invatator`, necesită aprobare admin, accesează resurse cls. 0–4, gestionează clase |
-| Cadru didactic (Profesor) | Cont `profesor`, necesită aprobare admin, accesează resurse cls. 5–8, gestionează clase |
-| Elev din clasă | Acces fără cont prin cod clasă + cod personal (dat de profesor) |
+| Părinte/tutore | Creează cont (`family`), gestionează profiluri cursanți, urmărește progresul |
+| Profil cursant | Legat de cont părinte, fără email, accesează cursuri |
+| Formator (Formator) | Cont `formator`, necesită aprobare admin, accesează resurse cls. 0–4, gestionează clase |
+| Formator (Profesor) | Cont `profesor`, necesită aprobare admin, accesează resurse cls. 5–8, gestionează clase |
+| Elev din clasă | Acces fără cont prin cod grup + cod personal (dat de profesor) |
 | Admin | Gestionează tot conținutul și utilizatorii platformei |
 
 ## Grupe de vârstă (pentru elevi)
@@ -24,18 +24,18 @@ Platformă educațională web pentru copii (piața română). Cursuri generate c
 1. Pagina principală cu hero, features, 4 carduri grupe
 2. Catalog cursuri cu căutare text și filtru grupă vârstă
 3. Pagina detaliu curs (publică)
-4. Pagina /cadre-didactice cu resurse didactice (acces per rol)
+4. Pagina /formatori cu resurse didactice (acces per rol)
 5. Pagina /despre, /help, /paths, /webinars
 
 ### Autentificare
-6. Înregistrare cu selectare tip cont (family/invatator/profesor)
+6. Înregistrare cu selectare tip cont (family/formator/profesor)
 7. Login/logout (Supabase Auth PKCE)
 8. MFA TOTP pentru admin
-9. PIN opțional 4 cifre pe profil copil (expiră 8h)
+9. PIN opțional 4 cifre pe profil cursant (expiră 8h)
 
 ### Dashboard & Progres
-10. Dashboard cu profiluri copii și XP
-11. Zona copilului: XP, streak, badges, curs activ
+10. Dashboard cu profiluri cursanți și XP
+11. Zona cursantului: XP, streak, badges, curs activ
 12. Player lecție: YouTube video, Google Drive prezentare/fișă de lucru, quiz interactiv
 13. Progres tracking (per copil, per lecție)
 14. Gamificare: XP, daily streak, 9 insigne, diplomă printabilă
@@ -45,16 +45,16 @@ Platformă educațională web pentru copii (piața română). Cursuri generate c
 16. Profesorul creează clase cu cod de acces unic
 17. Adaugă elevi (display_name + cod personal)
 18. Asignează cursuri clasei
-19. Elevi accesează /clasa fără cont (cod clasă + cod personal)
-20. Diplomă pentru elevi din clase
+19. Elevi accesează /clasa fără cont (cod grup + cod personal)
+20. Diplomă pentru membri din grupuri
 
 ### Admin
 21. CRUD complet cursuri / module / lecții / quiz-uri
 22. Import curriculum AI (DOCX/PDF → Groq → curs draft)
 23. Import quiz din DOCX/PDF/TXT
 24. Publicare/retragere cursuri și webinarii
-25. Gestionare utilizatori (părinți, cadre didactice, copii)
-26. Aprobare conturi cadre didactice
+25. Gestionare utilizatori (părinți, formatori, copii)
+26. Aprobare conturi formatori
 27. CRUD trasee de instruire și webinarii
 28. Statistici platformă
 29. Google Drive integration (OAuth2, Google Picker, organizare foldere)
@@ -74,4 +74,4 @@ Platformă educațională web pentru copii (piața română). Cursuri generate c
 Google Drive (authoring) → URL direct în lecție → embed în player (Google Drive Preview/Embed API). Toate lecțiile AI-generate necesită revizuire umană înainte de publicare.
 
 ## Deployment
-Vercel (Next.js), Supabase (DB + Auth), custom domain ami-moti.everydai.ro
+Vercel (Next.js), Supabase (DB + Auth), custom domain academia-aur.ro

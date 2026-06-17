@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
-import { AmiMotiGuide } from "@/components/common/ami-moti-guide";
+import { AcademiaGuide } from "@/components/common/academia-guide";
 import { createClient } from "@/lib/supabase/client";
 import { childProfileSchema, type ChildProfileFormData } from "@/lib/validation/schemas";
 
@@ -72,12 +72,12 @@ export default function AddChildPage() {
             Înapoi
           </Link>
         </Button>
-        <h1 className="text-2xl font-bold">Adaugă profil copil</h1>
+        <h1 className="text-2xl font-bold">Adaugă profil cursant</h1>
         <p className="text-gray-500 mt-1">Creează un profil pentru a permite accesul la cursuri.</p>
       </div>
 
-      <AmiMotiGuide
-        variant="moti"
+      <AcademiaGuide
+        variant="tip"
         message="Nu avem nevoie de emailul copilului! Folosim doar prenumele sau un pseudonim ales de tine."
         className="mb-6"
       />

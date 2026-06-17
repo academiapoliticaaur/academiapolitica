@@ -1,9 +1,9 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Users, Star, Shield, LayoutDashboard } from "lucide-react";
-import { AmiMotiGuide } from "@/components/common/ami-moti-guide";
+import { AcademiaGuide } from "@/components/common/academia-guide";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { StatsCounter } from "@/components/home/stats-counter";
@@ -13,9 +13,9 @@ import { getHomepageStats } from "@/lib/db/homepage-stats";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Ami & Moti — Platformă educațională pentru copii",
+  title: "Academia Politica AUR — Platformă de formare politică",
   description:
-    "O platformă educațională prietenoasă pentru copiii din clasele 0–8. Cursuri, lecții, filme și activități interactive cu Ami și Moti.",
+    "O platformă educațională prietenoasă pentru copiii din clasele 0–8. Cursuri, lecții, filme și activități interactive cu Academia Politica AUR.",
 };
 
 export default async function HomePage() {
@@ -58,8 +58,8 @@ export default async function HomePage() {
         {/* Banner principal */}
         <section className="w-full">
           <Image
-            src="/banner-ami-moti.png"
-            alt="Ami și Moti se pregătesc pentru viața"
+            src="/banner-academia-aur.png"
+            alt="Academia Politica AUR se pregătesc pentru viața"
             width={1920}
             height={768}
             className="w-full h-auto"
@@ -104,12 +104,12 @@ export default async function HomePage() {
                 {/* Copii înregistrați — vizibil doar părinților autentificați */}
                 {user && children.length > 0 && (
                   <div className="mt-6">
-                    <p className="text-sm font-semibold text-gray-500 mb-3">Intră direct în zona copilului:</p>
+                    <p className="text-sm font-semibold text-gray-500 mb-3">Intră direct în zona cursantului:</p>
                     <div className="flex flex-wrap gap-2">
                       {children.map((child) => (
                         <Link
                           key={child.id}
-                          href={`/child/${child.id}`}
+                          href={`/cursant/${child.id}`}
                           className="flex items-center gap-2 px-4 py-2 rounded-full border-2 border-blue-200 bg-white hover:bg-blue-50 hover:border-blue-400 transition-all text-sm font-semibold text-blue-700"
                         >
                           <span>{child.age_group === "0-4" ? "🌈" : "🚀"}</span>
@@ -123,15 +123,15 @@ export default async function HomePage() {
 
               <div className="flex flex-col items-center gap-4">
                 <Image
-                  src="/ami-moti-hero.png"
-                  alt="Ami și Moti"
+                  src="/academia-aur-hero.png"
+                  alt="Academia Politica AUR"
                   width={420}
                   height={420}
                   className="w-full max-w-sm drop-shadow-xl"
                   priority
                 />
-                <AmiMotiGuide
-                  variant="ami"
+                <AcademiaGuide
+                  variant="info"
                   message="Bună! Eu sunt Ami și împreună cu Moti te voi ajuta să descoperi lucruri noi și interesante!"
                 />
               </div>
@@ -261,12 +261,12 @@ export default async function HomePage() {
                 <Card className="border-2 border-emerald-200 hover:border-emerald-400 transition-colors">
                   <CardContent className="p-8">
                     <div className="text-5xl mb-4">🍎</div>
-                    <h3 className="text-2xl font-bold text-emerald-700 mb-2">Învățător (cl. 0–4)</h3>
+                    <h3 className="text-2xl font-bold text-emerald-700 mb-2">Formator (cl. 0–4)</h3>
                     <p className="text-gray-600 mb-4">
                       Cursuri dedicate învățătorilor + acces la cursurile elevilor din clasele 0–4.
                     </p>
                     <Button className="bg-emerald-500 hover:bg-emerald-600 text-white" asChild>
-                      <Link href="/cadre-didactice">Explorează cursurile</Link>
+                      <Link href="/formatori">Explorează cursurile</Link>
                     </Button>
                   </CardContent>
                 </Card>
@@ -279,7 +279,7 @@ export default async function HomePage() {
                       Cursuri pentru profesorii cls. 5–8 + acces la cursurile elevilor de gimnaziu.
                     </p>
                     <Button className="bg-purple-500 hover:bg-purple-600 text-white" asChild>
-                      <Link href="/cadre-didactice">Explorează cursurile</Link>
+                      <Link href="/formatori">Explorează cursurile</Link>
                     </Button>
                   </CardContent>
                 </Card>
@@ -310,8 +310,8 @@ export default async function HomePage() {
                 </ul>
               </div>
               <div className="flex flex-col gap-4">
-                <AmiMotiGuide
-                  variant="moti"
+                <AcademiaGuide
+                  variant="tip"
                   message="Eu, Moti, am verificat că platforma este sigură! Părinții controlează totul, iar copiii se pot concentra pe învățat."
                 />
                 <Button size="lg" className="bg-blue-100 hover:bg-blue-200 text-blue-700 w-full" asChild>

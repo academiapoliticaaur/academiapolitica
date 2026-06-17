@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -31,7 +31,7 @@ export function ImportStudentsButton({ classId }: { classId: string }) {
       const formData = new FormData();
       formData.append("file", file);
 
-      const res = await fetch(`/api/dashboard/classes/${classId}/import-students`, {
+      const res = await fetch(`/api/dashboard/grupuri/${classId}/import-students`, {
         method: "POST",
         body: formData,
       });

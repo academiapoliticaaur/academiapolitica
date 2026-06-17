@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import Link from "next/link";
 import { BookOpen, Award, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const supabase = await createClient();
   const { data } = await supabase.from("learning_paths").select("title, description").eq("slug", slug).single();
   if (!data) return { title: "Traseu negăsit" };
-  return { title: `${data.title} — Ami & Moti`, description: data.description ?? undefined };
+  return { title: `${data.title} — Academia Politica AUR`, description: data.description ?? undefined };
 }
 
 export default async function PathDetailPage({ params }: PageProps) {

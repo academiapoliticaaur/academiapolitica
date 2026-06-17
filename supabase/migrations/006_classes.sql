@@ -1,4 +1,4 @@
--- Migration 006: Clase pentru cadre didactice
+﻿-- Migration 006: Clase pentru formatori
 -- Tabele: classes, class_students, class_courses, class_student_progress
 
 -- ============================================================

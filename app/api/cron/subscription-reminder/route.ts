@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -90,11 +90,11 @@ export async function GET(request: Request) {
 </html>`;
 
     const subject = daysLeft <= 1
-      ? "⚠️ Abonamentul Ami & Moti expiră mâine"
-      : `⏰ Abonamentul Ami & Moti expiră în ${daysLeft} zile`;
+      ? "⚠️ Abonamentul Academia Politica AUR expiră mâine"
+      : `⏰ Abonamentul Academia Politica AUR expiră în ${daysLeft} zile`;
 
     await resend.emails.send({
-      from: process.env.EMAIL_FROM ?? "Ami & Moti <noreply@everydai.ro>",
+      from: process.env.EMAIL_FROM ?? "Academia Politica AUR <noreply@academia-aur.ro>",
       to: email,
       subject,
       html,

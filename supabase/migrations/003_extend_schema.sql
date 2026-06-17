@@ -1,4 +1,4 @@
--- ============================================================
+﻿-- ============================================================
 -- Migrație 003: Extensii platformă
 -- - Aprobare conturi părinți
 -- - Coloane noi pe courses (audience, validation_status, etc.)
@@ -10,7 +10,7 @@
 -- 1. APROBARE CONTURI — parent_profiles
 -- ============================================================
 alter table public.parent_profiles
-  add column if not exists account_type text not null default 'family',
+  add column if not exists account_type text not null default 'member',
   add column if not exists approved      boolean not null default false,
   add column if not exists approved_at   timestamptz;
 

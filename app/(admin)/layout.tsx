@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+﻿import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -151,7 +151,7 @@ export default async function AdminLayout({
                   { href: "/admin/administrators", icon: <ShieldCheck size={18} />, label: "Administratori" },
                   { href: "/admin/parents", icon: <Users size={18} />, label: "Părinți" },
                   { href: "/admin/children", icon: <Baby size={18} />, label: "Copii" },
-                  { href: "/admin/teachers", icon: <GraduationCap size={18} />, label: "Cadre didactice" },
+                  { href: "/admin/teachers", icon: <GraduationCap size={18} />, label: "Formatori" },
                   { href: "/admin/classes", icon: <School size={18} />, label: "Clase" },
                 ].map((item) => (
                   <Link

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
@@ -19,7 +19,7 @@ export default function MfaSetupPage() {
   useEffect(() => {
     const enroll = async () => {
       const supabase = createClient();
-      const { data, error } = await supabase.auth.mfa.enroll({ factorType: "totp", issuer: "Ami & Moti Admin" });
+      const { data, error } = await supabase.auth.mfa.enroll({ factorType: "totp", issuer: "Academia Politica AUR Admin" });
       if (error || !data) {
         setError("Eroare la activarea MFA: " + error?.message);
         return;

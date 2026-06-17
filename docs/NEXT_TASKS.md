@@ -1,4 +1,4 @@
-# Next Tasks
+﻿# Next Tasks
 
 ## MVP finalizat (2026-05-07) — toate WP-urile completate
 
@@ -20,11 +20,11 @@
 ### WP04 — Auth părinți (DONE — 2026-05-04)
 - [x] Register → Dashboard
 - [x] Login / Logout
-- [x] Dashboard cu profiluri copii
+- [x] Dashboard cu profiluri cursanți
 - [x] Middleware protecție rute
 
-### WP05 — Zona copilului (DONE — 2026-05-04)
-- [x] Profil copil cu cursuri filtrate
+### WP05 — Zona cursantului (DONE — 2026-05-04)
+- [x] Profil cursant cu cursuri filtrate
 - [x] Pagina curs cu progres
 - [x] Player lecție (video, prezentare, fișă lucru)
 - [x] Marcare lecție completată
@@ -52,37 +52,37 @@
 - [x] Diplomă de absolvire printabilă
 - [x] Email diplomă la finalizare curs (Resend)
 - [x] Raport săptămânal progres (cron luni 08:00)
-- [x] PIN profil copil cu expirare 8h
+- [x] PIN profil cursant cu expirare 8h
 - [x] MFA TOTP pentru admin (2FA obligatoriu)
 - [x] Chat widget FAQ client-side (zero API)
 - [x] Pagina /help cu secțiuni acordeon
-- [x] Formular contact → suport@amisimoti.ro → ADMIN_EMAIL
+- [x] Formular contact → suport@academia-aur.ro → ADMIN_EMAIL
 - [x] Header link Ajutor, Admin dashboard quick access
 
-### WP10 — Sistem clase cadre didactice (DONE — 2026-05-22)
+### WP10 — Sistem clase formatori (DONE — 2026-05-22)
 - [x] Migrație 006_classes.sql: 4 tabele (classes, class_students, class_courses, class_student_progress) + RLS
-- [x] /dashboard/classes — lista clase active/arhivate cu cod de acces
-- [x] /dashboard/classes/new — creare clasă (cod unic 4-12 car.)
-- [x] /dashboard/classes/[id] — detaliu clasă: tab Elevi (adaugă/șterge) + tab Cursuri (asignează/elimină)
+- [x] /dashboard/grupuri — lista clase active/arhivate cu cod de acces
+- [x] /dashboard/grupuri/new — creare clasă (cod unic 4-12 car.)
+- [x] /dashboard/grupuri/[id] — detaliu clasă: tab Membri (adaugă/șterge) + tab Cursuri (asignează/elimină)
 - [x] /clasa — landing page elevi (introduc codul clasei)
-- [x] /clasa/[code] — selectare elev din clasă
-- [x] /clasa/[code]/[studentCode] — zona elevului cu cursuri asignate clasei
-- [x] /api/clasa/verify — validare cod clasă (folosit de landing page client-side)
-- [x] Nav "Intră în clasă" (verde) vizibil global (desktop + mobil)
-- [x] Sidebar dashboard profesor: Clasele mele + Cursurile mele
+- [x] /grup/[code] — selectare elev din clasă
+- [x] /grup/[code]/[studentCode] — zona elevului cu cursuri asignate clasei
+- [x] /api/grup/verify — validare cod grup (folosit de landing page client-side)
+- [x] Nav "Intră în grup" (verde) vizibil global (desktop + mobil)
+- [x] Sidebar dashboard profesor: Grupurile mele + Cursurile mele
 - [x] Fix "Copii" ascuns pentru profesori: fallback user_metadata când account_type e null în DB
 - [x] Diplome elevi clase (007_class_certificates.sql)
 
 ### WP10b — Bugfixes & Admin improvements (DONE — 2026-05-22)
 - [x] Fix: titlu lecție trunchiat în admin (truncate + title tooltip)
-- [x] Fix: /cadre-didactice — invatator vedea resurse profesor (adăugat isApproved check)
-- [x] Fix: /courses — resurse cadre didactice apăreau la elevi (filtru audience=children/all)
+- [x] Fix: /formatori — formator vedea resurse profesor (adăugat isApproved check)
+- [x] Fix: /courses — resurse formatori apăreau la elevi (filtru audience=children/all)
 - [x] Fix: /courses — profesorii nu erau filtrați pe grupa de vârstă (forcedAgeGroup)
 - [x] Fix: ștergere curs afișa pagina de eroare Next.js (acum alert cu mesaj specific)
 - [x] Fix: după ștergere curs apărea 404 (redirectTo="/admin/courses" în DeleteButton)
 - [x] Admin: pagina Teachers redesigned (ca pagina Parents, cu Editează button)
 - [x] Admin: /admin/teachers/[userId]/edit — editare cont profesor nou
-- [x] Admin: /admin/parents/[userId]/edit — schimbare tip cont (family/invatator/profesor)
+- [x] Admin: /admin/parents/[userId]/edit — schimbare tip cont (family/formator/profesor)
 - [x] Admin: buton Șterge curs pe pagina de detaliu curs (nu doar în lista de cursuri)
 - [x] Guard centralizat requireAdmin() în lib/admin/guard.ts
 
@@ -100,11 +100,11 @@
 - [x] Conectat Google Drive din /admin/settings/google-drive
 
 ### WP12 — Funcții clase v2 (DONE — 2026-06-07)
-- [x] Progres elev în clasă: înregistrare la completarea lecției (class_student_progress) — POST /api/clasa/progress
-- [x] Tab "Progres" în /dashboard/classes/[id] — tabel per elev × curs, sumar clasă, ultima activitate
+- [x] Progres elev în clasă: înregistrare la completarea lecției (class_student_progress) — POST /api/grup/progress
+- [x] Tab "Progres" în /dashboard/grupuri/[id] — tabel per elev × curs, sumar clasă, ultima activitate
 - [x] PIN opțional per elev (student_pin, modal 4 cifre, sessionStorage, regenerare)
 - [x] Reordonare cursuri asignate — butoane Sus/Jos, swap order_index
-- [x] Export CSV progres clasă — GET /api/dashboard/classes/[id]/progress-csv, format wide, BOM UTF-8
+- [x] Export CSV progres clasă — GET /api/dashboard/grupuri/[id]/progress-csv, format wide, BOM UTF-8
 
 ### WP13 — Google Drive organizare automată (DONE — 2026-06-07)
 - [x] La creare curs: creare folder Drive "Curs — Titlu" (fire-and-forget din /admin/courses/new)
@@ -116,15 +116,15 @@
 - [x] Conectat Google Drive din /admin/settings/google-drive
 
 ### WP14 — Îmbunătățiri UI/UX (DONE — 2026-06-07)
-- [x] Loading skeletons — 3 pagini noi: /courses/[slug], /cadre-didactice, /child/.../lesson/[lessonId]
+- [x] Loading skeletons — 3 pagini noi: /courses/[slug], /formatori, /cursant/.../lesson/[lessonId]
 - [x] Error boundary — error.tsx în (public), (dashboard), (child), (admin)
 - [x] Pagina /courses: sortare cursuri — butoane A–Z / Noi întâi (persist în URL, combinate cu filtrele de grupă)
 - [x] Admin: reordonare module/lecții cu drag-and-drop (@dnd-kit — handles GripVertical, optimistic UI, server actions reorderModules/reorderLessons)
 
 ### WP15 — Email și notificări (DONE — 2026-06-07)
-- [x] Email de aprobare cont cadru didactic (în approveUser() Server Action)
+- [x] Email de aprobare cont formator (în approveUser() Server Action)
 - [x] Email de bun venit la înregistrare (sendWelcomeEmail — trimis din auth/callback la primul cont nou)
-- [x] Notificare admin când se înregistrează cont nou de cadru didactic (notifyAdminNewTeacher)
+- [x] Notificare admin când se înregistrează cont nou de formator (notifyAdminNewTeacher)
 
 ### WP16 — Teste automatizate (DONE — 2026-06-07)
 - [x] Vitest 4.1.8 configurat (vitest.config.ts, alias @/, environment node)
@@ -132,8 +132,8 @@
 - [x] __tests__/badges.test.ts — 10 teste computeBadges (toate 9 insigne)
 - [x] __tests__/schemas.test.ts — 17 teste Zod schemas (login, register, childProfile, course)
 - [x] __tests__/admin-delete.test.ts — 8 teste Server Actions (deleteLesson, deleteModule, deleteCourse) cu mock Supabase + vi.hoisted
-- [x] __tests__/clasa-verify-pin.test.ts — 8 teste POST /api/clasa/verify-pin (validare PIN, clase, elevi)
-- [x] __tests__/clasa-progress.test.ts — 6 teste POST /api/clasa/progress (missing fields, class/course/student not found, happy path)
+- [x] __tests__/clasa-verify-pin.test.ts — 8 teste POST /api/grup/verify-pin (validare PIN, clase, elevi)
+- [x] __tests__/clasa-progress.test.ts — 6 teste POST /api/grup/progress (missing fields, class/course/student not found, happy path)
 - [x] CI: .github/workflows/test.yml — rulare automată npm run test la push/PR pe main
 - Total: 69 teste, 6 fișiere, 354ms
 
@@ -173,10 +173,10 @@
 - [x] Unicitate cerere pending: index UNIQUE parțial (un singur pending per user)
 
 ### WP20 — Import CSV elevi (DONE — 2026-06-15)
-- [x] POST /api/dashboard/classes/[id]/import-students — parser CSV propriu, detecție header automată, max 100 elevi
+- [x] POST /api/dashboard/grupuri/[id]/import-students — parser CSV propriu, detecție header automată, max 100 elevi
 - [x] Generare cod unic + PIN hashed per elev (identic cu adăugarea individuală)
 - [x] ImportStudentsButton — client component: upload fișier, link template, rezultate cu PINuri, router.refresh()
-- [x] Integrat în tab Elevi din /dashboard/classes/[id]
+- [x] Integrat în tab Membri din /dashboard/grupuri/[id]
 
 ### WP21 — Căutare globală conținut cursuri (DONE — 2026-06-15)
 - [x] getPublishedCourseLessonTitles() — index courseId → titluri module+lecții, cached (tag "courses")
@@ -186,7 +186,7 @@
 
 ### WP22 — Distribuire certificat social media (DONE — 2026-06-15)
 - [x] ShareButtons client component: WhatsApp, Facebook, Copiază link (clipboard + fallback, feedback 2s)
-- [x] Integrat în bara .no-print pe /child/[id]/certificate/[certId] și /clasa/.../certificate/[certId]
+- [x] Integrat în bara .no-print pe /cursant/[id]/certificate/[certId] și /grup/.../certificate/[certId]
 - [x] Responsive: iconițe pe mobil, iconițe + text pe desktop
 
 ### WP23 — Calendar webinarii (DONE — 2026-06-15)
@@ -203,7 +203,7 @@
 ### Setup inițial fork
 1. Clonează repo sau descarcă arhiva template
 2. Redenumește proiectul în `package.json` și `next.config.ts`
-3. Înlocuiește brandul "Ami & Moti" cu noul brand (personaje, culori, favicon)
+3. Înlocuiește brandul "Academia Politica AUR" cu noul brand (personaje, culori, favicon)
 4. Creează proiect nou Supabase și aplică migrațiile SQL (001-009)
 5. Configurează variabilele de mediu (Supabase, Resend, domeniu, Google Drive)
 6. Deploy pe Vercel
@@ -212,7 +212,7 @@
 - [ ] Conținut cursuri: module despre AI, prompting, etica AI, instrumente AI
 - [ ] Grupe vârstă: adaptat pentru adulți/profesioniști dacă e cazul
 - [ ] Tipuri lecție noi: poate Notebook interactiv, sandbox code
-- [ ] Personaje noi în loc de Ami & Moti
+- [ ] Personaje noi în loc de Academia Politica AUR
 - [ ] Schema XP/gamificare: posibil simplificat pentru adulți
 - [ ] Certificare: diplomă adaptată pentru cursuri profesionale
 

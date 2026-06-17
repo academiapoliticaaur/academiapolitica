@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+﻿import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,7 +7,7 @@ import Link from "next/link";
 import { updateParentProfile, updateParentPassword } from "@/lib/actions/parent-profile";
 import { DeleteAccountButton } from "@/components/dashboard/delete-account-button";
 import { EmailReportsToggle } from "@/components/dashboard/email-reports-toggle";
-import { AmiMotiGuide } from "@/components/common/ami-moti-guide";
+import { AcademiaGuide } from "@/components/common/academia-guide";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Profilul meu" };
@@ -108,15 +108,15 @@ export default async function ParentProfilePage() {
         </p>
         <a
           href={`${siteUrl}/api/export-my-data`}
-          download="datele-mele-ami-moti.json"
+          download="datele-mele-academia-aur.json"
           className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-800 underline"
         >
           ⬇️ Descarcă datele mele (JSON)
         </a>
       </div>
 
-      <AmiMotiGuide
-        variant="ami"
+      <AcademiaGuide
+        variant="info"
         className="mb-5"
         message="Datele tale și ale copiilor sunt stocate securizat, conform GDPR. Poți exporta toate datele oricând sau solicita ștergerea completă a contului. Controlul este 100% al tău."
       />

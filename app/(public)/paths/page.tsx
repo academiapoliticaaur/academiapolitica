@@ -1,11 +1,11 @@
-import { createClient } from "@/lib/supabase/server";
+﻿import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
 import { BookOpen, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Trasee de instruire — Ami & Moti",
+  title: "Trasee de instruire — Academia Politica AUR",
   description: "Parcurge un traseu complet și obține o diplomă de certificare.",
 };
 

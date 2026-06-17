@@ -1,10 +1,10 @@
-import { createClient } from "@/lib/supabase/server";
+﻿import { createClient } from "@/lib/supabase/server";
 import type { Metadata } from "next";
-import { AmiMotiGuide } from "@/components/common/ami-moti-guide";
+import { AcademiaGuide } from "@/components/common/academia-guide";
 import { CalendarDays, Clock, User, ExternalLink } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Webinarii — Ami & Moti",
+  title: "Webinarii — Academia Politica AUR",
   description: "Webinarii educaționale pentru copii și părinți.",
 };
 
@@ -68,8 +68,8 @@ export default async function WebinarsPage() {
         <h1 className="text-3xl font-bold mb-3">Webinarii</h1>
         <p className="text-gray-500 text-lg">Sesiuni video educaționale pentru copii și părinți</p>
         <div className="mt-6 max-w-lg mx-auto">
-          <AmiMotiGuide
-            variant="moti"
+          <AcademiaGuide
+            variant="tip"
             message="Eu, Moti, te ghidez! Webinariile sunt sesiuni video cu experți — urmărește-le pentru a afla mai multe despre inteligența artificială și lumea digitală."
           />
         </div>

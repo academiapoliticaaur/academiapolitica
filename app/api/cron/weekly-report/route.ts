@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createHmac } from "crypto";
@@ -103,7 +103,7 @@ export async function GET(request: Request) {
 </html>`;
 
     await resend.emails.send({
-      from: process.env.EMAIL_FROM ?? "Ami & Moti <noreply@everydai.ro>",
+      from: process.env.EMAIL_FROM ?? "Academia Politica AUR <noreply@academia-aur.ro>",
       to: email,
       subject: `📚 Rezumatul săptămânii — ${totalLessons} ${totalLessons === 1 ? "lecție" : "lecții"} completate!`,
       html,

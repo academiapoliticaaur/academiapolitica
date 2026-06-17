@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
@@ -132,8 +132,8 @@ export default function NewCoursePage() {
                 defaultValue="children"
               >
                 <option value="children">Copii (implicit)</option>
-                <option value="invatator">Învățători — Clasele 0–4</option>
-                <option value="profesor">Profesori gimnaziu — Clasele 5–8</option>
+                <option value="formator">Formatori — Clasele 0–4</option>
+                <option value="lector">Profesori gimnaziu — Clasele 5–8</option>
                 <option value="all">Toți</option>
               </select>
             </div>

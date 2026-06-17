@@ -1,4 +1,4 @@
-# Known Issues and Risks
+﻿# Known Issues and Risks
 
 ## Blockers rezolvate
 
@@ -9,7 +9,7 @@
 - Migrații aplicate în Supabase Dashboard
 
 ### ~~AUTH-002~~ — RESOLVED (2026-05-07)
-- PIN 4 cifre implementat pe profil copil, expiră 8h (sessionStorage), poate fi eliminat din Dashboard
+- PIN 4 cifre implementat pe profil cursant, expiră 8h (sessionStorage), poate fi eliminat din Dashboard
 
 ### ~~ADMIN-001~~ — RESOLVED (2026-05-07)
 - Admin routes protejate de middleware + MFA TOTP obligatoriu
@@ -30,7 +30,7 @@
 
 ### ~~DRIVE-003~~ — RESOLVED (2026-06-07)
 - Google Drive conectat din `/admin/settings/google-drive` cu contul mpandilica@gmail.com
-- Folderul rădăcină "Ami & Moti — Conținut Cursuri" creat automat în Drive
+- Folderul rădăcină "Academia Politica AUR — Conținut Cursuri" creat automat în Drive
 
 ## Limitări cunoscute (by design pentru MVP)
 
@@ -48,9 +48,9 @@
 - `email_reports boolean NOT NULL DEFAULT true` adăugat pe `parent_profiles` în Supabase Dashboard
 
 ### EMAIL-001 — Domeniu expeditor
-- `EMAIL_FROM` în Vercel = `noreply@everydai.ro` (domeniu verificat în Resend)
-- Fallback-uri hardcodate standardizate la `noreply@everydai.ro` (2026-06-07)
-- Când `amisimoti.ro` e verificat în Resend: actualizează doar env var `EMAIL_FROM` în Vercel, zero cod
+- `EMAIL_FROM` în Vercel = `noreply@academia-aur.ro` (domeniu verificat în Resend)
+- Fallback-uri hardcodate standardizate la `noreply@academia-aur.ro` (2026-06-07)
+- Când `academia-aur.ro` e verificat în Resend: actualizează doar env var `EMAIL_FROM` în Vercel, zero cod
 
 ### MW-001 — Middleware convention (non-blocker)
 - `middleware.ts` la rădăcină — funcționează corect în Next.js 16
@@ -65,14 +65,14 @@
 | ID | Severitate | Fix aplicat |
 |----|-----------|-------------|
 | C-1 | CRITICAL | `flowType: "pkce"` în loc de "implicit" (lib/supabase/client.ts) |
-| H-2 | HIGH | Eliminat `access_code` din GET /api/clasa/list |
+| H-2 | HIGH | Eliminat `access_code` din GET /api/grup/list |
 | H-3 | HIGH | HMAC-SHA256 pentru token unsubscribe (weekly-report + /api/unsubscribe) |
 | H-4 | HIGH | Ownership check `parent_id` în `verifyChildPin` + cookie `secure` flag |
 | H-5 | HIGH | QR code MFA: `<img src="data:image/svg+xml;base64,...">` în loc de `dangerouslySetInnerHTML` |
 | M-5 | MEDIUM | Middleware verifică `ADMIN_EMAILS` + `app_metadata.role` înainte de MFA check pentru /admin |
-| M-4 | MEDIUM | Rate limiting in-memory (10 req/5min per IP+studentCode) pe POST /api/clasa/verify-pin |
+| M-4 | MEDIUM | Rate limiting in-memory (10 req/5min per IP+studentCode) pe POST /api/grup/verify-pin |
 | M-1 | MEDIUM | `logAdminAction` non-exportat (internal use only în lib/admin/actions.ts) |
-| C-2 | MEDIUM | PIN elevi hash SHA-256 (`ami-moti-elev:{pin}`) stocat, nu plain-text |
+| C-2 | MEDIUM | PIN elevi hash SHA-256 (`academia-aur-elev:{pin}`) stocat, nu plain-text |
 | C-3 | MEDIUM | Migrație 015: nulare PIN-uri plain-text existente ✓ APLICAT 2026-06-15 |
 | L-3 | LOW | Parolă minimă 8 caractere (login, register, reset-password, updateParentPassword) |
 | L-4 | LOW | Cookie `secure: true` în producție pentru child_session |

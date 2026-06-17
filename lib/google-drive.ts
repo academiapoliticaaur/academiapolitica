@@ -1,4 +1,4 @@
-// Google Drive OAuth2 helpers — server-side only
+﻿// Google Drive OAuth2 helpers — server-side only
 
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -159,13 +159,13 @@ export async function setFileDownloadRestriction(fileId: string, restrict: boole
   }
 }
 
-/** Obține sau creează folderul rădăcină "Ami & Moti — Conținut Cursuri" */
+/** Obține sau creează folderul rădăcină "Academia Politica AUR — Conținut Cursuri" */
 export async function getRootFolder(): Promise<string> {
   const db = createAdminClient();
   const { data: existing } = await db.from("admin_settings").select("value").eq("key", "google_drive_root_folder_id").single();
   if (existing?.value) return existing.value;
 
-  const folderId = await createDriveFolder("Ami & Moti — Conținut Cursuri");
+  const folderId = await createDriveFolder("Academia Politica AUR — Conținut Cursuri");
   await db.from("admin_settings").upsert({ key: "google_drive_root_folder_id", value: folderId, updated_at: new Date().toISOString() });
   return folderId;
 }

@@ -1,24 +1,24 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { Smartphone, Monitor, CheckCircle2, Download } from "lucide-react";
-import { AmiMotiGuide } from "@/components/common/ami-moti-guide";
+import { AcademiaGuide } from "@/components/common/academia-guide";
 import { InstallButton } from "@/components/common/install-button";
 
 export const metadata: Metadata = {
-  title: "Instalează aplicația – Ami & Moti",
+  title: "Instalează aplicația – Academia Politica AUR",
   description:
-    "Descarcă aplicația Ami & Moti pe telefon sau tabletă. Funcționează pe Android și iOS, fără App Store.",
+    "Descarcă aplicația Academia Politica AUR pe telefon sau tabletă. Funcționează pe Android și iOS, fără App Store.",
 };
 
 const androidSteps = [
-  "Deschide site-ul ami-moti.ro în Chrome pe Android.",
+  "Deschide site-ul academia-aur.ro în Chrome pe Android.",
   'Apasă meniul din dreapta sus (⋮) și selectează „Adaugă pe ecranul principal".',
   'Apasă „Adaugă" în fereastra de confirmare.',
   "Pictograma apare pe ecranul principal — aplicația este gata!",
 ];
 
 const iosSteps = [
-  "Deschide site-ul ami-moti.ro în Safari pe iPhone sau iPad.",
+  "Deschide site-ul academia-aur.ro în Safari pe iPhone sau iPad.",
   'Apasă butonul „Share" (pătrat cu săgeată în sus) din bara de jos.',
   'Derulează în jos și apasă „Adaugă pe ecranul principal".',
   'Apasă „Adaugă" — gata, aplicația este instalată!',
@@ -50,8 +50,8 @@ export default function InstaleazaPage() {
         <InstallButton />
 
         {/* Moti guide */}
-        <AmiMotiGuide
-          variant="moti"
+        <AcademiaGuide
+          variant="tip"
           message="Eu, Moti, te ghidez! Instalarea durează mai puțin de un minut și funcționează pe orice telefon sau tabletă. Nu ai nevoie de App Store sau Google Play!"
         />
 

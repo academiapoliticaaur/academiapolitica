@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -31,7 +31,7 @@ function CallbackHandler() {
             sendWelcomeEmail({
               fullName: (meta.full_name as string) || "Utilizator",
               email: data.session.user.email,
-              accountType: (meta.account_type as string) || "family",
+              accountType: (meta.account_type as string) || "member",
             }).catch(() => {});
           }
         }
@@ -51,7 +51,7 @@ function CallbackHandler() {
                 sendWelcomeEmail({
                   fullName: (meta.full_name as string) || "Utilizator",
                   email: session.user.email,
-                  accountType: (meta.account_type as string) || "family",
+                  accountType: (meta.account_type as string) || "member",
                 }).catch(() => {});
               }
             }
@@ -88,7 +88,7 @@ async function ensureParentProfile(
   supabase: ReturnType<typeof createClient>,
   user: { id: string; user_metadata?: Record<string, unknown> }
 ): Promise<{ isNew: boolean }> {
-  const accountType = (user.user_metadata?.account_type as string) || "family";
+  const accountType = (user.user_metadata?.account_type as string) || "member";
 
   const { data: existing } = await supabase
     .from("parent_profiles")
@@ -107,7 +107,7 @@ async function ensureParentProfile(
     return { isNew: true };
   }
 
-  if (!existing.account_type || (existing.account_type === "family" && accountType !== "family")) {
+  if (!existing.account_type || (existing.account_type === "member" && accountType !== "member")) {
     // Actualizează account_type dacă profilul a fost creat înainte de această funcționalitate
     await supabase.from("parent_profiles")
       .update({ account_type: accountType })

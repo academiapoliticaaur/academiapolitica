@@ -1,4 +1,4 @@
-import { createAdminClient } from "@/lib/supabase/admin";
+﻿import { createAdminClient } from "@/lib/supabase/admin";
 import { CreditCard, CheckCircle, XCircle, Clock, Edit, AlertTriangle } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,7 @@ export const metadata: Metadata = { title: "Abonamente — Admin" };
 
 const ACCOUNT_TYPE_LABELS: Record<string, string> = {
   family: "Părinte",
-  invatator: "Învățător",
+  formator: "Formator",
   profesor: "Profesor",
 };
 
@@ -70,7 +70,7 @@ export default async function SubscriptionsPage({ searchParams }: PageProps) {
   ];
 
   const editPath = (p: { account_type: string; user_id: string }) =>
-    p.account_type === "family"
+    p.account_type === "member"
       ? `/admin/parents/${p.user_id}/edit?from=/admin/subscriptions`
       : `/admin/teachers/${p.user_id}/edit?from=/admin/subscriptions`;
 
@@ -150,11 +150,11 @@ export default async function SubscriptionsPage({ searchParams }: PageProps) {
                     </td>
                     <td className="px-4 py-3 hidden sm:table-cell">
                       <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                        row.account_type === "family"
+                        row.account_type === "member"
                           ? "bg-blue-100 text-blue-700"
                           : "bg-indigo-100 text-indigo-700"
                       }`}>
-                        {ACCOUNT_TYPE_LABELS[row.account_type ?? "family"] ?? row.account_type}
+                        {ACCOUNT_TYPE_LABELS[row.account_type ?? "member"] ?? row.account_type}
                       </span>
                     </td>
                     <td className="px-4 py-3 hidden md:table-cell">

@@ -1,4 +1,4 @@
-export const runtime = "nodejs";
+﻿export const runtime = "nodejs";
 export const maxDuration = 120;
 
 // pdf-parse v2 requires DOMMatrix (browser API) — polyfill for Node.js
@@ -60,10 +60,10 @@ interface ParsedCurriculum {
 const SYSTEM_PROMPT = `Ești un expert în design educațional. Analizezi un document de curriculum educațional și extragi structura COMPLETĂ.
 
 IMPORTANT — detectează tipul de document:
-- Dacă documentul este un ghid pentru ÎNVĂȚĂTORI sau PROFESORI (ghid de predare, resurse cadre didactice, plan de lecție pentru cadre), setează "audience": "invatator" sau "profesor"
+- Dacă documentul este un ghid pentru ÎNVĂȚĂTORI sau PROFESORI (ghid de predare, resurse formatori, plan de lecție pentru cadre), setează "audience": "formator" sau "lector"
 - Dacă documentul este un curs pentru COPII sau ELEVI, setează "audience": "children"
-- audience "invatator" = material pentru cei care predau la clase 0-4
-- audience "profesor" = material pentru cei care predau la clase 5-8
+- audience "formator" = material pentru cei care predau la clase 0-4
+- audience "lector" = material pentru cei care predau la clase 5-8
 - Titlul cursului ("course_title") trebuie să fie titlul ACESTUI document, nu al unui curs asociat menționat în text
 
 EXTRAGE TOATE modulele și TOATE lecțiile din document — nu omite nimic, chiar dacă documentul este lung.
@@ -80,7 +80,7 @@ Returnează EXCLUSIV un obiect JSON valid:
   "course_title": "string (titlul ACESTUI document, nu al unui curs asociat)",
   "course_description": "string (2-3 propoziții)",
   "age_group": "string (ex: '0-4', '5-8')",
-  "audience": "children|invatator|profesor",
+  "audience": "children|formator|profesor",
   "estimated_duration_hours": number,
   "modules": [
     {

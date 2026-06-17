@@ -1,8 +1,8 @@
-# Claude Code Instructions
+# Claude Code Instructions — Academia Politica AUR
 
-## Project
-Platformă educațională pentru copii (Ami & Moti), conturi gestionate de părinți și cadre didactice.
-Detalii complete: docs/PROJECT_BRIEF.md | Stare curentă: docs/CURRENT_STATE.md
+## Proiect
+Platformă de formare politică și educație civică a Alianței pentru Unirea Românilor.
+Fork din ami-moti-edu-platform, adaptat pentru utilizatori adulți (membri, simpatizanți, formatori, lectori).
 
 ## Stack
 - Next.js 16 + TypeScript + Tailwind CSS v4 + shadcn/ui
@@ -11,10 +11,29 @@ Detalii complete: docs/PROJECT_BRIEF.md | Stare curentă: docs/CURRENT_STATE.md
 - Google Drive (conținut lecții + OAuth2 pentru admin)
 
 ## Tipuri de conturi (account_type în parent_profiles)
-- `family` — Părinte/tutore, nu necesită aprobare
-- `invatator` — Învățător cls. 0–4, necesită aprobare admin
-- `profesor` — Profesor gimnaziu cls. 5–8, necesită aprobare admin
+- `member` — Membru AUR / Simpatizant, nu necesită aprobare, auto-redirect la zona de cursuri
+- `formator` — Formator (echivalent invatator din original), necesită aprobare admin
+- `lector` — Lector / Conferențiar (echivalent profesor din original), necesită aprobare admin
 - Admin: verificat prin `ADMIN_EMAILS` env var sau `user.app_metadata?.role === "admin"`
+
+## Flow utilizator (adulți — fără profiluri copii)
+- **Member**: login → dashboard → auto-creare child_profile cu datele userului → redirect `/cursant/[profileId]`
+- **Formator/Lector**: login → redirect automat la `/dashboard/grupuri`
+- **Admin**: login → dashboard cu acces la toate resursele
+
+## Diferențe față de ami-moti (fork source)
+| Ami & Moti (original) | Academia Politica AUR (fork) |
+|---|---|
+| `family` account | `member` account |
+| `invatator` account | `formator` account |
+| `profesor` account | `lector` account |
+| `/child/[profileId]/*` | `/cursant/[profileId]/*` |
+| `/clasa/[code]/*` | `/grup/[code]/*` |
+| `/cadre-didactice` | `/formatori` |
+| `/dashboard/classes/*` | `/dashboard/grupuri/*` |
+| AmiMotiGuide (ami/moti variants) | AcademiaGuide (info/tip/mission/discovery) |
+| Logo: Ami & Moti | Logo: ACADEMIA POLITICA AUR (galben/negru) |
+| Tema: teal (#0d9488) | Tema: gold (#b8860b) |
 
 ## Pattern CRITIC — Supabase client în admin
 ```typescript
@@ -25,9 +44,6 @@ const supabase = createAdminClient(); // sync, nu await
 // CORECT — user-specific queries cu RLS
 import { createClient } from "@/lib/supabase/server";
 const supabase = await createClient(); // async
-
-// GREȘIT pentru admin — blocat de RLS
-import { createClient } from "@/lib/supabase/client"; // browser client
 ```
 
 ## Pattern — requireAdmin() guard centralizat (Server Actions)
@@ -36,125 +52,73 @@ import { requireAdmin } from "@/lib/admin/guard";
 
 export async function myAdminAction(): Promise<{ error?: string } | void> {
   try {
-    await requireAdmin(); // aruncă Error dacă nu admin
+    await requireAdmin();
     const supabase = createAdminClient();
-    // ... mutație
   } catch (e) {
     return { error: e instanceof Error ? e.message : "Eroare necunoscută" };
   }
 }
 ```
 
-## Pattern admin check (pentru API routes — NextResponse)
-```typescript
-const adminEmails = (process.env.ADMIN_EMAILS || "").split(",").map(e => e.trim()).filter(Boolean);
-const isAdmin = adminEmails.includes(user.email || "") || user.app_metadata?.role === "admin";
-if (!isAdmin) return NextResponse.json({ error: "Acces interzis" }, { status: 403 });
-```
-
-## Pattern — DeleteButton cu redirect
+## Componenta AcademiaGuide
 ```tsx
-// Când ștergerea necesită navigare (ex: stergere curs din pagina de detaliu)
-<DeleteButton
-  action={deleteCourse.bind(null, id)}
-  confirmMessage="Ștergi cursul?"
-  redirectTo="/admin/courses"   // opțional — face router.push după ștergere reușită
-/>
+// Variante disponibile: "info" | "tip" | "mission" | "discovery"
+import { AcademiaGuide } from "@/components/common/academia-guide";
+<AcademiaGuide variant="info" message="..." />
+<AcademiaGuide variant="tip" message="..." />
 ```
 
-## Pattern class student (auth-free zone — /clasa/*)
-```typescript
-// Validare fără Supabase Auth session:
-const supabase = createAdminClient(); // direct, nu await
-const { data: cls } = await supabase.from("classes").select("...").eq("access_code", code).single();
-const { data: student } = await supabase.from("class_students").select("...").eq("student_code", studentCode).single();
-// Progres salvat via POST /api/clasa/progress (nu quiz_attempts)
+## Rute cheie
+- `/cursant/[profileId]/*` — zona de învățare a utilizatorului adult
+- `/grup/[code]/*` — acces membri în grupuri de formare (fără auth)
+- `/dashboard/grupuri/*` — gestionare grupuri (formatori/lectori)
+- `/formatori` — pagina publică resurse formatori
+- `/pentru-formatori` — landing page pentru formatori neautentificați
+
+## Fișiere cheie
+```
+lib/supabase/admin.ts              — createAdminClient()
+lib/supabase/server.ts             — createClient()
+lib/admin/guard.ts                 — requireAdmin()
+lib/admin/actions.ts               — Server Actions admin
+lib/auth/actions.ts                — Server Actions auth
+lib/db/courses.ts                  — DB queries cursuri
+components/common/academia-guide.tsx  — componenta ghid
+components/layout/header.tsx          — header cu logo AUR
+components/layout/footer.tsx          — footer AUR
+app/(child)/cursant/               — zona cursantului adult
+app/(public)/grup/                 — zona grupurilor (fără auth)
+app/(dashboard)/dashboard/grupuri/ — gestionare grupuri
 ```
 
-## Conținut lecții — Google Drive
-```typescript
-// video_url: YouTube sau Google Drive
-// presentation_url: Google Drive PDF/Slides (docs.google.com/presentation sau drive.google.com/file)
-// worksheet_url: Google Drive PDF
-// Embed: getGoogleDriveEmbedUrl(fileId, originalUrl) din lib/utils/google-drive.ts
-// Google Slides → docs.google.com/presentation/d/ID/embed
-// Drive file → drive.google.com/file/d/ID/preview
-```
-
-## Routing (app router, route groups)
-- `(public)` — home, courses, course detail, despre, help, cadre-didactice, clasa/*
-- `(auth)` — login, register, logout
-- `(dashboard)` — dashboard părinte/profesor, clase, profil
-- `(child)` — zona copilului: cursuri, lecții, certificate
-- `(admin)` — admin panel: cursuri/module/lecții/utilizatori/clase/settings CRUD
-
-## Fișiere cheie — nu scana altceva dacă nu e necesar
-```
-lib/supabase/admin.ts          — createAdminClient() (service role)
-lib/supabase/server.ts         — createClient() (SSR, cu RLS)
-lib/admin/guard.ts             — requireAdmin() (guard centralizat Server Actions)
-lib/admin/actions.ts           — Server Actions admin (courses, modules, lessons, users)
-lib/admin/quiz-actions.ts      — Server Actions quiz (createAdminClient în interior)
-lib/actions/admin-delete.ts    — deleteLesson, deleteModule, deleteCourse
-lib/auth/actions.ts            — Server Actions auth (login, register, logout)
-lib/db/courses.ts              — DB queries cursuri (user-facing, cu filtru audience)
-lib/google-drive.ts            — OAuth2 Google Drive (getAuthUrl, getAccessToken, saveRefreshToken)
-lib/utils/google-drive.ts      — isGoogleDriveUrl, getGoogleDriveEmbedUrl, getLinkLabel
-lib/storage/resolve-url.ts     — isStoragePath, resolveStorageUrl (backward compat)
-lib/validation/schemas.ts      — Zod schemas: loginSchema, lessonSchema, courseSchema etc.
-types/index.ts                 — Domain types
-types/database.ts              — Supabase generated table types
-components/lesson/             — VideoEmbed, PresentationViewer, QuizPlayer, LessonCompleteOverlay
-components/admin/              — DeleteButton, PublishButtons, GoogleDriveLinkField, GooglePickerButton
-components/layout/             — Header, Footer
-components/child/              — ChildProfileCard
-app/(admin)/admin/layout.tsx   — Admin auth guard (redirect dacă nu admin)
-app/(child)/child/[profileId]/layout.tsx — Child auth guard (parent session sau child_session cookie)
-middleware.ts                  — Protecție rute /dashboard, /admin, /child
-```
-
-## Migrații SQL (trebuie aplicate manual în Supabase Dashboard)
-- `001_initial_schema.sql` — schema + RLS
-- `002_demo_data.sql` — date demo
-- `003_extend_schema.sql` — aprobare conturi, audience pe cursuri
-- `004_categories_webinars_paths.sql` — webinars, learning_paths
-- `005_teacher_audience.sql` — constraint audience extins
-- `006_classes.sql` — classes, class_students, class_courses, class_student_progress
-- `007_class_certificates.sql` — class_student_certificates (diplome pentru elevi)
-- `009_google_drive.sql` — drive_folder_id pe courses/modules/lessons + tabel admin_settings ⚠️ PENDING
+## Setup nou proiect
+1. Crează proiect Supabase nou
+2. Aplică migrațiile din `supabase/migrations/` (001-016)
+3. Completează `.env.local` cu valorile reale (vezi `.env.example`)
+4. `npm install && npm run dev`
+5. Configurează Google Drive din `/admin/settings/google-drive`
 
 ## Variabile de mediu necesare
 ```
-NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY
-NEXT_PUBLIC_APP_URL, NEXT_PUBLIC_SITE_URL
-RESEND_API_KEY, EMAIL_FROM, ADMIN_EMAIL, ADMIN_EMAILS
-GROQ_API_KEY
-CRON_SECRET                                           # ⚠️ OBLIGATORIU — protejează /api/cron/weekly-report
-GOOGLE_DRIVE_CLIENT_ID, GOOGLE_DRIVE_CLIENT_SECRET   # server-only
-NEXT_PUBLIC_GOOGLE_DRIVE_API_KEY                      # client-safe, pentru Google Picker
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+NEXT_PUBLIC_APP_URL=
+NEXT_PUBLIC_SITE_URL=https://academia-aur.ro
+RESEND_API_KEY=
+EMAIL_FROM=Academia Politica AUR <noreply@academia-aur.ro>
+ADMIN_EMAIL=
+ADMIN_EMAILS=
+GROQ_API_KEY=
+CRON_SECRET=
+GOOGLE_DRIVE_CLIENT_ID=
+GOOGLE_DRIVE_CLIENT_SECRET=
+NEXT_PUBLIC_GOOGLE_DRIVE_API_KEY=
 ```
 
 ## Workflow rules
-- Nu scana întreg repository-ul fără motiv — folosește fișierele cheie de mai sus.
-- Nu refactoriza fișiere fără legătură cu task-ul curent.
-- Explică planul înainte de modificări majore.
-- **La orice mutație admin**: verifică că folosești `createAdminClient()`, nu `createClient()`.
-- **Server Actions admin**: apelează `await requireAdmin()` ca primă instrucțiune, în try/catch.
-- **Server Actions**: `"use server"` la topul fișierului, validare user înainte de orice mutație.
-- **Params Next.js 16**: `const { id } = await params;` — mereu await params.
-- **Ștergere cu navigare**: pasează `redirectTo` la DeleteButton când pagina curentă devine invalidă după ștergere.
-- **audience pe cursuri**: children | invatator | profesor | all — filtrează corect în lib/db/courses.ts
-- După task: actualizează docs/CURRENT_STATE.md și docs/NEXT_TASKS.md.
-- **Sesiuni Claude Code**: pornește o conversație nouă pentru fiecare sarcină majoră/nouă, în loc să continui una foarte lungă — sesiunile lungi ating limita de context (1M tokens la Sonnet 4.6) și declanșează rezumare automată ("compactare"), care poate părea un blocaj. Comenzi utile: `/context` (cât din memoria sesiunii e ocupată), `/clear` (golește conversația la schimbarea sarcinii).
-
-## Validare
-- `npm run build` — mandatory după modificări majore (TypeScript strict)
-- `npm run lint` — fix blockers only
-- No test suite yet
-
-## Docs de referință
-- docs/PROJECT_BRIEF.md — product summary
-- docs/CURRENT_STATE.md — ce e implementat + rute + features
-- docs/ARCHITECTURE_DECISIONS.md — decizii tehnice (ADR-001 → ADR-014)
-- docs/NEXT_TASKS.md — backlog
-- docs/KNOWN_ISSUES.md — probleme cunoscute + technical debt
+- **Nu modifica proiectul ami-moti-edu-platform** — acesta e un fork independent
+- La orice mutație admin: folosește `createAdminClient()`, nu `createClient()`
+- Server Actions admin: apelează `await requireAdmin()` ca primă instrucțiune
+- Params Next.js 16: `const { id } = await params;`
+- `npm run build` după modificări majore (TypeScript strict)

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Save } from "lucide-react";
@@ -94,8 +94,8 @@ export function EditCourseForm({ course, action }: EditCourseFormProps) {
               className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background"
             >
               <option value="children">Copii (implicit)</option>
-              <option value="invatator">Învățători — Clasele 0–4</option>
-              <option value="profesor">Profesori gimnaziu — Clasele 5–8</option>
+              <option value="formator">Formatori — Clasele 0–4</option>
+              <option value="lector">Profesori gimnaziu — Clasele 5–8</option>
               <option value="all">Toți</option>
             </select>
           </div>

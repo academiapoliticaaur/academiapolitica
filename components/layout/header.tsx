@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, BookOpen, LogIn, LogOut, User, ChevronDown, LayoutDashboard, Star, Baby, HelpCircle, GraduationCap, School, Users, CreditCard, Smartphone } from "lucide-react";
+import { Menu, X, BookOpen, LogIn, LogOut, User, ChevronDown, LayoutDashboard, Star, HelpCircle, GraduationCap, School, Users, CreditCard, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface HeaderProps {
@@ -15,8 +15,8 @@ interface HeaderProps {
 
 export function Header({ user, parentName, isAdmin, accountType }: HeaderProps) {
   const pathname = usePathname();
-  const isClassZone = pathname?.startsWith("/clasa") ?? false;
-  const isTeacher = accountType === "invatator" || accountType === "profesor";
+  const isGroupZone = pathname?.startsWith("/grup") ?? false;
+  const isTeacher = accountType === "formator" || accountType === "lector";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -31,17 +31,14 @@ export function Header({ user, parentName, isAdmin, accountType }: HeaderProps) 
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Zona elevului (/clasa/*) e auth-free — ascundem contul adultului logat în
-  // browser ca să nu apese accidental Deconectare/Dashboard de pe ecranul clasei
-  if (isClassZone) {
+  if (isGroupZone) {
     return (
       <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div className="container mx-auto flex h-16 items-center px-4">
           <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-            <span className="text-2xl">🌟</span>
-            <span className="text-blue-500">Ami</span>
-            <span className="text-gray-400">&amp;</span>
-            <span className="text-teal-500">Moti</span>
+            <span className="text-yellow-600 font-black tracking-tight">ACADEMIA</span>
+            <span className="text-gray-800 font-black tracking-tight">POLITICA</span>
+            <span className="bg-yellow-500 text-white px-2 py-0.5 rounded font-black text-sm">AUR</span>
           </Link>
         </div>
       </header>
@@ -52,44 +49,44 @@ export function Header({ user, parentName, isAdmin, accountType }: HeaderProps) 
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-          <span className="text-2xl">🌟</span>
-          <span className="text-blue-500">Ami</span>
-          <span className="text-gray-400">&amp;</span>
-          <span className="text-teal-500">Moti</span>
+        <Link href="/" className="flex items-center gap-2 font-bold text-xl shrink-0">
+          <span className="text-yellow-600 font-black tracking-tight">ACADEMIA</span>
+          <span className="text-gray-800 font-black tracking-tight hidden sm:inline">POLITICA</span>
+          <span className="bg-yellow-500 text-white px-2 py-0.5 rounded font-black text-sm">AUR</span>
         </Link>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-2">
-          <Link href="/despre" className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-teal-600 border border-teal-200 bg-teal-50 hover:bg-teal-100 hover:border-teal-400 transition-all">
+          <Link href="/despre" className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-yellow-700 border border-yellow-200 bg-yellow-50 hover:bg-yellow-100 hover:border-yellow-400 transition-all">
             <Star size={15} />
-            Despre platformă
+            Despre noi
           </Link>
           <Link href="/courses" className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-blue-600 border border-blue-200 bg-blue-50 hover:bg-blue-100 hover:border-blue-400 transition-all">
             <BookOpen size={15} />
             Cursuri
           </Link>
           {(!user || isTeacher) && (
-            <Link href={isTeacher ? "/cadre-didactice" : "/pentru-profesori"} className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold border transition-all ${isTeacher ? "text-indigo-700 border-indigo-300 bg-indigo-50 hover:bg-indigo-100" : "text-indigo-600 border-indigo-200 bg-indigo-50 hover:bg-indigo-100 hover:border-indigo-400"}`}>
+            <Link
+              href={isTeacher ? "/formatori" : "/pentru-formatori"}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold border transition-all ${
+                isTeacher
+                  ? "text-indigo-700 border-indigo-300 bg-indigo-50 hover:bg-indigo-100"
+                  : "text-indigo-600 border-indigo-200 bg-indigo-50 hover:bg-indigo-100 hover:border-indigo-400"
+              }`}
+            >
               <GraduationCap size={15} />
-              Cadre didactice
+              Formatori
             </Link>
           )}
           {isTeacher && (
-            <Link href="/dashboard/classes" className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-indigo-700 border border-indigo-300 bg-indigo-100 hover:bg-indigo-200 transition-all">
+            <Link href="/dashboard/grupuri" className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-indigo-700 border border-indigo-300 bg-indigo-100 hover:bg-indigo-200 transition-all">
               <Users size={15} />
-              Clasele mele
+              Grupurile mele
             </Link>
           )}
-          {user && !isTeacher && (
-            <Link href="/dashboard" className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-orange-600 border border-orange-200 bg-orange-50 hover:bg-orange-100 hover:border-orange-400 transition-all">
-              <Baby size={15} />
-              Copii
-            </Link>
-          )}
-          <Link href="/clasa" className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-emerald-600 border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-400 transition-all">
+          <Link href="/grup" className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-emerald-600 border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 hover:border-emerald-400 transition-all">
             <School size={15} />
-            Intră în clasă
+            Intră în grup
           </Link>
           {isAdmin && (
             <Link href="/admin" className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-purple-600 border border-purple-200 bg-purple-50 hover:bg-purple-100 hover:border-purple-400 transition-all">
@@ -98,7 +95,7 @@ export function Header({ user, parentName, isAdmin, accountType }: HeaderProps) 
             </Link>
           )}
           {user && !isAdmin && (
-            <Link href={isTeacher ? "/dashboard/classes" : "/dashboard"} className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-indigo-600 border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 hover:border-indigo-400 transition-all">
+            <Link href={isTeacher ? "/dashboard/grupuri" : "/dashboard"} className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-indigo-600 border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 hover:border-indigo-400 transition-all">
               <LayoutDashboard size={15} />
               Dashboard
             </Link>
@@ -157,8 +154,8 @@ export function Header({ user, parentName, isAdmin, accountType }: HeaderProps) 
                   Intră în cont
                 </Link>
               </Button>
-              <Button size="sm" className="bg-blue-100 hover:bg-blue-200 text-blue-700" asChild>
-                <Link href="/register">Creează cont</Link>
+              <Button size="sm" className="bg-yellow-500 hover:bg-yellow-600 text-white" asChild>
+                <Link href="/register">Înscrie-te</Link>
               </Button>
             </>
           )}
@@ -177,38 +174,32 @@ export function Header({ user, parentName, isAdmin, accountType }: HeaderProps) 
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden border-t bg-white px-4 py-4 flex flex-col gap-4">
-          <Link href="/despre" className="text-base font-medium text-teal-600 flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+          <Link href="/despre" className="text-base font-medium text-yellow-700 flex items-center gap-2" onClick={() => setMobileOpen(false)}>
             <Star size={18} />
-            Despre platformă
+            Despre noi
           </Link>
           <Link href="/courses" className="text-base font-medium flex items-center gap-2" onClick={() => setMobileOpen(false)}>
             <BookOpen size={18} />
             Cursuri
           </Link>
           {(!user || isTeacher) && (
-            <Link href={isTeacher ? "/cadre-didactice" : "/pentru-profesori"} className="text-base font-medium text-indigo-600 flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+            <Link href={isTeacher ? "/formatori" : "/pentru-formatori"} className="text-base font-medium text-indigo-600 flex items-center gap-2" onClick={() => setMobileOpen(false)}>
               <GraduationCap size={18} />
-              Cadre didactice
+              Formatori
             </Link>
           )}
           {isTeacher && (
-            <Link href="/dashboard/classes" className="text-base font-medium text-indigo-700 font-semibold flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+            <Link href="/dashboard/grupuri" className="text-base font-medium text-indigo-700 font-semibold flex items-center gap-2" onClick={() => setMobileOpen(false)}>
               <Users size={18} />
-              Clasele mele
+              Grupurile mele
             </Link>
           )}
-          <Link href="/clasa" className="text-base font-medium text-emerald-600 flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+          <Link href="/grup" className="text-base font-medium text-emerald-600 flex items-center gap-2" onClick={() => setMobileOpen(false)}>
             <School size={18} />
-            Intră în clasă
+            Intră în grup
           </Link>
           {user ? (
             <>
-              {!isTeacher && (
-                <Link href="/dashboard" className="text-base font-medium flex items-center gap-2" onClick={() => setMobileOpen(false)}>
-                  <Baby size={18} />
-                  Copii
-                </Link>
-              )}
               {isAdmin && (
                 <Link href="/admin" className="text-base font-medium text-purple-600 flex items-center gap-2" onClick={() => setMobileOpen(false)}>
                   <LayoutDashboard size={18} />
@@ -216,7 +207,7 @@ export function Header({ user, parentName, isAdmin, accountType }: HeaderProps) 
                 </Link>
               )}
               {!isAdmin && (
-                <Link href={isTeacher ? "/dashboard/classes" : "/dashboard"} className="text-base font-medium text-indigo-600 flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+                <Link href={isTeacher ? "/dashboard/grupuri" : "/dashboard"} className="text-base font-medium text-indigo-600 flex items-center gap-2" onClick={() => setMobileOpen(false)}>
                   <LayoutDashboard size={18} />
                   Dashboard
                 </Link>
@@ -245,12 +236,12 @@ export function Header({ user, parentName, isAdmin, accountType }: HeaderProps) 
                 <HelpCircle size={18} />
                 Ajutor
               </Link>
-              <Link href="/instaleaza" className="text-base font-medium text-teal-600 flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+              <Link href="/instaleaza" className="text-base font-medium text-yellow-700 flex items-center gap-2" onClick={() => setMobileOpen(false)}>
                 <Smartphone size={18} />
                 Instalează app
               </Link>
-              <Button className="bg-blue-100 hover:bg-blue-200 text-blue-700 w-full" asChild>
-                <Link href="/register" onClick={() => setMobileOpen(false)}>Creează cont</Link>
+              <Button className="bg-yellow-500 hover:bg-yellow-600 text-white w-full" asChild>
+                <Link href="/register" onClick={() => setMobileOpen(false)}>Înscrie-te</Link>
               </Button>
             </>
           )}

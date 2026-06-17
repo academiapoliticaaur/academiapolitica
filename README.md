@@ -1,4 +1,4 @@
-# Ami & Moti — Platformă educațională
+﻿# Academia Politica AUR
 
 Platformă web educațională pentru copii (clasele 0–8), administrată de părinți. Construită cu Next.js, Supabase și Tailwind CSS. Poate fi folosită ca **template de bază** pentru orice platformă de e-learning.
 
@@ -23,7 +23,7 @@ Platformă web educațională pentru copii (clasele 0–8), administrată de pă
 
 ```bash
 git clone <repo-url>
-cd ami-moti-edu-platform
+cd academia-politica-aur
 npm install
 ```
 
@@ -102,14 +102,14 @@ app/
   (public)/     — pagini publice: home, cursuri, ajutor, contact
   (auth)/       — login, register, logout
   (dashboard)/  — dashboard părinte: copii, progres, preview lecții
-  (child)/      — zona copilului: cursuri, lecții, quiz, diplomă, PIN
+  (child)/      — zona cursantului: cursuri, lecții, quiz, diplomă, PIN
   (admin)/      — admin: CRUD cursuri, statistici, MFA, utilizatori
   api/          — parse-quiz, cron email, lesson-asset proxy
 
 components/
   admin/        — PublishButtons, DeleteButton, QuizPdfImport, ReorderButtons
   child/        — ChildProfileCard, PinEntry, DeleteChildButton
-  common/       — ChatWidget (FAQ), ContactForm, AmiMotiGuide, ProgressBar
+  common/       — ChatWidget (FAQ), ContactForm, AcademiaGuide, ProgressBar
   course/       — CourseCard, AgeGroupBadge, CourseSearchInput, ReplayCourseButton
   layout/       — Header, Footer
   lesson/       — QuizPlayer, VideoEmbed, PresentationViewer, LessonCompleteOverlay
@@ -134,7 +134,7 @@ supabase/
 
 ## Funcționalități
 
-- **Auth** — cont părinte + profil copil (fără email copil), PIN opțional 8h
+- **Auth** — cont părinte + profil cursant (fără email copil), PIN opțional 8h
 - **Cursuri** — video (YouTube), prezentare (iframe), fișă lucru (PDF), quiz
 - **Quiz** — import DOCX/PDF/TXT, gate 80%, retry nelimitat, editor în admin
 - **Gamificare** — XP permanent, streak zilnic, 9 badges, diplomă printabilă

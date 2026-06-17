@@ -1,9 +1,9 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Clock, BookOpen, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AgeGroupBadge } from "@/components/course/age-group-badge";
-import { AmiMotiGuide } from "@/components/common/ami-moti-guide";
+import { AcademiaGuide } from "@/components/common/academia-guide";
 import { getCourseBySlug } from "@/lib/db/courses";
 import { createClient } from "@/lib/supabase/server";
 import type { Metadata } from "next";
@@ -17,9 +17,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const course = await getCourseBySlug(slug);
   if (!course) return { title: "Curs negăsit" };
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://ami-moti-edu-platform.vercel.app";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://academia-politica-aur.vercel.app";
   const courseUrl = `${appUrl}/courses/${slug}`;
-  const description = course.description || `Curs educațional pentru copii — ${course.age_group === "0-4" ? "clasele 0–4" : "clasele 5–8"}. Platformă Ami și Moti.`;
+  const description = course.description || `Curs educațional pentru copii — ${course.age_group === "0-4" ? "clasele 0–4" : "clasele 5–8"}. Platformă Academia Politica AUR.`;
 
   return {
     title: course.title,
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description,
       url: courseUrl,
       type: "website",
-      siteName: "Ami & Moti",
+      siteName: "Academia Politica AUR",
       images: [
         {
           url: `${appUrl}/og-default.png`,
@@ -90,7 +90,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
         </div>
       </div>
 
-      <AmiMotiGuide
+      <AcademiaGuide
         variant="mission"
         message={`Acest curs este gândit special pentru ${course.age_group === "0-4" ? "clasele 0–4" : "clasele 5–8"}. Vei descoperi lucruri noi și interesante pas cu pas!`}
         className="mb-8"

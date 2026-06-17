@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createHmac } from "crypto";
 
@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
   return new NextResponse(
     buildHtml(
       "Dezabonat cu succes",
-      "Nu vei mai primi raportul săptămânal Ami & Moti. Te poți reabona oricând din profilul tău.",
+      "Nu vei mai primi raportul săptămânal Academia Politica AUR. Te poți reabona oricând din profilul tău.",
       true
     ),
     { headers: { "Content-Type": "text/html; charset=utf-8" } }
@@ -61,7 +61,7 @@ function buildHtml(title: string, message: string, success: boolean): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>${title} — Ami & Moti</title>
+  <title>${title} — Academia Politica AUR</title>
 </head>
 <body style="margin:0;padding:0;background:#f9fafb;font-family:Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;">
   <div style="max-width:420px;width:90%;background:#fff;border-radius:16px;padding:40px 32px;box-shadow:0 4px 24px rgba(0,0,0,0.08);text-align:center;">

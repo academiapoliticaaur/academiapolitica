@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+﻿import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { LogOut, BookOpen, LayoutDashboard, GraduationCap, Users } from "lucide-react";
@@ -22,7 +22,7 @@ export default async function DashboardLayout({
     .single();
 
   const accountType = profile?.account_type ?? (user.user_metadata?.account_type as string | null) ?? null;
-  const isTeacher = accountType === "invatator" || accountType === "profesor";
+  const isTeacher = accountType === "formator" || accountType === "lector";
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -64,15 +64,15 @@ export default async function DashboardLayout({
             </Link>
             {isTeacher && (
               <Link
-                href="/dashboard/classes"
+                href="/dashboard/grupuri"
                 className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors"
               >
                 <Users size={18} />
-                Clasele mele
+                Grupurile mele
               </Link>
             )}
             <Link
-              href={isTeacher ? "/cadre-didactice" : "/courses"}
+              href={isTeacher ? "/formatori" : "/courses"}
               className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
             >
               {isTeacher ? <GraduationCap size={18} /> : <BookOpen size={18} />}

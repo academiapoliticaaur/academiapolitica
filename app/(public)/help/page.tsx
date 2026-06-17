@@ -1,9 +1,9 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { ContactForm } from "@/components/common/contact-form";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Ajutor & Ghid — Ami & Moti" };
+export const metadata: Metadata = { title: "Ajutor & Ghid — Academia Politica AUR" };
 
 const SECTIONS: {
   id: string;
@@ -24,7 +24,7 @@ const SECTIONS: {
       },
       {
         q: "Cum adaug un profil de copil?",
-        a: "După autentificare, mergi la Dashboard și apasă \"Adaugă profil copil\". Completezi numele afișat, grupa de vârstă (0-4 sau 5-8) și poți seta un PIN opțional. Poți adăuga mai mulți copii pe același cont.",
+        a: "După autentificare, mergi la Dashboard și apasă \"Adaugă profil cursant\". Completezi numele afișat, grupa de vârstă (0-4 sau 5-8) și poți seta un PIN opțional. Poți adăuga mai mulți copii pe același cont.",
       },
       {
         q: "Cum urmăresc progresul copilului?",
@@ -63,24 +63,24 @@ const SECTIONS: {
   {
     id: "cadre",
     icon: "🎓",
-    title: "Ghid pentru cadre didactice",
+    title: "Ghid pentru formatori",
     color: "purple",
     items: [
       {
-        q: "Cum îmi creez un cont de cadru didactic?",
-        a: "Pe pagina de înregistrare, la câmpul \"Tip cont\" alege \"Învățător (clasele 0–4)\" sau \"Profesor gimnaziu (clasele 5–8)\". Completezi restul datelor și trimiți. Vei primi un email de confirmare — după confirmare, contul intră în așteptare pentru aprobare de administrator.",
+        q: "Cum îmi creez un cont de formator?",
+        a: "Pe pagina de înregistrare, la câmpul \"Tip cont\" alege \"Formator (clasele 0–4)\" sau \"Profesor gimnaziu (clasele 5–8)\". Completezi restul datelor și trimiți. Vei primi un email de confirmare — după confirmare, contul intră în așteptare pentru aprobare de administrator.",
       },
       {
         q: "De ce nu pot accesa cursurile imediat după înregistrare?",
-        a: "Conturile de cadre didactice necesită aprobare manuală de administrator pentru a verifica calitatea educatorului. Primești un email când contul este aprobat. Poți naviga și vedea titlurile cursurilor, dar conținutul lecțiilor devine disponibil doar după aprobare.",
+        a: "Conturile de formatori necesită aprobare manuală de administrator pentru a verifica calitatea educatorului. Primești un email când contul este aprobat. Poți naviga și vedea titlurile cursurilor, dar conținutul lecțiilor devine disponibil doar după aprobare.",
       },
       {
-        q: "Ce cursuri pot accesa ca Învățător?",
-        a: "Ai acces la secțiunea \"Cadre didactice\" → \"Resurse Învățători\" — cursuri concepute specific pentru predarea AI literacy în clasele 0–4. Poți accesa pagina prin meniul de sus sau direct la /cadre-didactice.",
+        q: "Ce cursuri pot accesa ca Formator?",
+        a: "Ai acces la secțiunea \"Formatori\" → \"Resurse Formatori\" — cursuri concepute specific pentru predarea AI literacy în clasele 0–4. Poți accesa pagina prin meniul de sus sau direct la /formatori.",
       },
       {
         q: "Ce cursuri pot accesa ca Profesor de gimnaziu?",
-        a: "Ai acces la secțiunea \"Cadre didactice\" → \"Resurse Profesori Gimnaziu\" — cursuri pentru predarea competențelor digitale și AI în clasele 5–8.",
+        a: "Ai acces la secțiunea \"Formatori\" → \"Resurse Profesori Gimnaziu\" — cursuri pentru predarea competențelor digitale și AI în clasele 5–8.",
       },
       {
         q: "Pot vedea și cursurile pentru elevi?",
@@ -88,7 +88,7 @@ const SECTIONS: {
       },
       {
         q: "Cum știu că am fost aprobat?",
-        a: "Vei vedea în Dashboard un mesaj verde \"Cont aprobat\" în loc de cel galben \"Cont în așteptare\". De asemenea, butonul de acces la lecțiile din cursurile de cadre didactice devine activ.",
+        a: "Vei vedea în Dashboard un mesaj verde \"Cont aprobat\" în loc de cel galben \"Cont în așteptare\". De asemenea, butonul de acces la lecțiile din cursurile de formatori devine activ.",
       },
     ],
   },
@@ -136,7 +136,7 @@ const SECTIONS: {
       },
       {
         q: "Există și cursuri pentru profesori?",
-        a: "Da. Există cursuri dedicate Învățătorilor (cls. 0-4) și Profesorilor de gimnaziu (cls. 5-8), accesibile din secțiunea \"Cadre didactice\" după aprobarea contului.",
+        a: "Da. Există cursuri dedicate Formatorilor (cls. 0-4) și Profesorilor de gimnaziu (cls. 5-8), accesibile din secțiunea \"Formatori\" după aprobarea contului.",
       },
       {
         q: "Ce tipuri de lecții există?",
@@ -212,14 +212,14 @@ const SECTIONS: {
       },
       {
         q: "Copilul nu poate accesa profilul — apare ecranul de PIN.",
-        a: "Introdu PIN-ul de 4 cifre setat de tine ca părinte. Dacă nu îl mai știi, mergi la Dashboard → Editează profil copil → bifează \"Elimină PIN\" și salvează.",
+        a: "Introdu PIN-ul de 4 cifre setat de tine ca părinte. Dacă nu îl mai știi, mergi la Dashboard → Editează profil cursant → bifează \"Elimină PIN\" și salvează.",
       },
       {
         q: "Confirmarea emailului nu funcționează sau pagina rămâne blocată.",
         a: "Apasă direct pe linkul din emailul de confirmare (nu copia/lipi URL-ul). Dacă pagina se blochează, închide tab-ul și intră pe /login — dacă emailul a fost confirmat, vei putea autentifica normal.",
       },
       {
-        q: "Contul de cadru didactic este aprobat dar tot nu văd cursurile.",
+        q: "Contul de formator este aprobat dar tot nu văd cursurile.",
         a: "Deconectează-te și reconectează-te pentru a reîmprospăta sesiunea. Dacă problema persistă, contactează administratorul.",
       },
       {
@@ -231,12 +231,12 @@ const SECTIONS: {
   {
     id: "clase",
     icon: "🏫",
-    title: "Elevi din clase (acces cu cod)",
+    title: "Membri din grupuri (acces cu cod)",
     color: "emerald",
     items: [
       {
         q: "Cum intru în platforma dacă sunt elev dintr-o clasă?",
-        a: "Accesează ami-moti.everydai.ro/clasa (sau apasă \"Intră în clasă\" din meniu). Introduce codul clasei dat de profesorul tău, selectează-ți numele din lista clasei și ești gata!",
+        a: "Accesează academia-aur.ro/clasa (sau apasă \"Intră în grup\" din meniu). Introduce codul clasei dat de profesorul tău, selectează-ți numele din lista clasei și ești gata!",
       },
       {
         q: "Am nevoie de un cont sau parolă?",
@@ -298,7 +298,7 @@ export default async function HelpPage() {
           <div className="text-5xl mb-4">🌟</div>
           <h1 className="text-3xl font-extrabold text-gray-900 mb-3">Centru de ajutor</h1>
           <p className="text-gray-500 text-lg max-w-xl mx-auto">
-            Răspunsuri la cele mai frecvente întrebări despre platforma Ami & Moti.
+            Răspunsuri la cele mai frecvente întrebări despre platforma Academia Politica AUR.
           </p>
           <div className="flex flex-wrap justify-center gap-3 mt-6">
             {SECTIONS.map((s) => (
@@ -348,8 +348,8 @@ export default async function HelpPage() {
             <Link href="/preturi" className="text-sm font-semibold px-4 py-2 rounded-full bg-violet-600 text-white hover:bg-violet-700 transition-colors">
               Prețuri & Abonamente
             </Link>
-            <Link href="/cadre-didactice" className="text-sm font-semibold px-4 py-2 rounded-full bg-purple-500 text-white hover:bg-purple-600 transition-colors">
-              Cadre didactice
+            <Link href="/formatori" className="text-sm font-semibold px-4 py-2 rounded-full bg-purple-500 text-white hover:bg-purple-600 transition-colors">
+              Formatori
             </Link>
             {!user && (
               <Link href="/register" className="text-sm font-semibold px-4 py-2 rounded-full border border-blue-300 text-blue-700 hover:bg-blue-100 transition-colors">
@@ -375,7 +375,7 @@ export default async function HelpPage() {
             <div className="px-6 py-6">
               <p className="text-sm text-gray-600 mb-2">
                 Nu ai găsit răspuns în ghid? Scrie-ne direct la{" "}
-                <span className="font-semibold text-blue-600">suport@amisimoti.ro</span>{" "}
+                <span className="font-semibold text-blue-600">suport@academia-aur.ro</span>{" "}
                 sau folosește formularul de mai jos.
               </p>
               <p className="text-xs text-gray-400 mb-6">Răspundem în maximum 24–48 de ore în zilele lucrătoare.</p>

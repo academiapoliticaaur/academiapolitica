@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
@@ -16,11 +16,11 @@ export default async function AdminCoursesPage({ searchParams }: PageProps) {
   const { view } = await searchParams;
   // /admin/courses           -> ambele secțiuni (navigare implicită, link-uri "Înapoi"/redirectTo existente)
   // /admin/courses?view=cursuri            -> doar cursuri copii/elevi
-  // /admin/courses?view=resurse-didactice  -> doar resurse cadre didactice
+  // /admin/courses?view=resurse-didactice  -> doar resurse formatori
   const showChildren = view !== "resurse-didactice";
   const showTeacher = view !== "cursuri";
   const pageTitle = view === "cursuri" ? "Cursuri pentru copii / elevi"
-    : view === "resurse-didactice" ? "Resurse cadre didactice"
+    : view === "resurse-didactice" ? "Resurse formatori"
     : "Cursuri";
 
   const supabase = createAdminClient();
@@ -36,13 +36,13 @@ export default async function AdminCoursesPage({ searchParams }: PageProps) {
     (c) => !c.audience || c.audience === "children" || c.audience === "all"
   );
   const teacherCourses = allCourses.filter(
-    (c) => c.audience === "invatator" || c.audience === "profesor"
+    (c) => c.audience === "formator" || c.audience === "lector"
   );
 
   const c04 = childrenCourses.filter((c) => c.age_group === "0-4");
   const c58 = childrenCourses.filter((c) => c.age_group === "5-8");
-  const inv = teacherCourses.filter((c) => c.audience === "invatator");
-  const prof = teacherCourses.filter((c) => c.audience === "profesor");
+  const inv = teacherCourses.filter((c) => c.audience === "formator");
+  const prof = teacherCourses.filter((c) => c.audience === "lector");
 
   const isEmpty = allCourses.length === 0;
 
@@ -107,14 +107,14 @@ export default async function AdminCoursesPage({ searchParams }: PageProps) {
             </section>
           )}
 
-          {/* Secțiunea 2 — Resurse cadre didactice */}
+          {/* Secțiunea 2 — Resurse formatori */}
           {showTeacher && (
           <section id="resurse-didactice">
             <div className="flex items-center gap-3 mb-3">
               <span className="text-xl">🎓</span>
               <div>
-                <h2 className="text-base font-bold text-gray-800">Resurse cadre didactice</h2>
-                <p className="text-xs text-gray-500">Apar la <strong>/cadre-didactice</strong> — pentru învățători și profesori</p>
+                <h2 className="text-base font-bold text-gray-800">Resurse formatori</h2>
+                <p className="text-xs text-gray-500">Apar la <strong>/formatori</strong> — pentru învățători și profesori</p>
               </div>
               <span className="ml-auto text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
                 {teacherCourses.length} resurse
@@ -126,7 +126,7 @@ export default async function AdminCoursesPage({ searchParams }: PageProps) {
                 {inv.length > 0 && (
                   <div>
                     <p className="text-xs font-semibold text-indigo-600 mb-2 flex items-center gap-1">
-                      🌈 Învățători — Clasele 0–4 <span className="font-normal text-gray-400">({inv.length})</span>
+                      🌈 Formatori — Clasele 0–4 <span className="font-normal text-gray-400">({inv.length})</span>
                     </p>
                     <AdminCoursesTable courses={inv} />
                   </div>
@@ -142,11 +142,11 @@ export default async function AdminCoursesPage({ searchParams }: PageProps) {
               </div>
             ) : (
               <div className="bg-white rounded-xl border border-dashed p-6 text-center text-gray-400 text-sm">
-                Nicio resursă pentru cadre didactice.{" "}
+                Nicio resursă pentru formatori.{" "}
                 <Link href="/admin/courses/new" className="text-blue-500 underline">Adaugă una</Link>{" "}
                 sau importă cu{" "}
                 <Link href="/admin/curriculum-import" className="text-blue-500 underline">Import AI</Link>{" "}
-                selectând audiența <em>Învățători / Profesori</em>.
+                selectând audiența <em>Formatori / Profesori</em>.
               </div>
             )}
           </section>

@@ -1,4 +1,4 @@
-# Current State — 2026-06-15 (update 11)
+﻿# Current State — 2026-06-15 (update 11)
 
 ## Stack
 - Next.js 16, React 19, TypeScript 5
@@ -9,7 +9,7 @@
 - Vercel (deployment, auto-deploy din GitHub main)
 
 ## Deployment
-- **URL producție:** https://ami-moti.everydai.ro (custom domain)
+- **URL producție:** https://academia-aur.ro (custom domain)
 - **Platform:** Vercel, conectat la GitHub (branch main)
 - **Auto-deploy:** orice push pe main declanșează deploy nou
 
@@ -17,7 +17,7 @@
 | Valoare | Descriere | Aprobare necesară |
 |---|---|---|
 | `family` | Părinte/tutore cu copii | Nu |
-| `invatator` | Învățător cls. 0–4 | Da (admin) |
+| `formator` | Formator cls. 0–4 | Da (admin) |
 | `profesor` | Profesor gimnaziu cls. 5–8 | Da (admin) |
 
 ## Rute implementate (app router)
@@ -27,38 +27,38 @@
 - `/courses` — listing cursuri + secțiune Cursuri demonstrative la top; ?type=video/presentation/worksheet/quiz → pagini descriptive dedicate (fără grilă)
 - `/courses/[slug]` — detaliu curs; lecții demo au link "Demo gratuit →" în loc de lacăt pentru utilizatori neautentificați
 - `/courses?type=video|presentation|worksheet|quiz` — pagini descriptive pentru fiecare tip de conținut (fără filtre sau grilă de cursuri)
-- `/cadre-didactice` — pagina publică cu cursuri pentru Învățători și Profesori de gimnaziu; acces filtrat per rol și aprobat
+- `/formatori` — pagina publică cu cursuri pentru Formatori și Profesori de gimnaziu; acces filtrat per rol și aprobat
 - `/despre` — pagina "Despre platformă"
 - `/paths` — trasee de instruire publice
 - `/paths/[slug]` — detaliu traseu cu cursuri incluse
 - `/webinars` — lista webinarii publice
-- `/help` — centru de ajutor cu 7 secțiuni acordeon (Părinți, Cadre didactice, Copii, Cursuri, **Abonamente**, Tehnic, Elevi din clase) + formular contact + CTA "Prețuri & Abonamente" → /preturi
-- `/preturi` — pagina prețuri: 3 planuri (Lunar 29 lei, Trimestrial 72 lei, Anual 228 lei), secțiune trial, FAQ 4 întrebări, AmiMotiGuide ami
+- `/help` — centru de ajutor cu 7 secțiuni acordeon (Părinți, Formatori, Copii, Cursuri, **Abonamente**, Tehnic, Membri din grupuri) + formular contact + CTA "Prețuri & Abonamente" → /preturi
+- `/preturi` — pagina prețuri: 3 planuri (Lunar 29 lei, Trimestrial 72 lei, Anual 228 lei), secțiune trial, FAQ 4 întrebări, AcademiaGuide ami
 
 ### (auth)
 - `/login` — autentificare email + parolă
-- `/register` — înregistrare cont cu selectare tip (family / invatator / profesor)
+- `/register` — înregistrare cont cu selectare tip (family / formator / profesor)
 - `/auth/callback` — PKCE flow: exchangeCodeForSession + ensureParentProfile
 - `/logout` — POST route handler
 
 ### (dashboard)
-- `/dashboard` — lista profiluri copii, XP total, banner aprobare pentru cadre didactice neaprobate
-- `/dashboard/add-child` — adaugă profil copil
-- `/dashboard/edit-child/[profileId]` — editare profil + PIN management
+- `/dashboard` — lista profiluri cursanți, XP total, banner aprobare pentru formatori neaprobate
+- `/dashboard/profil` — adaugă profil cursant
+- `/dashboard/edit-cursant/[profileId]` — editare profil + PIN management
 - `/dashboard/progress/[childId]` — progres detaliat per copil
 - `/dashboard/profile` — editare cont părinte (nume, parolă)
 - `/dashboard/preview/[courseId]/lesson/[lessonId]` — previzualizare lecție fără XP/progres
-- `/dashboard/classes` — lista claselor active/arhivate (profesor)
-- `/dashboard/classes/new` — creare clasă nouă (cod acces unic 4-12 car.)
-- `/dashboard/classes/[id]` — detaliu clasă: tab Elevi (adaugă/editează/șterge, PIN per elev, regenerare PIN) + tab Cursuri (asignează/elimină/reordonează Sus↑↓Jos) + tab Progres (tabel per elev × curs, sumar clasă, export CSV)
+- `/dashboard/grupuri` — lista claselor active/arhivate (profesor)
+- `/dashboard/grupuri/new` — creare clasă nouă (cod acces unic 4-12 car.)
+- `/dashboard/grupuri/[id]` — detaliu clasă: tab Membri (adaugă/editează/șterge, PIN per elev, regenerare PIN) + tab Cursuri (asignează/elimină/reordonează Sus↑↓Jos) + tab Progres (tabel per elev × curs, sumar clasă, export CSV)
 
 ### (child)
-- `/child/[profileId]` — zona copilului: XP, streak, curs activ, badges
-- `/child/[profileId]/course/[courseId]` — curs cu module/lecții; lecții blocate pentru cadre neaprobate
-- `/child/[profileId]/course/[courseId]/lesson/[lessonId]` — player lecție (layout.tsx blochează dacă cont neaprobat)
-- `/child/[profileId]/pin` — ecran PIN cu validare + expirare 8h
-- `/child/[profileId]/transcript` — transcript cursuri și progres
-- `/child/[profileId]/certificate/[certificateId]` — diplomă printabilă
+- `/cursant/[profileId]` — zona cursantului: XP, streak, curs activ, badges
+- `/cursant/[profileId]/course/[courseId]` — curs cu module/lecții; lecții blocate pentru cadre neaprobate
+- `/cursant/[profileId]/course/[courseId]/lesson/[lessonId]` — player lecție (layout.tsx blochează dacă cont neaprobat)
+- `/cursant/[profileId]/pin` — ecran PIN cu validare + expirare 8h
+- `/cursant/[profileId]/transcript` — transcript cursuri și progres
+- `/cursant/[profileId]/certificate/[certificateId]` — diplomă printabilă
 
 ### (admin)
 - `/admin` — dashboard statistici + linkuri rapide
@@ -72,11 +72,11 @@
 - `/admin/courses/[id]/modules/[moduleId]/lessons/[lessonId]/quiz` — editor quiz cu import AI
 - `/admin/parents` — lista părinți + aprobare inline (buton Aprobă direct în tabel)
 - `/admin/parents/add` — adaugă utilizator manual
-- `/admin/parents/[userId]/edit` — editare cont + schimbare tip cont (family/invatator/profesor)
-- `/admin/teachers` — lista conturi invatator/profesor (redesigned ca pagina Parents)
+- `/admin/parents/[userId]/edit` — editare cont + schimbare tip cont (family/formator/profesor)
+- `/admin/teachers` — lista conturi formator/profesor (redesigned ca pagina Parents)
 - `/admin/teachers/[userId]/edit` — editare cont profesor (full_name, email, account_type)
-- `/admin/approvals` — conturi cadre didactice în așteptare
-- `/admin/children` — lista profiluri copii
+- `/admin/approvals` — conturi formatori în așteptare
+- `/admin/children` — lista profiluri cursanți
 - `/admin/administrators` — lista admini
 - `/admin/paths` — CRUD trasee de instruire
 - `/admin/paths/[id]` — detalii traseu + gestionare cursuri incluse
@@ -90,23 +90,23 @@
 ### (public) — cursuri demonstrative
 - `/demo/[courseSlug]/lesson/[lessonId]` — viewer lecție public, fără autentificare; accesibil pentru cursuri cu `is_demo=true`; include VideoEmbed/PresentationViewer, nav prev/next, cuprins, CTA register
 
-### (public) — acces elevi din clase
-- `/clasa` — landing page: elev introduce codul clasei
-- `/clasa/[code]` — lista elevilor din clasă (selectare)
-- `/clasa/[code]/[studentCode]` — zona elevului: cursuri asignate clasei
+### (public) — acces membri din grupuri
+- `/grup` — landing page: elev introduce codul clasei
+- `/grup/[code]` — lista elevilor din clasă (selectare)
+- `/grup/[code]/[studentCode]` — zona elevului: cursuri asignate clasei
 - `/instaleaza` — ghid instalare PWA: Android (Chrome), iOS (Safari), desktop; beneficii, pași numerotați
 
 ### API routes
-- `GET /api/clasa/verify?code=X` — validează dacă codul de clasă există și e activ
+- `GET /api/grup/verify?code=X` — validează dacă codul de clasă există și e activ
 - `POST /api/admin/parse-quiz` — parsare quiz din DOCX/PDF/TXT (regex + fallback Groq)
 - `POST /api/admin/parse-curriculum` — extragere structură curriculum din PDF cu Groq (DOMMatrix polyfill)
 - `POST /api/admin/import-curriculum` — inserare curs generat AI în DB (duplicate detection)
 - `GET /api/admin/drive/auth` — inițiază Google OAuth2 flow (redirect la Google)
 - `GET /api/admin/drive/callback` — finalizează OAuth2, salvează refresh_token în admin_settings
 - `GET /api/admin/drive/token` — returnează access_token proaspăt pentru Google Picker (client-side)
-- `POST /api/clasa/progress` — înregistrează completare lecție elev în class_student_progress; upsert + creare certificat la final curs
-- `POST /api/clasa/verify-pin` — verifică PIN-ul unui elev din clasă (rate-limitat implicit prin Supabase)
-- `GET /api/dashboard/classes/[id]/progress-csv` — export CSV progres clasă (verificare ownership teacher_id, format wide cu BOM UTF-8)
+- `POST /api/grup/progress` — înregistrează completare lecție elev în class_student_progress; upsert + creare certificat la final curs
+- `POST /api/grup/verify-pin` — verifică PIN-ul unui elev din clasă (rate-limitat implicit prin Supabase)
+- `GET /api/dashboard/grupuri/[id]/progress-csv` — export CSV progres clasă (verificare ownership teacher_id, format wide cu BOM UTF-8)
 - `GET /api/cron/weekly-report` — raport săptămânal email (Resend, cron Vercel luni 08:00)
 - `GET /api/lesson-asset` — proxy fișiere storage Supabase
 
@@ -114,27 +114,27 @@
 
 ### Autentificare și conturi
 - Login/register cu Supabase Auth PKCE (email + parolă)
-- Selectare tip cont la înregistrare: family / invatator / profesor
+- Selectare tip cont la înregistrare: family / formator / profesor
 - Auth callback PKCE: detectează `?code=` param, apelează `exchangeCodeForSession()`
 - Middleware protejează /dashboard, /admin, /child
 - MFA TOTP obligatoriu pentru admin (Google Authenticator / Authy)
-- PIN 4 cifre opțional pe profil copil, expiră 8h (sessionStorage)
+- PIN 4 cifre opțional pe profil cursant, expiră 8h (sessionStorage)
 - RLS policies pe toate tabelele
 - Guard `requireAdmin()` în `lib/admin/guard.ts` — verificare centralizată în Server Actions
 - **Reset parolă** — /auth/forgot-password + /auth/reset-password (PKCE flow: resetPasswordForEmail → exchangeCodeForSession → updateUser)
 - **Cookie consent banner** GDPR — localStorage, dismiss persistent, în root layout
 
-### Cadre didactice
-- Conturi `invatator` și `profesor` înregistrate cu self-service la /register
+### Formatori
+- Conturi `formator` și `profesor` înregistrate cu self-service la /register
 - Aprobare manuală de admin (`parent_profiles.approved`)
 - Bannere: "Cont în așteptare" pe dashboard și pe pagina cursului
 - Lecții blocate (layout.tsx server-side) până la aprobare
 - Browsing liber: titluri cursuri vizibile, conținut lecție blocat
-- Pagina publică /cadre-didactice: invatator vede DOAR cursuri invatator, profesor vede DOAR cursuri profesor (+ isApproved verificat)
+- Pagina publică /formatori: formator vede DOAR cursuri formator, profesor vede DOAR cursuri profesor (+ isApproved verificat)
 - Pagina /courses: profesorii văd doar cursuri pentru copii, filtrate automat pe grupa de vârstă; butoanele de filtru ascunse
 - Admin: /admin/approvals + aprobare inline din /admin/parents + /admin/teachers
-- Admin: editare cont profesor (full_name, email, account_type invatator↔profesor)
-- Admin: editare cont parinte include schimbare tip cont (family→invatator/profesor și înapoi)
+- Admin: editare cont profesor (full_name, email, account_type formator↔profesor)
+- Admin: editare cont parinte include schimbare tip cont (family→formator/profesor și înapoi)
 
 ### Sistem clase (complet)
 - Profesorul creează clase cu cod de acces ales (unic global, 4-12 car. alfanumerice)
@@ -143,18 +143,18 @@
 - Reordonare cursuri asignate cu butoane Sus/Jos (swap order_index în class_courses)
 - Arhivare clasă (status → archived)
 - **PIN per elev:** generat automat la creare, vizibil în dashboard profesor, regenerare oricând; elevi cu PIN văd modal 4 cifre la selectare (sessionStorage pentru UX fluid)
-- **Progres înregistrat:** la completarea lecției în zona elevului → POST /api/clasa/progress → upsert class_student_progress; la finalizare curs → creare class_student_certificates
+- **Progres înregistrat:** la completarea lecției în zona elevului → POST /api/grup/progress → upsert class_student_progress; la finalizare curs → creare class_student_certificates
 - **Tab Progres:** tabel per elev × curs (lecții completate, bară progres, ✓ Complet), sumar clasă (%, elevi activi, inactivi), ultima activitate relativă
-- **Export CSV progres:** buton în tab Progres → GET /api/dashboard/classes/[id]/progress-csv; format wide, BOM UTF-8 (compatibil Excel românesc)
-- Elevi accesează /clasa → cod clasă → selectează numele (+ PIN dacă setat) → zona personală cu cursuri
-- Sidebar dashboard profesor: "Clasele mele" + "Cursurile mele" în loc de "Cursuri disponibile"
-- Navigație header: buton "Intră în clasă" verde vizibil pentru toți (desktop + mobil)
+- **Export CSV progres:** buton în tab Progres → GET /api/dashboard/grupuri/[id]/progress-csv; format wide, BOM UTF-8 (compatibil Excel românesc)
+- Elevi accesează /clasa → cod grup → selectează numele (+ PIN dacă setat) → zona personală cu cursuri
+- Sidebar dashboard profesor: "Grupurile mele" + "Cursurile mele" în loc de "Cursuri disponibile"
+- Navigație header: buton "Intră în grup" verde vizibil pentru toți (desktop + mobil)
 - Tabele: classes, class_students, class_courses, class_student_progress (migration 006)
 - `account_type` fallback: dacă null în DB → citit din user.user_metadata (fix fără re-login)
-- Diplome elevi din clase (class_student_certificates — migration 007)
+- Diplome membri din grupuri (class_student_certificates — migration 007)
 
 ### Cursuri și lecții
-- `audience` pe cursuri: `children | invatator | profesor | all`
+- `audience` pe cursuri: `children | formator | profesor | all`
 - `age_group` pe cursuri: `0-4 | 5-8`
 - 5 tipuri lecție: video, presentation, worksheet, quiz, mixed
 - Quiz gate 80% pentru finalizare lecție
@@ -181,7 +181,7 @@
 - Admin activează/dezactivează subscripția din `/admin/parents/[userId]/edit` și `/admin/teachers/[userId]/edit`
 - `lib/subscription.ts`: `isSubscriptionActive`, `subscriptionExpiresIn`, `formatSubscriptionExpiry`, `PLAN_LABELS` (include prețuri)
 - **Gate lecții copii:** `layout.tsx` blochează accesul dacă contul parent nu are subscripție activă (după verificarea de aprobare)
-- **Gate lecții elevi din clase:** pagina lecției verifică subscripția profesorului — elevi moștenesc accesul cadrului didactic
+- **Gate lecții membri din grupuri:** pagina lecției verifică subscripția profesorului — elevi moștenesc accesul cadrului didactic
 - **Pagina de curs copil:** banner indigo "Abonament necesar" + pictograme lacăt indigo pe lecții (vs amber pentru cont neaprobat)
 - **Oprire self-service:** buton "Oprește abonamentul" în bannerul "Abonament activ" din dashboard; confirmare inline, dezactivare imediată, email notificare admin (`lib/actions/subscription.ts` + `components/dashboard/cancel-subscription-button.tsx`)
 - Acces admin: bypass complet (ADMIN_EMAILS)
@@ -236,9 +236,9 @@
 - Email diplomă la finalizare curs
 - Raport săptămânal progres copii (cron luni 08:00 UTC)
 - Formular contact → livrat la ADMIN_EMAIL
-- Notificare admin la înregistrare cont nou cadru didactic (`notifyAdminNewTeacher`)
-- Email aprobare cont cadru didactic (trimis din `approveUser()` Server Action)
-- **Email bun venit la confirmare email** (`sendWelcomeEmail`) — trimis din auth/callback doar la primul cont (isNew flag); include notă specială pentru cadre didactice care așteaptă aprobare
+- Notificare admin la înregistrare cont nou formator (`notifyAdminNewTeacher`)
+- Email aprobare cont formator (trimis din `approveUser()` Server Action)
+- **Email bun venit la confirmare email** (`sendWelcomeEmail`) — trimis din auth/callback doar la primul cont (isNew flag); include notă specială pentru formatori care așteaptă aprobare
 - **Email notificare anulare abonament** — trimis adminului când utilizatorul folosește butonul "Oprește abonamentul"
 
 ### SEO
@@ -247,10 +247,10 @@
 - OpenGraph metadata în `app/layout.tsx` — url, og:image (/og-image.png, 1200×630)
 
 ### Import CSV elevi (WP20 — COMPLET 2026-06-15)
-- `POST /api/dashboard/classes/[id]/import-students` — parser CSV propriu, detecție automată header, max 100 elevi/import
+- `POST /api/dashboard/grupuri/[id]/import-students` — parser CSV propriu, detecție automată header, max 100 elevi/import
 - Generare cod elev unic + PIN hashed identic cu adăugarea individuală
 - `ImportStudentsButton` — client component: upload CSV/TXT, link "Descarcă template", rezultate cu PINuri în clar (o singură dată), `router.refresh()` la închidere
-- Integrat în tab Elevi din `/dashboard/classes/[id]` ca secțiune "Import în masă din CSV"
+- Integrat în tab Membri din `/dashboard/grupuri/[id]` ca secțiune "Import în masă din CSV"
 
 ### Căutare globală conținut cursuri (WP21 — COMPLET 2026-06-15)
 - `getPublishedCourseLessonTitles()` în `lib/db/courses.ts` — index `courseId → [titluri module + lecții]`, cached cu tag `courses`
@@ -260,19 +260,19 @@
 
 ### Distribuire certificat social media (WP22 — COMPLET 2026-06-15)
 - `ShareButtons` — client component: WhatsApp, Facebook, Copiază link (clipboard API cu fallback `execCommand`, feedback "Copiat!" 2s)
-- Mesaj pre-completat: `"{Nume} a absolvit cursul "{Titlu}" pe Ami & Moti! 🎓🌟"`
-- Integrat în bara de navigare (`.no-print`) pe ambele pagini de diplomă: `/child/[id]/certificate/[certId]` și `/clasa/.../certificate/[certId]`
+- Mesaj pre-completat: `"{Nume} a absolvit cursul "{Titlu}" pe Academia Politica AUR! 🎓🌟"`
+- Integrat în bara de navigare (`.no-print`) pe ambele pagini de diplomă: `/cursant/[id]/certificate/[certId]` și `/grup/.../certificate/[certId]`
 - Pe mobil: doar iconițe; pe desktop: iconițe + text
 
 ### UI/UX
-- Header sticky cu nav: Despre platformă, Cursuri, Cadre didactice, Intră în clasă, Copii, Admin, Ajutor
-- "Copii" ascuns pentru cadre didactice (isTeacher din accountType)
+- Header sticky cu nav: Despre platformă, Cursuri, Formatori, Intră în grup, Copii, Admin, Ajutor
+- "Copii" ascuns pentru formatori (isTeacher din accountType)
 - accountType cu fallback user_metadata (funcționează fără re-login)
 - Chat widget FAQ client-side (zero API) cu linkuri la /help
 - Pagina /help cu 6 secțiuni acordeon + contact
-- Home page: 4 carduri grupate ELEVI (0-4, 5-8) + PROFESORI (Învățător, Profesor Gimnaziu)
+- Home page: 4 carduri grupate ELEVI (0-4, 5-8) + PROFESORI (Formator, Profesor Gimnaziu)
 - **Cookie consent banner** GDPR — `components/common/cookie-consent.tsx`, localStorage, persistent dismiss
-- **AmiMotiGuide cu Moti** pe 11 pagini cheie: home, /preturi, /help, /cadre-didactice, /child/[id], /dashboard/progress/[id], /register, /login, /despre, /webinars, /instaleaza — toate cu `variant="moti"`
+- **AcademiaGuide cu Moti** pe 11 pagini cheie: home, /preturi, /help, /formatori, /cursant/[id], /dashboard/progress/[id], /register, /login, /despre, /webinars, /instaleaza — toate cu `variant="moti"`
 - **PWA (Progressive Web App)** — manifest.json (standalone, teal theme), sw.js (cache-first assets, network-first pagini, fallback `/offline.html`), pwa-register.tsx (banner install + beforeinstallprompt), offline.html (cu Moti); link "Instalează app" în footer + meniu mobil; pagina /instaleaza cu instrucțiuni Android/iOS/desktop
 - **Loading skeletons** — /admin/parents/loading.tsx, /admin/courses/loading.tsx
 - **Paginare admin** — /admin/parents, /admin/children, /admin/teachers: 25/pagină, range Supabase + count exact
@@ -285,8 +285,8 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 NEXT_PUBLIC_APP_URL=
 RESEND_API_KEY=
-EMAIL_FROM=Ami & Moti <noreply@domeniu-verificat.ro>
-NEXT_PUBLIC_SITE_URL=https://ami-moti.everydai.ro
+EMAIL_FROM=Academia Politica AUR <noreply@domeniu-verificat.ro>
+NEXT_PUBLIC_SITE_URL=https://academia-aur.ro
 ADMIN_EMAIL=email-admin@domeniu.com
 ADMIN_EMAILS=email-admin@domeniu.com
 GROQ_API_KEY=                        # import curriculum AI
@@ -303,9 +303,9 @@ NEXT_PUBLIC_GOOGLE_DRIVE_API_KEY=    # Google Picker (client-safe)
 - `002_demo_data.sql` — date demo cursuri
 - `003_extend_schema.sql` — aprobare conturi, câmpuri noi courses/lessons, audience
 - `004_webinars_paths.sql` — webinars, learning_paths, learning_path_courses, webinar_registrations
-- `005_teacher_audience.sql` — constraint audience extins cu invatator/profesor
+- `005_teacher_audience.sql` — constraint audience extins cu formator/profesor
 - `006_classes.sql` — tabele clase: classes, class_students, class_courses, class_student_progress + RLS
-- `007_class_certificates.sql` — class_student_certificates (diplome pentru elevi din clase)
+- `007_class_certificates.sql` — class_student_certificates (diplome pentru membri din grupuri)
 - `009_google_drive.sql` — drive_folder_id pe courses/modules/lessons; tabel admin_settings ✓ APLICAT
 - `010_subscriptions.sql` — subscription_plan, subscription_expires_at, subscription_activated_by pe parent_profiles ✓ APLICAT
 - `011_soft_delete.sql` — deleted_at pe courses/modules/lessons + indexuri parțiale ✓ APLICAT
@@ -383,8 +383,8 @@ export async function deleteLesson(lessonId: string): Promise<{ error?: string }
 - `__tests__/badges.test.ts` — 10 teste computeBadges (9 insigne)
 - `__tests__/schemas.test.ts` — 17 teste Zod schemas
 - `__tests__/admin-delete.test.ts` — 8 teste Server Actions cu mock Supabase (vi.hoisted pattern)
-- `__tests__/clasa-verify-pin.test.ts` — 8 teste POST /api/clasa/verify-pin
-- `__tests__/clasa-progress.test.ts` — 6 teste POST /api/clasa/progress
+- `__tests__/clasa-verify-pin.test.ts` — 8 teste POST /api/grup/verify-pin
+- `__tests__/clasa-progress.test.ts` — 6 teste POST /api/grup/progress
 - **Total: 69 teste, 6 fișiere, ~350ms**
 - CI: `.github/workflows/test.yml` — rulare automată la push/PR pe `main`
 - Rulare: `npm run test` (one-shot) sau `npm run test:watch` (watch mode)

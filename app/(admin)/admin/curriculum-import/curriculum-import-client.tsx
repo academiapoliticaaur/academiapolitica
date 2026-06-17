@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef } from "react";
 import { Upload, Loader2, CheckCircle, ChevronDown, ChevronRight, Clock } from "lucide-react";
@@ -48,8 +48,8 @@ const AGE_GROUPS = [
 
 const AUDIENCE_OPTIONS = [
   { value: "children", label: "🧒 Copii / Elevi", desc: "Apare la Cursuri" },
-  { value: "invatator", label: "🌈 Învățători (cls. 0–4)", desc: "Apare la Resurse Cadre Didactice" },
-  { value: "profesor", label: "🚀 Profesori gimnaziu (cls. 5–8)", desc: "Apare la Resurse Cadre Didactice" },
+  { value: "formator", label: "🌈 Formatori (cls. 0–4)", desc: "Apare la Resurse Cadre Didactice" },
+  { value: "lector", label: "🚀 Profesori gimnaziu (cls. 5–8)", desc: "Apare la Resurse Cadre Didactice" },
 ];
 
 export function CurriculumImportClient() {
@@ -97,7 +97,7 @@ export function CurriculumImportClient() {
     setQuizzesDetected(data.quizzesDetected ?? 0);
 
     const detectedAudience = data.curriculum.audience ?? "children";
-    setSelectedAudience(["children", "invatator", "profesor"].includes(detectedAudience) ? detectedAudience : "children");
+    setSelectedAudience(["children", "formator", "lector"].includes(detectedAudience) ? detectedAudience : "children");
 
     const rawAge: string = data.curriculum.age_group ?? "";
     const normalizedAge: "0-4" | "5-8" =

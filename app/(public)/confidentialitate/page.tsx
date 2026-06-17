@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Politica de confidențialitate — Ami & Moti",
-  description: "Politica de prelucrare a datelor cu caracter personal a platformei educaționale Ami & Moti, conform GDPR.",
+  title: "Politica de confidențialitate — Academia Politica AUR",
+  description: "Politica de prelucrare a datelor cu caracter personal a platformei educaționale Academia Politica AUR, conform GDPR.",
 };
 
 export default function ConfidentialitatePage() {
@@ -46,8 +46,8 @@ export default function ConfidentialitatePage() {
           </p>
           <ul className="list-disc list-inside text-gray-700 space-y-1 ml-4 text-sm">
             <li><strong>Părinți / tutori legali</strong> — titularii conturilor de familie</li>
-            <li><strong>Cadre didactice</strong> — învățători (clasele 0–4) și profesori (clasele 5–8) cu cont aprobat</li>
-            <li><strong>Copii / elevi</strong> — ale căror profiluri sunt create și administrate de părinți/tutori sau cadre didactice</li>
+            <li><strong>Formatori</strong> — învățători (clasele 0–4) și profesori (clasele 5–8) cu cont aprobat</li>
+            <li><strong>Copii / elevi</strong> — ale căror profiluri sunt create și administrate de părinți/tutori sau formatori</li>
             <li><strong>Administratori</strong> — persoane autorizate să administreze platforma</li>
             <li><strong>Vizitatori ai site-ului</strong> — persoane care accesează paginile publice fără cont</li>
           </ul>
@@ -57,12 +57,12 @@ export default function ConfidentialitatePage() {
           <h2 className="text-xl font-bold mb-3">3. Ce date colectăm</h2>
           <div className="space-y-4">
             <div>
-              <p className="font-semibold text-gray-800 mb-2">Date privind titularul contului adult (părinte / cadru didactic)</p>
+              <p className="font-semibold text-gray-800 mb-2">Date privind titularul contului adult (părinte / formator)</p>
               <ul className="list-disc list-inside text-gray-700 space-y-1 ml-4 text-sm">
                 <li>Nume complet</li>
                 <li>Adresă de email</li>
                 <li>Parola (stocată criptat — hash bcrypt, nu avem acces la parola în clar)</li>
-                <li>Tipul de cont (Părinte, Învățător, Profesor)</li>
+                <li>Tipul de cont (Părinte, Formator, Profesor)</li>
                 <li>Data creării contului</li>
                 <li>Preferința privind emailurile (raport săptămânal activ/inactiv)</li>
               </ul>
@@ -136,7 +136,7 @@ export default function ConfidentialitatePage() {
             ))}
           </div>
           <p className="text-xs text-amber-700 mt-3 italic">
-            [DE COMPLETAT] Temeiul exact pentru utilizarea instituțională de către școli/cadre didactice trebuie stabilit și documentat separat. Necesită validare finală avocat/DPO.
+            [DE COMPLETAT] Temeiul exact pentru utilizarea instituțională de către școli/formatori trebuie stabilit și documentat separat. Necesită validare finală avocat/DPO.
           </p>
         </section>
 
@@ -155,7 +155,7 @@ export default function ConfidentialitatePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold mb-3">6. Cadre didactice și funcționalitatea de clasă</h2>
+          <h2 className="text-xl font-bold mb-3">6. Formatori și funcționalitatea de clasă</h2>
           <p className="text-gray-700 leading-relaxed">
             În cazul utilizării funcției de clasă, cadrul didactic trebuie să introducă numai date minime necesare
             scopului educațional. Se recomandă utilizarea prenumelui, inițialelor, pseudonimului sau unui cod intern
@@ -289,7 +289,7 @@ export default function ConfidentialitatePage() {
           <div className="space-y-2 text-sm text-gray-700">
             {[
               { categorie: "Date cont adult", retentie: "Pe durata existenței contului + 30 zile după ștergere (backup)" },
-              { categorie: "Date profil copil", retentie: "Pe durata existenței contului de părinte" },
+              { categorie: "Date profil cursant", retentie: "Pe durata existenței contului de părinte" },
               { categorie: "Progres lecții și certificate", retentie: "Pe durata existenței profilului copilului" },
               { categorie: "Date elevi clasă", retentie: "Pe durata existenței clasei + 30 zile după arhivare" },
               { categorie: "Loguri tehnice Sentry", retentie: "90 zile" },

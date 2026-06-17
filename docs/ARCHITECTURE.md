@@ -1,4 +1,4 @@
-# Schema Arhitecturală — Ami & Moti Educational Platform
+﻿# Schema Arhitecturală — Academia Politica AUR Educational Platform
 > MVP v1.0 | Bază pentru proiectul AILiteracy
 > Ultima actualizare: 2026-05-22
 
@@ -80,7 +80,7 @@ app/
 │   ├── help/              # Centru de ajutor + FAQ
 │   ├── paths/             # Trasee de instruire
 │   ├── webinars/          # Webinarii
-│   └── clasa/             # Acces elevi fără cont (cod clasă)
+│   └── clasa/             # Acces elevi fără cont (cod grup)
 │
 ├── (auth)/                # Pagini autentificare
 │   ├── login/
@@ -88,20 +88,20 @@ app/
 │   └── auth/callback/     # PKCE exchange
 │
 ├── (dashboard)/           # Guard: user autentificat
-│   ├── dashboard/         # Profiluri copii, XP
-│   ├── dashboard/classes/ # Gestionare clase (profesori)
+│   ├── dashboard/         # Profiluri cursanți, XP
+│   ├── dashboard/grupuri/ # Gestionare clase (profesori)
 │   └── dashboard/profile/ # Setări cont
 │
 ├── (child)/               # Guard: parent session SAU child_session cookie
-│   └── child/[profileId]/ # Zona copilului: cursuri, lecții, certificate
+│   └── child/[profileId]/ # Zona cursantului: cursuri, lecții, certificate
 │
 └── (admin)/               # Guard: ADMIN_EMAILS + MFA TOTP
     └── admin/             # Panel complet admin
         ├── courses/       # CRUD cursuri cu filtre/sortare
         ├── parents/       # Gestionare conturi family
-        ├── teachers/      # Gestionare conturi invatator/profesor
+        ├── teachers/      # Gestionare conturi formator/profesor
         ├── classes/       # Vizualizare clase
-        ├── approvals/     # Aprobare cadre didactice
+        ├── approvals/     # Aprobare formatori
         ├── curriculum-import/ # Import AI
         ├── settings/      # Setări platformă (Google Drive)
         └── ...
@@ -245,7 +245,7 @@ import { createClient } from "@/lib/supabase/client";
 | `004_webinars_paths.sql` | Tabele webinars, learning_paths |
 | `005_teacher_audience.sql` | Constraint audience extins |
 | `006_classes.sql` | Sistem clase (4 tabele + RLS) |
-| `007_class_certificates.sql` | Diplome elevi din clase |
+| `007_class_certificates.sql` | Diplome membri din grupuri |
 | `009_google_drive.sql` | drive_folder_id + admin_settings |
 
 ---
@@ -259,29 +259,29 @@ import { createClient } from "@/lib/supabase/client";
 → ensureParentProfile() → /dashboard
 ```
 
-### 6.2 Flux Cadru Didactic (invatator/profesor)
+### 6.2 Flux Cadru Didactic (formator/profesor)
 ```
 /register → selectează tip → Supabase signup
 → email confirmare → /auth/callback
-→ ensureParentProfile(account_type=invatator|profesor)
+→ ensureParentProfile(account_type=formator|profesor)
 → /dashboard cu banner "Cont în așteptare"
                          │
 Admin → /admin/approvals → aprobă → approved=true
                          │
-→ Cadrul didactic se reconectează → acces /cadre-didactice
+→ Cadrul didactic se reconectează → acces /formatori
 ```
 
 ### 6.3 Flux Copil (fără cont)
 ```
-Parent → /dashboard → click profil copil
-→ dacă PIN activ → /child/[profileId]/pin → validare PIN
-→ /child/[profileId] (child_session cookie setat)
+Parent → /dashboard → click profil cursant
+→ dacă PIN activ → /cursant/[profileId]/pin → validare PIN
+→ /cursant/[profileId] (child_session cookie setat)
 ```
 
 ### 6.4 Flux Elev din Clasă (auth-free)
 ```
-/clasa → introduce cod clasă → /clasa/[code]
-→ selectează numele → /clasa/[code]/[studentCode]
+/clasa → introduce cod grup → /grup/[code]
+→ selectează numele → /grup/[code]/[studentCode]
 → cursurile clasei (createAdminClient, fără Supabase Auth)
 → progres salvat în class_student_progress
 ```
@@ -309,7 +309,7 @@ Lesson Editor (/admin/courses/.../lessons/...)
       │
       │  Salvat în DB: video_url, presentation_url, worksheet_url
       ▼
-Player lecție (/child/[profileId]/course/.../lesson/...)
+Player lecție (/cursant/[profileId]/course/.../lesson/...)
       │
       ├── video_url → <VideoEmbed> → YouTube iframe SAU Google Drive preview
       ├── presentation_url → <PresentationViewer> → Google Slides embed / Drive PDF
@@ -390,8 +390,8 @@ export async function myAdminAction(id: string): Promise<{ error?: string } | vo
 ### Audience pe cursuri
 ```
 audience = "children"  → apare DOAR pe /courses (pentru elevi)
-audience = "invatator" → apare DOAR pe /cadre-didactice (invatatori aprobati)
-audience = "profesor"  → apare DOAR pe /cadre-didactice (profesori aprobati)
+audience = "formator" → apare DOAR pe /formatori (formatori aprobati)
+audience = "lector"  → apare DOAR pe /formatori (profesori aprobati)
 audience = "all"       → apare pe /courses (tratată ca "children")
 ```
 
@@ -445,7 +445,7 @@ Developer → git push main
          └── deploy pe edge network Vercel
                 │
                 ▼
-    https://ami-moti.everydai.ro
+    https://academia-aur.ro
     (custom domain, HTTPS automat)
 ```
 

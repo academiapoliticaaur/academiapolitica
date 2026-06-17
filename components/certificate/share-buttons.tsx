@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Link2, Check } from "lucide-react";
@@ -24,7 +24,7 @@ const FACEBOOK_ICON = (
 export function ShareButtons({ shareUrl, courseTitle, childName }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
 
-  const shareText = `${childName} a absolvit cursul "${courseTitle}" pe platforma educațională Ami & Moti! 🎓🌟`;
+  const shareText = `${childName} a absolvit cursul "${courseTitle}" pe platforma educațională Academia Politica AUR! 🎓🌟`;
 
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText + "\n" + shareUrl)}`;
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;

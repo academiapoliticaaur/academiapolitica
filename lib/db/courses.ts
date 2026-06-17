@@ -1,4 +1,4 @@
-import { unstable_cache } from "next/cache";
+﻿import { unstable_cache } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { Course, Module, Lesson } from "@/types";
@@ -10,7 +10,7 @@ export const getPublishedCourses = unstable_cache(
   async (ageGroup?: "0-4" | "5-8") => {
     const supabase = createAdminClient();
 
-    // Pagina /courses arată DOAR cursuri pentru copii (nu resurse cadre didactice)
+    // Pagina /courses arată DOAR cursuri pentru copii (nu resurse formatori)
     let query = supabase
       .from("courses")
       .select("*")

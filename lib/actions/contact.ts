@@ -1,4 +1,4 @@
-"use server";
+﻿"use server";
 
 import { Resend } from "resend";
 
@@ -29,10 +29,10 @@ export async function sendContactEmail(formData: FormData): Promise<ContactResul
   const adminEmail = process.env.ADMIN_EMAIL || "mpandilica@yahoo.com";
 
   const { error } = await resend.emails.send({
-    from: process.env.EMAIL_FROM || "Ami & Moti <noreply@everydai.ro>",
+    from: process.env.EMAIL_FROM || "Academia Politica AUR <noreply@academia-aur.ro>",
     to: adminEmail,
     replyTo: email,
-    subject: `Mesaj nou de la ${name} — suport@amisimoti.ro`,
+    subject: `Mesaj nou de la ${name} — suport@academia-aur.ro`,
     html: `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #3b82f6;">Mesaj nou prin formularul de contact</h2>
@@ -50,7 +50,7 @@ export async function sendContactEmail(formData: FormData): Promise<ContactResul
           <p style="margin: 0; white-space: pre-wrap;">${message}</p>
         </div>
         <p style="color: #9ca3af; font-size: 12px; margin-top: 24px;">
-          Mesaj primit prin suport@amisimoti.ro — platforma Ami &amp; Moti
+          Mesaj primit prin suport@academia-aur.ro — platforma Ami &amp; Moti
         </p>
       </div>
     `,

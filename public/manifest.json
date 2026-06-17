@@ -1,15 +1,15 @@
 {
-  "name": "Ami & Moti — Platformă Educațională",
-  "short_name": "Ami & Moti",
-  "description": "Cursuri, lecții și activități interactive pentru copiii din clasele 0–8.",
+  "name": "Academia Politica AUR",
+  "short_name": "Academia AUR",
+  "description": "Platformă de formare politică și educație civică a Alianței pentru Unirea Românilor.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#ffffff",
-  "theme_color": "#0d9488",
+  "theme_color": "#b8860b",
   "lang": "ro",
-  "categories": ["education", "kids"],
+  "categories": ["education", "politics"],
   "icons": [
     {
       "src": "/apple-touch-icon.png",
@@ -44,9 +44,9 @@
       "description": "Explorează cursurile disponibile"
     },
     {
-      "name": "Intră în clasă",
-      "url": "/clasa",
-      "description": "Accesează clasa ca elev"
+      "name": "Intră în grup",
+      "url": "/grup",
+      "description": "Accesează grupul ca membru"
     }
   ]
 }

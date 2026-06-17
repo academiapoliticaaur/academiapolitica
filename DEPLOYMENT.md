@@ -1,4 +1,4 @@
-# DEPLOYMENT.md — Publicare pe Vercel
+﻿# DEPLOYMENT.md — Publicare pe Vercel
 
 ## Cerințe preliminare
 
@@ -10,8 +10,8 @@
 
 ```bash
 git add .
-git commit -m "Initial commit - Ami & Moti Platform MVP"
-git remote add origin https://github.com/username/ami-moti-edu-platform.git
+git commit -m "Initial commit - Academia Politica AUR Platform MVP"
+git remote add origin https://github.com/username/academia-politica-aur.git
 git push -u origin main
 ```
 
@@ -19,7 +19,7 @@ git push -u origin main
 
 1. Mergi la [vercel.com/new](https://vercel.com/new)
 2. Conectează-te cu GitHub
-3. Selectează repository-ul `ami-moti-edu-platform`
+3. Selectează repository-ul `academia-politica-aur`
 4. Apasă **Import**
 
 ## Pasul 3: Configurează variabilele de mediu
@@ -31,7 +31,7 @@ git push -u origin main
 | `NEXT_PUBLIC_SUPABASE_URL` | URL-ul proiectului Supabase |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Cheia anon din Supabase |
 | `SUPABASE_SERVICE_ROLE_KEY` | Cheia service role (secretă!) |
-| `NEXT_PUBLIC_APP_URL` | URL-ul Vercel (ex: `https://ami-moti.vercel.app`) |
+| `NEXT_PUBLIC_APP_URL` | URL-ul Vercel (ex: `https://academia-aur.vercel.app`) |
 | `ADMIN_EMAILS` | emailul tău de admin (ex: `admin@email.com`) |
 
 ## Pasul 4: Deploy
@@ -42,7 +42,7 @@ Apasă **Deploy** și așteaptă 1-3 minute.
 
 1. Supabase Dashboard → **Authentication → Settings**
 2. **Site URL**: înlocuiește `http://localhost:3000` cu URL-ul Vercel
-3. **Redirect URLs**: adaugă `https://ami-moti.vercel.app/**`
+3. **Redirect URLs**: adaugă `https://academia-aur.vercel.app/**`
 
 ## Actualizări viitoare
 
@@ -68,7 +68,7 @@ Vercel creează automat preview-uri pentru Pull Requests. Util pentru testare î
 
 | Variabilă | Development | Producție |
 |-----------|-------------|-----------|
-| `NEXT_PUBLIC_APP_URL` | `http://localhost:3000` | `https://ami-moti.vercel.app` |
+| `NEXT_PUBLIC_APP_URL` | `http://localhost:3000` | `https://academia-aur.vercel.app` |
 | Altele | Identice | Identice (same Supabase project) |
 
 > ⚠️ Poți folosi un proiect Supabase separat pentru producție vs. dev pentru siguranță maximă.

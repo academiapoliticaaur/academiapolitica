@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -18,7 +18,7 @@ export async function POST() {
     .single();
 
   // Activăm trial doar pentru conturi family noi, fără plan existent
-  if (profile?.account_type !== "family" || profile?.subscription_plan) {
+  if (profile?.account_type !== "member" || profile?.subscription_plan) {
     return NextResponse.json({ activated: false });
   }
 

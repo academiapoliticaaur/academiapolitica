@@ -1,4 +1,4 @@
-import { createAdminClient } from "@/lib/supabase/admin";
+﻿import { createAdminClient } from "@/lib/supabase/admin";
 import { ApprovalsWithBulk, type AccountPendingRow, type SubRequestRow } from "@/components/admin/approvals-bulk";
 import type { Metadata } from "next";
 
@@ -46,7 +46,7 @@ export default async function ApprovalsPage() {
         created_at: r.created_at,
         email: authUser?.user?.email ?? "—",
         full_name: profile?.full_name ?? "—",
-        account_type: profile?.account_type ?? "family",
+        account_type: profile?.account_type ?? "member",
       };
     })
   );

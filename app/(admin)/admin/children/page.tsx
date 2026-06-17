@@ -1,4 +1,4 @@
-import { createAdminClient } from "@/lib/supabase/admin";
+﻿import { createAdminClient } from "@/lib/supabase/admin";
 import { deleteChild } from "@/lib/admin/actions";
 import { DeleteButton } from "@/components/admin/delete-button";
 import { Pagination } from "@/components/admin/pagination";
@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Profiluri copii" };
+export const metadata: Metadata = { title: "Profiluri cursanți" };
 
 const PAGE_SIZE = 25;
 
@@ -47,7 +47,7 @@ export default async function AdminChildrenPage({ searchParams }: PageProps) {
         <Link href="/admin"><ArrowLeft size={16} />Dashboard</Link>
       </Button>
       <h1 className="text-2xl font-bold mb-6">
-        Profiluri copii{count != null ? ` (${count})` : ""}
+        Profiluri cursanți{count != null ? ` (${count})` : ""}
       </h1>
 
       {children && children.length > 0 ? (

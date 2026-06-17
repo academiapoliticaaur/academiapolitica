@@ -1,11 +1,11 @@
-# SETUP.md — Configurare Supabase și mediu local
+﻿# SETUP.md — Configurare Supabase și mediu local
 
 ## Pasul 1: Creează proiect Supabase
 
 1. Mergi la [supabase.com](https://supabase.com) și autentifică-te
 2. Apasă **New Project**
 3. Completează:
-   - **Name**: ami-moti-edu-platform
+   - **Name**: academia-politica-aur
    - **Database Password**: alege o parolă puternică (o vei folosi mai târziu)
    - **Region**: alege Europe (Frankfurt sau altul apropiat)
 4. Apasă **Create new project** și așteaptă 1-2 minute

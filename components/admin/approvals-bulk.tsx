@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useTransition } from "react";
 import { CheckCircle, XCircle, Clock, CreditCard, CheckSquare, Square } from "lucide-react";
@@ -167,7 +167,7 @@ export function ApprovalsWithBulk({
                     <td className="px-5 py-4 text-gray-500">{a.email}</td>
                     <td className="px-5 py-4">
                       <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-medium">
-                        {a.account_type ?? "family"}
+                        {a.account_type ?? "member"}
                       </span>
                     </td>
                     <td className="px-5 py-4 text-gray-400 text-xs">

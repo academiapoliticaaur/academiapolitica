@@ -1,5 +1,5 @@
 {
-  "name": "ami-moti-edu-platform",
+  "name": "academia-politica-aur",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
     "test:watch": "vitest",
     "lint": "eslint",
     "clean:cache": "node -e \"const fs=require('fs');const p='.next/dev/cache';if(fs.existsSync(p)){fs.rmSync(p,{recursive:true});console.log('Cache sters.');}else{console.log('Nimic de sters.');}\"",
-    "postinstall": "git config core.hooksPath .githooks 2>/dev/null || true",
+    "postinstall": "git config core.hooksPath .githooks || exit 0",
     "notebooklm": "node scripts/generate-notebooklm-tasks.mjs",
     "notebooklm:status": "node scripts/generate-notebooklm-tasks.mjs --status",
     "notebooklm:reset": "node scripts/generate-notebooklm-tasks.mjs --reset"

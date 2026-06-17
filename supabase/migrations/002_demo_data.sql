@@ -1,5 +1,5 @@
--- ============================================================
--- DATE DEMO — Platforma Ami & Moti
+﻿-- ============================================================
+-- DATE DEMO — Platforma Academia Politica AUR
 -- ATENȚIE: Rulează DUPĂ 001_initial_schema.sql
 -- ============================================================
 
@@ -11,7 +11,7 @@ values (
   'a1b2c3d4-0000-0000-0000-000000000001',
   'Atelierul de zâmbete',
   'atelierul-de-zambete',
-  'Un curs prietenos despre emoții, comunicare și încredere în sine. Alături de Ami și Moti, copiii vor învăța să recunoască emoțiile, să le exprime și să se simtă bine în propria piele.',
+  'Un curs prietenos despre emoții, comunicare și încredere în sine. Alături de Academia Politica AUR, copiii vor învăța să recunoască emoțiile, să le exprime și să se simtă bine în propria piele.',
   '0-4',
   'published',
   120,

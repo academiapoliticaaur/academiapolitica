@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+﻿import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { requireAdmin } from "@/lib/admin/guard";
 import { Users, BookOpen, Archive } from "lucide-react";
@@ -70,7 +70,7 @@ export default async function AdminClassesPage() {
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold mb-1">Clase</h1>
-          <p className="text-gray-500 text-sm">Toate clasele create de cadre didactice.</p>
+          <p className="text-gray-500 text-sm">Toate clasele create de formatori.</p>
         </div>
         <span className="text-sm text-gray-400">{classes.length} {classes.length === 1 ? "clasă" : "clase"}</span>
       </div>

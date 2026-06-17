@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Termeni și condiții — Ami & Moti",
-  description: "Termenii și condițiile de utilizare ale platformei educaționale Ami & Moti.",
+  title: "Termeni și condiții — Academia Politica AUR",
+  description: "Termenii și condițiile de utilizare ale platformei educaționale Academia Politica AUR.",
 };
 
 export default function TermeniPage() {
@@ -25,7 +25,7 @@ export default function TermeniPage() {
         <section>
           <h2 className="text-xl font-bold mb-3">1. Operatorul platformei</h2>
           <p className="text-gray-700 leading-relaxed">
-            Platforma <strong>Ami &amp; Moti</strong> (accesibilă la <strong>ami-moti.everydai.ro</strong>) este operată de{" "}
+            Platforma <strong>Ami &amp; Moti</strong> (accesibilă la <strong>academia-aur.ro</strong>) este operată de{" "}
             <strong>[DENUMIRE JURIDICĂ COMPLETĂ]</strong>, persoană juridică română, cu sediul social în{" "}
             <strong>[ADRESĂ COMPLETĂ]</strong>, înregistrată cu CUI <strong>[CUI]</strong>,
             reprezentată legal de <strong>[REPREZENTANT LEGAL]</strong> (denumit în continuare „Operatorul").
@@ -62,9 +62,9 @@ export default function TermeniPage() {
               </p>
             </div>
             <div className="p-4 bg-gray-50 rounded-xl">
-              <p className="font-semibold text-gray-800">Cont Cadru Didactic (Învățător / Profesor)</p>
+              <p className="font-semibold text-gray-800">Cont Cadru Didactic (Formator / Profesor)</p>
               <p className="text-sm text-gray-600 mt-1">
-                Creat de un cadru didactic activ din România. Contul necesită aprobare din partea administratorului
+                Creat de un formator activ din România. Contul necesită aprobare din partea administratorului
                 platformei. Cadrele didactice se angajează să utilizeze platforma exclusiv în scop educațional
                 și să respecte normele deontologice profesionale.
               </p>
@@ -163,7 +163,7 @@ export default function TermeniPage() {
           <h2 className="text-xl font-bold mb-3">9. Proprietate intelectuală</h2>
           <p className="text-gray-700 leading-relaxed">
             Toate drepturile de proprietate intelectuală asupra platformei, designului, codului sursă, conținutului
-            educațional, personajelor Ami și Moti și materialelor auxiliare aparțin Operatorului sau licențiatorilor
+            educațional, personajelor Academia Politica AUR și materialelor auxiliare aparțin Operatorului sau licențiatorilor
             săi. Este interzisă orice utilizare neautorizată.
           </p>
         </section>

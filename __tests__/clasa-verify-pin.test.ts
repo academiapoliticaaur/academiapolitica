@@ -1,18 +1,18 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+﻿import { describe, it, expect, vi, beforeEach } from "vitest";
 import { createHash } from "crypto";
 import type { NextRequest } from "next/server";
 
 function hashPin(pin: string): string {
-  return createHash("sha256").update(`ami-moti-elev:${pin}`).digest("hex");
+  return createHash("sha256").update(`academia-aur-elev:${pin}`).digest("hex");
 }
 
 const { mockFrom } = vi.hoisted(() => ({ mockFrom: vi.fn() }));
 vi.mock("@/lib/supabase/admin", () => ({ createAdminClient: () => ({ from: mockFrom }) }));
 
-import { POST } from "@/app/api/clasa/verify-pin/route";
+import { POST } from "@/app/api/grup/verify-pin/route";
 
 function makeReq(body: object): NextRequest {
-  return new Request("http://localhost/api/clasa/verify-pin", {
+  return new Request("http://localhost/api/grup/verify-pin", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -33,7 +33,7 @@ function chain(data: unknown) {
 
 beforeEach(() => vi.clearAllMocks());
 
-describe("POST /api/clasa/verify-pin", () => {
+describe("POST /api/grup/verify-pin", () => {
   it("returnează 400 la câmpuri lipsă", async () => {
     const res = await POST(makeReq({ classCode: "ABC1" }));
     expect(res.status).toBe(400);

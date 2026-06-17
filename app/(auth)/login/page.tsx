@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useTransition, Suspense } from "react";
 import Link from "next/link";
@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/client";
 import { loginSchema, type LoginFormData } from "@/lib/validation/schemas";
-import { AmiMotiGuide } from "@/components/common/ami-moti-guide";
+import { AcademiaGuide } from "@/components/common/academia-guide";
 
 function ConfirmErrorBanner() {
   const searchParams = useSearchParams();
@@ -62,8 +62,8 @@ export default function LoginPage() {
 
   return (
     <div className="w-full max-w-md space-y-4">
-      <AmiMotiGuide
-        variant="moti"
+      <AcademiaGuide
+        variant="tip"
         message="Eu, Moti, te ghidez! Intră în cont ca să explorezi lecțiile și să urmărești progresul copilului tău."
       />
       <Card className="w-full max-w-md shadow-lg">

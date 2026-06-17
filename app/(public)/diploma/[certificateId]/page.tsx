@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+﻿import { notFound } from "next/navigation";
 import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { PrintButton } from "@/components/certificate/print-button";
@@ -13,13 +13,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { certificateId } = await params;
   const db = createAdminClient();
   const { data: cert } = await db.from("certificates").select("child_name, course_title").eq("id", certificateId).single();
-  if (!cert) return { title: "Diplomă — Ami & Moti" };
+  if (!cert) return { title: "Diplomă — Academia Politica AUR" };
   return {
-    title: `Diplomă — ${cert.child_name} | Ami & Moti`,
-    description: `${cert.child_name} a absolvit cursul "${cert.course_title}" pe platforma educațională Ami & Moti.`,
+    title: `Diplomă — ${cert.child_name} | Academia Politica AUR`,
+    description: `${cert.child_name} a absolvit cursul "${cert.course_title}" pe platforma educațională Academia Politica AUR.`,
     openGraph: {
       title: `🎓 ${cert.child_name} a absolvit "${cert.course_title}"`,
-      description: "Platformă educațională românească pentru copii — Ami & Moti",
+      description: "Platformă educațională românească pentru copii — Academia Politica AUR",
     },
   };
 }
@@ -176,7 +176,7 @@ export default async function PublicDiplomaPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Promo Ami & Moti pentru vizitatori */}
+      {/* Promo Academia Politica AUR pentru vizitatori */}
       <div className="no-print max-w-lg mx-auto px-4 pb-16 text-center">
         <p className="text-gray-500 text-sm mb-3">Vrei și copilul tău să obțină diplome ca aceasta?</p>
         <Link

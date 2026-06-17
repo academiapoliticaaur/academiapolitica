@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef, useEffect, useMemo } from "react";
 import { Upload, Loader2, CheckCircle, FileText, X, BookOpen, Search } from "lucide-react";
@@ -46,8 +46,8 @@ const AGE_GROUP_OPTIONS = [
 
 const AUDIENCE_OPTIONS = [
   { value: "children",  label: "Copii / Elevi" },
-  { value: "invatator", label: "Invatatori (cls. 0–4)" },
-  { value: "profesor",  label: "Profesori (cls. 5–8)" },
+  { value: "formator", label: "Formatori (cls. 0–4)" },
+  { value: "lector",  label: "Profesori (cls. 5–8)" },
   { value: "all",       label: "Toate publicurile" },
 ];
 

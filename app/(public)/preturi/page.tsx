@@ -1,12 +1,12 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { CheckCircle2, Star, Sparkles, Clock } from "lucide-react";
-import { AmiMotiGuide } from "@/components/common/ami-moti-guide";
+import { AcademiaGuide } from "@/components/common/academia-guide";
 import { Button } from "@/components/ui/button";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Prețuri — Ami & Moti",
-  description: "Planuri de abonament pentru platforma educațională Ami & Moti. Începe cu 7 zile gratuite.",
+  title: "Prețuri — Academia Politica AUR",
+  description: "Planuri de abonament pentru platforma educațională Academia Politica AUR. Începe cu 7 zile gratuite.",
 };
 
 const PLANS = [
@@ -157,8 +157,8 @@ export default function PreturiPage() {
 
       {/* Mesaj ghid */}
       <section className="container mx-auto px-4 pb-6 max-w-2xl">
-        <AmiMotiGuide
-          variant="ami"
+        <AcademiaGuide
+          variant="info"
           message="Eu, Ami, garantez că primele 7 zile sunt complet gratuite — fără card, fără surprize! Încearcă platforma cu copilul tău și dacă îți place, ne întoarcem împreună cu un abonament. 😊"
         />
       </section>
@@ -178,7 +178,7 @@ export default function PreturiPage() {
             },
             {
               q: "Cum plătesc abonamentul?",
-              a: "În prezent, activarea planului se face manual de echipa Ami & Moti după confirmarea plății. Contactează-ne prin pagina de ajutor.",
+              a: "În prezent, activarea planului se face manual de echipa Academia Politica AUR după confirmarea plății. Contactează-ne prin pagina de ajutor.",
             },
             {
               q: "Ce se întâmplă cu progresul copilului dacă abonamentul expiră?",

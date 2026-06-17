@@ -1,4 +1,4 @@
-import { z } from "zod";
+﻿import { z } from "zod";
 
 export const loginSchema = z.object({
   email: z.string().email("Adresă de email invalidă"),
@@ -8,7 +8,7 @@ export const loginSchema = z.object({
 export const registerSchema = z.object({
   full_name: z.string().min(2, "Numele trebuie să aibă cel puțin 2 caractere"),
   email: z.string().email("Adresă de email invalidă"),
-  account_type: z.enum(["family", "invatator", "profesor"]),
+  account_type: z.enum(["member", "formator", "lector"]),
   password: z.string().min(8, "Parola trebuie să aibă cel puțin 8 caractere"),
   confirm_password: z.string(),
   accepted_terms: z.boolean().refine((v) => v === true, {
@@ -34,7 +34,7 @@ export const courseSchema = z.object({
   slug: z.string().min(3).regex(/^[a-z0-9-]+$/, "Slug-ul poate conține doar litere mici, cifre și cratimă"),
   description: z.string().min(10, "Descrierea trebuie să aibă cel puțin 10 caractere"),
   age_group: z.enum(["0-4", "5-8"]),
-  audience: z.enum(["children", "invatator", "profesor", "all"]).optional(),
+  audience: z.enum(["children", "formator", "lector", "all"]).optional(),
   status: z.enum(["draft", "published"]).optional(),
   estimated_duration: z.number().min(1).optional(),
   order_index: z.number().min(0).optional(),
