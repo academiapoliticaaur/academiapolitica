@@ -95,7 +95,7 @@ export default function PentruProfesoriPage() {
             </span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-black leading-tight mb-6 max-w-3xl">
-            Aduce AI literacy în clasa ta cu <span className="text-yellow-300">Ami &amp; Moti</span>
+            Aduce AI literacy în clasa ta cu <span className="text-yellow-300">Academia Politica AUR</span>
           </h1>
           <p className="text-indigo-100 text-lg sm:text-xl max-w-2xl mb-8 leading-relaxed">
             Platformă educațională românească pentru cursuri de competențe digitale. Creezi clasa virtuală în 5 minute — elevii intră cu un cod, fără conturi sau email.

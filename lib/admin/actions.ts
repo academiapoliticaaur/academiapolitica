@@ -33,11 +33,11 @@ export async function approveUser(userId: string, email: string, fullName: strin
 <body style="font-family:sans-serif;background:#f9fafb;padding:32px;color:#1f2937">
   <div style="max-width:480px;margin:0 auto;background:white;border-radius:16px;padding:32px;box-shadow:0 1px 4px rgba(0,0,0,0.08)">
     <h1 style="font-size:22px;margin-bottom:8px">Bună, ${fullName}! 🎉</h1>
-    <p style="color:#6b7280">Contul tău a fost aprobat. Poți accesa platforma Ami &amp; Moti acum.</p>
+    <p style="color:#6b7280">Contul tău a fost aprobat. Poți accesa platforma Academia Politica AUR acum.</p>
     <a href="${appUrl}/dashboard" style="display:inline-block;margin-top:16px;padding:12px 24px;background:#3b82f6;color:white;border-radius:10px;text-decoration:none;font-weight:600">
       Intră în cont →
     </a>
-    <p style="margin-top:32px;font-size:12px;color:#9ca3af">Ami &amp; Moti · Platformă educațională</p>
+    <p style="margin-top:32px;font-size:12px;color:#9ca3af">Academia Politica AUR · Platformă educațională</p>
   </div>
 </body></html>`,
   });

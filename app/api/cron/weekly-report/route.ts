@@ -83,7 +83,7 @@ export async function GET(request: Request) {
 <body style="font-family:sans-serif;background:#f9fafb;padding:32px;color:#1f2937">
   <div style="max-width:480px;margin:0 auto;background:white;border-radius:16px;padding:32px;box-shadow:0 1px 4px rgba(0,0,0,0.08)">
     <h1 style="font-size:22px;margin-bottom:4px">Bună ziua, ${parent.full_name}! 👋</h1>
-    <p style="color:#6b7280;margin-top:0">Iată rezumatul săptămânii cu Ami &amp; Moti:</p>
+    <p style="color:#6b7280;margin-top:0">Iată rezumatul săptămânii cu Academia Politica AUR:</p>
 
     <table width="100%" style="margin:24px 0;border-top:1px solid #f3f4f6;border-collapse:collapse">
       ${childRows}
@@ -94,7 +94,7 @@ export async function GET(request: Request) {
       Mergi la Dashboard →
     </a>
     <p style="margin-top:32px;font-size:12px;color:#9ca3af;line-height:1.6">
-      Ami &amp; Moti · Platformă educațională ·
+      Academia Politica AUR · Platformă educațională ·
       <a href="${siteUrl}" style="color:#9ca3af">${siteUrl.replace("https://", "")}</a><br>
       <a href="${unsubUrl}" style="color:#9ca3af;text-decoration:underline">Dezabonare raport săptămânal</a>
     </p>

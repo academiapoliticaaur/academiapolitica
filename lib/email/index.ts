@@ -72,7 +72,7 @@ export async function sendSubscriptionRequestToAdmin({
     <a href="${appUrl}/admin/approvals" style="display:inline-block;padding:12px 24px;background:#3b82f6;color:white;border-radius:10px;text-decoration:none;font-weight:600">
       Procesează cererea →
     </a>
-    <p style="margin-top:32px;font-size:12px;color:#9ca3af">Ami &amp; Moti · Platformă educațională</p>
+    <p style="margin-top:32px;font-size:12px;color:#9ca3af">Academia Politica AUR · Platformă educațională</p>
   </div>
 </body></html>`,
   });
@@ -109,7 +109,7 @@ export async function sendSubscriptionResponseEmail({
     <a href="${appUrl}/dashboard" style="display:inline-block;padding:12px 24px;background:#0f766e;color:white;border-radius:10px;text-decoration:none;font-weight:600">
       Intră în cont →
     </a>
-    <p style="margin-top:32px;font-size:12px;color:#9ca3af">Ami &amp; Moti · Platformă educațională</p>
+    <p style="margin-top:32px;font-size:12px;color:#9ca3af">Academia Politica AUR · Platformă educațională</p>
   </div>
 </body></html>`
     : `<!DOCTYPE html><html lang="ro"><head><meta charset="UTF-8"></head>
@@ -120,7 +120,7 @@ export async function sendSubscriptionResponseEmail({
     <a href="${appUrl}/dashboard" style="display:inline-block;padding:12px 24px;background:#3b82f6;color:white;border-radius:10px;text-decoration:none;font-weight:600">
       Înapoi la dashboard →
     </a>
-    <p style="margin-top:32px;font-size:12px;color:#9ca3af">Ami &amp; Moti · Platformă educațională</p>
+    <p style="margin-top:32px;font-size:12px;color:#9ca3af">Academia Politica AUR · Platformă educațională</p>
   </div>
 </body></html>`;
 
@@ -157,7 +157,7 @@ function diplomaEmailHtml({
         <tr>
           <td style="background:linear-gradient(135deg,#0f766e,#0ea5e9);padding:32px 24px;text-align:center;">
             <div style="font-size:48px;margin-bottom:8px;">🌟</div>
-            <div style="color:#ffffff;font-size:22px;font-weight:bold;letter-spacing:1px;">Ami &amp; Moti</div>
+            <div style="color:#ffffff;font-size:22px;font-weight:bold;letter-spacing:1px;">Academia Politica AUR</div>
             <div style="color:#99f6e4;font-size:14px;margin-top:4px;">Platforma educațională pentru copii</div>
           </td>
         </tr>
@@ -200,7 +200,7 @@ function diplomaEmailHtml({
         <tr>
           <td style="background:#f9fafb;border-top:1px solid #e5e7eb;padding:20px 28px;text-align:center;">
             <p style="color:#9ca3af;font-size:12px;margin:0;">
-              Ami &amp; Moti — Platforma educațională pentru copii de 0–8 ani<br>
+              Academia Politica AUR — Platforma educațională pentru copii de 0–8 ani<br>
               Psiholog Ionela Pandilică
             </p>
           </td>

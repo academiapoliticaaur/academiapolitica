@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -6,10 +7,8 @@ export function Footer() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           <div>
-            <div className="flex items-center gap-2 font-bold text-lg mb-3">
-              <span className="text-yellow-600 font-black tracking-tight">ACADEMIA</span>
-              <span className="text-gray-800 font-black tracking-tight">POLITICA</span>
-              <span className="bg-yellow-500 text-white px-1.5 py-0.5 rounded font-black text-xs">AUR</span>
+            <div className="mb-3">
+              <Image src="/logo_academia_politica_titu_maiorescu_transparent.png" alt="Academia Politica AUR" width={48} height={48} style={{ width: "auto", height: 48 }} />
             </div>
             <p className="text-sm text-gray-500">
               Platformă de formare politică și educație civică a Alianței pentru Unirea Românilor.

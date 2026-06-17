@@ -95,7 +95,7 @@ export default async function ParentProfilePage() {
       <div className="bg-white rounded-xl border p-5 mb-5">
         <h2 className="font-semibold mb-1">Notificări email</h2>
         <p className="text-xs text-gray-500 mb-4">
-          Controlează ce emailuri primești de la Ami &amp; Moti.
+          Controlează ce emailuri primești de la Academia Politica AUR.
         </p>
         <EmailReportsToggle enabled={profile?.email_reports ?? true} />
       </div>

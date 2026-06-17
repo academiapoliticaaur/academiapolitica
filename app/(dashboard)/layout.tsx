@@ -1,5 +1,6 @@
 ﻿import { redirect } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { LogOut, BookOpen, LayoutDashboard, GraduationCap, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -30,12 +31,7 @@ export default async function DashboardLayout({
       {/* Top nav */}
       <header className="bg-white border-b sticky top-0 z-40">
         <div className="container mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-            <span className="text-xl">🌟</span>
-            <span className="text-blue-500">Ami</span>
-            <span className="text-gray-400">&amp;</span>
-            <span className="text-teal-500">Moti</span>
-          </Link>
+          <Link href="/" className="flex items-center"><Image src="/logo_academia_politica_titu_maiorescu_transparent.png" alt="Academia Politica AUR" width={40} height={40} style={{ width: "auto", height: 40 }} /></Link>
 
           <div className="flex items-center gap-4">
             <span className="hidden sm:block text-sm text-gray-600">

@@ -47,7 +47,7 @@ export default async function AdminDashboardPage() {
       <div className="mb-8 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold">Dashboard Admin</h1>
-          <p className="text-gray-500">Platformă Ami &amp; Moti</p>
+          <p className="text-gray-500">Platformă Academia Politica AUR</p>
         </div>
         <Button asChild className="bg-blue-100 hover:bg-blue-200 text-blue-700 gap-2 shrink-0 self-start">
           <Link href="/dashboard">

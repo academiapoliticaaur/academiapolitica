@@ -70,7 +70,7 @@ export default async function WebinarsPage() {
         <div className="mt-6 max-w-lg mx-auto">
           <AcademiaGuide
             variant="tip"
-            message="Eu, Moti, te ghidez! Webinariile sunt sesiuni video cu experți — urmărește-le pentru a afla mai multe despre inteligența artificială și lumea digitală."
+            message=" Webinariile sunt sesiuni video cu experți — urmărește-le pentru a afla mai multe despre inteligența artificială și lumea digitală."
           />
         </div>
       </div>

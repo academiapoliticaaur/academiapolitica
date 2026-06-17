@@ -319,7 +319,7 @@ export function ImportModuleButton({ courseId: propCourseId }: { courseId?: stri
                               type="text"
                               value={newCourseTitle}
                               onChange={(e) => setNewCourseTitle(e.target.value)}
-                              placeholder="ex: Prieteni de Incredere cu Ami si Moti"
+                              placeholder="ex: Formare Politica — Modulul I"
                               className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
                             />
                           </div>

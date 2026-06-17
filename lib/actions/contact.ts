@@ -50,7 +50,7 @@ export async function sendContactEmail(formData: FormData): Promise<ContactResul
           <p style="margin: 0; white-space: pre-wrap;">${message}</p>
         </div>
         <p style="color: #9ca3af; font-size: 12px; margin-top: 24px;">
-          Mesaj primit prin suport@academia-aur.ro — platforma Ami &amp; Moti
+          Mesaj primit prin suport@academia-aur.ro — platforma Academia Politica AUR
         </p>
       </div>
     `,

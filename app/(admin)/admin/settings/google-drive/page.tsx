@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { ArrowLeft, CheckCircle, XCircle, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { isDriveConnected } from "@/lib/google-drive";
@@ -88,7 +88,7 @@ export default async function GoogleDriveSettingsPage({
 
       {/* Info */}
       <div className="bg-gray-50 rounded-xl border p-4 text-xs text-gray-500 space-y-1">
-        <p>📁 Folderul rădăcină: <strong>Ami &amp; Moti — Conținut Cursuri</strong></p>
+        <p>📁 Folderul rădăcină: <strong>Academia Politica AUR — Conținut Cursuri</strong></p>
         <p>🔒 Accesibil doar din panoul Admin</p>
         <p>🔄 Token-ul se reînnoiește automat</p>
       </div>

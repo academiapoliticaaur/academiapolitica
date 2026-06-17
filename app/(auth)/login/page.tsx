@@ -64,14 +64,14 @@ export default function LoginPage() {
     <div className="w-full max-w-md space-y-4">
       <AcademiaGuide
         variant="tip"
-        message="Eu, Moti, te ghidez! Intră în cont ca să explorezi lecțiile și să urmărești progresul copilului tău."
+        message=" Intră în cont ca să explorezi lecțiile și să urmărești progresul copilului tău."
       />
       <Card className="w-full max-w-md shadow-lg">
       <CardHeader className="text-center pb-4">
         <div className="text-4xl mb-2">👧🐱</div>
         <CardTitle className="text-2xl">Intră în contul tău</CardTitle>
         <CardDescription>
-          Platforma Ami &amp; Moti — cont de părinte
+          Platforma Academia Politica AUR — cont de utilizator
         </CardDescription>
       </CardHeader>
 
@@ -141,7 +141,7 @@ export default function LoginPage() {
         <div className="mt-6 text-center text-sm text-gray-500">
           Nu ai cont?{" "}
           <Link href="/register" className="text-blue-500 hover:underline font-medium">
-            Creează cont de părinte
+            Creează cont de utilizator
           </Link>
         </div>
       </CardContent>

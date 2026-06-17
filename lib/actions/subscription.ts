@@ -80,7 +80,7 @@ async function notifyAdminCancelledSubscription({
       <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;max-width:600px;width:100%;">
         <tr>
           <td style="background:linear-gradient(135deg,#ef4444,#f97316);padding:28px 24px;text-align:center;">
-            <div style="color:#ffffff;font-size:22px;font-weight:bold;">Ami &amp; Moti 👧🐱</div>
+            <div style="color:#ffffff;font-size:22px;font-weight:bold;">Academia Politica AUR 👧🐱</div>
             <div style="color:#fee2e2;font-size:13px;margin-top:6px;">Abonament anulat de utilizator</div>
           </td>
         </tr>

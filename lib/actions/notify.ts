@@ -111,7 +111,7 @@ function buildWelcomeHtml({
         <tr>
           <td style="background:linear-gradient(135deg,#6366f1,#a855f7);padding:28px 24px;text-align:center;">
             <div style="color:#ffffff;font-size:30px;margin-bottom:6px;">👧🐱</div>
-            <div style="color:#ffffff;font-size:22px;font-weight:bold;">Bun venit pe Ami &amp; Moti!</div>
+            <div style="color:#ffffff;font-size:22px;font-weight:bold;">Bun venit pe Academia Politica AUR!</div>
             <div style="color:#e0e7ff;font-size:13px;margin-top:6px;">Platformă educațională pentru copii</div>
           </td>
         </tr>
@@ -134,7 +134,7 @@ function buildWelcomeHtml({
         <tr>
           <td style="background:#f9fafb;border-top:1px solid #e5e7eb;padding:14px 28px;text-align:center;">
             <p style="color:#9ca3af;font-size:12px;margin:0;">
-              Ami &amp; Moti · <a href="${siteUrl}" style="color:#6366f1;text-decoration:none;">Platformă educațională</a>
+              Academia Politica AUR · <a href="${siteUrl}" style="color:#6366f1;text-decoration:none;">Platformă educațională</a>
             </p>
           </td>
         </tr>
@@ -167,7 +167,7 @@ function buildAdminNotifyHtml({
       <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);max-width:600px;width:100%;">
         <tr>
           <td style="background:linear-gradient(135deg,#6366f1,#a855f7);padding:28px 24px;text-align:center;">
-            <div style="color:#ffffff;font-size:22px;font-weight:bold;">Ami &amp; Moti 👧🐱</div>
+            <div style="color:#ffffff;font-size:22px;font-weight:bold;">Academia Politica AUR 👧🐱</div>
             <div style="color:#e0e7ff;font-size:13px;margin-top:6px;">Cont nou de formator — necesită aprobare</div>
           </td>
         </tr>
@@ -200,7 +200,7 @@ function buildAdminNotifyHtml({
         <tr>
           <td style="background:#f9fafb;border-top:1px solid #e5e7eb;padding:14px 28px;text-align:center;">
             <p style="color:#9ca3af;font-size:12px;margin:0;">
-              Ami &amp; Moti · <a href="${siteUrl}" style="color:#6366f1;text-decoration:none;">Platformă educațională</a>
+              Academia Politica AUR · <a href="${siteUrl}" style="color:#6366f1;text-decoration:none;">Platformă educațională</a>
             </p>
           </td>
         </tr>

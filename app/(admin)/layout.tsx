@@ -1,5 +1,6 @@
 ﻿import { redirect } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { BookOpen, LayoutDashboard, LogOut, Users, Baby, ShieldCheck, BarChart2, UserCheck, Video, Route, FileUp, GraduationCap, School, Presentation, HardDrive, Trash2, CreditCard, Shield, Ticket } from "lucide-react";
@@ -38,12 +39,7 @@ export default async function AdminLayout({
       <header className="bg-white border-b sticky top-0 z-40">
         <div className="container mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-              <span className="text-xl">🌟</span>
-              <span className="text-blue-500">Ami</span>
-              <span className="text-gray-400">&amp;</span>
-              <span className="text-teal-500">Moti</span>
-            </Link>
+            <Link href="/" className="flex items-center"><Image src="/logo_academia_politica_titu_maiorescu_transparent.png" alt="Academia Politica AUR" width={40} height={40} style={{ width: "auto", height: 40 }} /></Link>
             <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full font-medium">
               Admin
             </span>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { X, Download, Share } from "lucide-react";
@@ -83,7 +83,7 @@ export function PwaRegister() {
         <div className="max-w-md mx-auto bg-teal-700 text-white rounded-2xl shadow-xl flex items-center gap-3 px-4 py-3">
           <div className="flex-1 min-w-0">
             <p className="font-semibold text-sm">Adaugă pe ecranul principal</p>
-            <p className="text-xs text-teal-200 mt-0.5">Acces rapid la Ami &amp; Moti</p>
+            <p className="text-xs text-teal-200 mt-0.5">Acces rapid la Academia Politica AUR</p>
           </div>
           <button
             onClick={handleInstall}

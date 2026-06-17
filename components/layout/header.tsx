@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import { Menu, X, BookOpen, LogIn, LogOut, User, ChevronDown, LayoutDashboard, Star, HelpCircle, GraduationCap, School, Users, CreditCard, Smartphone } from "lucide-react";
@@ -35,10 +36,8 @@ export function Header({ user, parentName, isAdmin, accountType }: HeaderProps) 
     return (
       <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div className="container mx-auto flex h-16 items-center px-4">
-          <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-            <span className="text-yellow-600 font-black tracking-tight">ACADEMIA</span>
-            <span className="text-gray-800 font-black tracking-tight">POLITICA</span>
-            <span className="bg-yellow-500 text-white px-2 py-0.5 rounded font-black text-sm">AUR</span>
+          <Link href="/" className="flex items-center">
+            <Image src="/logo_academia_politica_titu_maiorescu_transparent.png" alt="Academia Politica AUR" width={44} height={44} style={{ width: "auto", height: 44 }} />
           </Link>
         </div>
       </header>
@@ -49,10 +48,8 @@ export function Header({ user, parentName, isAdmin, accountType }: HeaderProps) 
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 font-bold text-xl shrink-0">
-          <span className="text-yellow-600 font-black tracking-tight">ACADEMIA</span>
-          <span className="text-gray-800 font-black tracking-tight hidden sm:inline">POLITICA</span>
-          <span className="bg-yellow-500 text-white px-2 py-0.5 rounded font-black text-sm">AUR</span>
+        <Link href="/" className="flex items-center shrink-0">
+          <Image src="/logo_academia_politica_titu_maiorescu_transparent.png" alt="Academia Politica AUR" width={44} height={44} style={{ width: "auto", height: 44 }} />
         </Link>
 
         {/* Desktop nav */}

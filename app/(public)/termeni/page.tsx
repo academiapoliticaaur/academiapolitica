@@ -25,7 +25,7 @@ export default function TermeniPage() {
         <section>
           <h2 className="text-xl font-bold mb-3">1. Operatorul platformei</h2>
           <p className="text-gray-700 leading-relaxed">
-            Platforma <strong>Ami &amp; Moti</strong> (accesibilă la <strong>academia-aur.ro</strong>) este operată de{" "}
+            Platforma <strong>Academia Politica AUR</strong> (accesibilă la <strong>academia-aur.ro</strong>) este operată de{" "}
             <strong>[DENUMIRE JURIDICĂ COMPLETĂ]</strong>, persoană juridică română, cu sediul social în{" "}
             <strong>[ADRESĂ COMPLETĂ]</strong>, înregistrată cu CUI <strong>[CUI]</strong>,
             reprezentată legal de <strong>[REPREZENTANT LEGAL]</strong> (denumit în continuare „Operatorul").
@@ -41,7 +41,7 @@ export default function TermeniPage() {
         <section>
           <h2 className="text-xl font-bold mb-3">2. Obiectul și acceptarea termenilor</h2>
           <p className="text-gray-700 leading-relaxed">
-            Prezentele Termeni și Condiții reglementează accesul și utilizarea platformei educaționale Ami &amp; Moti,
+            Prezentele Termeni și Condiții reglementează accesul și utilizarea platformei educaționale Academia Politica AUR,
             care oferă cursuri de alfabetizare digitală și AI pentru copii din clasele 0–8 și pentru cadrele didactice.
           </p>
           <p className="text-gray-700 leading-relaxed mt-2">

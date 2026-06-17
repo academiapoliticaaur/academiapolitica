@@ -99,10 +99,10 @@ export default async function ClassStudentCertificatePage({
             {/* Left: seal */}
             <div
               className="w-24 h-24 rounded-full flex flex-col items-center justify-center text-white flex-shrink-0"
-              style={{ background: "#0f766e", border: "3px solid #0f766e" }}
+              style={{ background: "#b8860b", border: "3px solid #b8860b" }}
             >
-              <span className="text-3xl">🌟</span>
-              <span className="text-xs font-bold text-center leading-tight px-1">Ami &amp; Moti</span>
+              <span className="text-3xl">🏛️</span>
+              <span className="text-xs font-bold text-center leading-tight px-1">Academia Politica AUR</span>
             </div>
 
             {/* Center: title */}

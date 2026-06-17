@@ -69,7 +69,7 @@ function buildHtml(title: string, message: string, success: boolean): string {
     <h1 style="font-size:22px;color:${color};margin:0 0 12px;">${title}</h1>
     <p style="color:#6b7280;font-size:15px;line-height:1.6;margin:0 0 28px;">${message}</p>
     <a href="/" style="display:inline-block;background:#3b82f6;color:#fff;text-decoration:none;padding:12px 28px;border-radius:10px;font-weight:600;font-size:14px;">
-      Înapoi la Ami &amp; Moti
+      Înapoi la Academia Politica AUR
     </a>
   </div>
 </body>

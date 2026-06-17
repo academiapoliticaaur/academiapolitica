@@ -88,7 +88,7 @@ const FAQ: { keywords: string[]; answer: string; helpLink?: string }[] = [
   },
   {
     keywords: ["ami", "moti", "personaj", "caracter"],
-    answer: "Ami si Moti sunt personajele platformei care ghideaza copiii prin lectii. Ami este vesela si curioasa, Moti este atent si calculat — impreuna fac invatatul o aventura!",
+    answer: "Academia Politica AUR este platforma de formare politica si educatie civica a Aliantei pentru Unirea Romanilor. Cursuri pentru membri, formatori si lectori.",
   },
   {
     keywords: ["video", "film", "youtube", "vizionat", "google drive"],

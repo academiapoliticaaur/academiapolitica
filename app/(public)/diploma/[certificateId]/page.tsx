@@ -56,7 +56,7 @@ export default async function PublicDiplomaPage({ params }: PageProps) {
 
       <div className="no-print flex items-center justify-between gap-3 px-4 py-3 bg-white border-b mb-6 flex-wrap">
         <Link href="/" className="text-sm text-gray-500 hover:text-gray-800 flex items-center gap-1">
-          <span>🌟</span> Ami &amp; Moti — platformă educațională pentru copii
+          <span>🏛️</span> Academia Politica AUR — platformă de formare politică
         </Link>
         <div className="flex items-center gap-2 flex-wrap">
           <ShareButtons
@@ -80,9 +80,9 @@ export default async function PublicDiplomaPage({ params }: PageProps) {
 
           <div className="flex items-start justify-between gap-4 mb-4">
             <div className="w-24 h-24 rounded-full flex flex-col items-center justify-center text-white flex-shrink-0"
-              style={{ background: "#0f766e", border: "3px solid #0f766e" }}>
-              <span className="text-3xl">🌟</span>
-              <span className="text-xs font-bold text-center leading-tight px-1">Ami &amp; Moti</span>
+              style={{ background: "#b8860b", border: "3px solid #b8860b" }}>
+              <span className="text-3xl">🏛️</span>
+              <span className="text-xs font-bold text-center leading-tight px-1">Academia Politica AUR</span>
             </div>
 
             <div className="flex-1 text-center">
@@ -183,7 +183,7 @@ export default async function PublicDiplomaPage({ params }: PageProps) {
           href="/register"
           className="inline-block bg-teal-600 hover:bg-teal-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors"
         >
-          Creează cont gratuit pe Ami &amp; Moti
+          Creează cont gratuit
         </Link>
       </div>
     </>

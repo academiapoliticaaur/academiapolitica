@@ -63,7 +63,7 @@ export async function GET(request: Request) {
 <body style="font-family:sans-serif;background:#f9fafb;padding:32px;color:#1f2937">
   <div style="max-width:480px;margin:0 auto;background:white;border-radius:16px;padding:32px;box-shadow:0 1px 4px rgba(0,0,0,0.08)">
     <h1 style="font-size:22px;margin-bottom:4px">Bună, ${profile.full_name}! 👋</h1>
-    <p style="color:#6b7280;margin-top:0">Ai un mesaj important despre contul tău Ami &amp; Moti.</p>
+    <p style="color:#6b7280;margin-top:0">Ai un mesaj important despre contul tău Academia Politica AUR.</p>
 
     <div style="background:${urgentBg};border:1px solid ${urgentBorder};border-radius:12px;padding:16px;margin:24px 0">
       <p style="margin:0;font-size:15px">${urgentText}</p>
@@ -82,7 +82,7 @@ export async function GET(request: Request) {
     </a>
 
     <p style="margin-top:32px;font-size:12px;color:#9ca3af;line-height:1.6">
-      Ami &amp; Moti · Platformă educațională ·
+      Academia Politica AUR · Platformă educațională ·
       <a href="${siteUrl}" style="color:#9ca3af">${siteUrl.replace("https://", "")}</a>
     </p>
   </div>

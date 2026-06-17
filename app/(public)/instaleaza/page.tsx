@@ -39,7 +39,7 @@ export default function InstaleazaPage() {
         <div className="text-center space-y-3">
           <div className="text-6xl">📱</div>
           <h1 className="text-3xl font-bold text-gray-900">
-            Instalează Ami &amp; Moti pe telefon
+            Instalează Academia Politica AUR pe telefon
           </h1>
           <p className="text-gray-500 text-lg">
             Adaugă platforma pe ecranul principal — gratuit, fără App Store.
@@ -49,10 +49,9 @@ export default function InstaleazaPage() {
         {/* Buton interactiv — se adaptează automat la platformă */}
         <InstallButton />
 
-        {/* Moti guide */}
         <AcademiaGuide
           variant="tip"
-          message="Eu, Moti, te ghidez! Instalarea durează mai puțin de un minut și funcționează pe orice telefon sau tabletă. Nu ai nevoie de App Store sau Google Play!"
+          message=" Instalarea durează mai puțin de un minut și funcționează pe orice telefon sau tabletă. Nu ai nevoie de App Store sau Google Play!"
         />
 
         {/* Benefits */}
