@@ -11,7 +11,7 @@ const CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // fără 0,O,1,I — confunda
 function generateCode(): string {
   const seg = () =>
     Array.from({ length: 5 }, () => CHARS[Math.floor(Math.random() * CHARS.length)]).join("");
-  return `AMI-${seg()}-${seg()}`;
+  return `AUR-${seg()}-${seg()}`;
 }
 
 export async function generateVouchers(formData: FormData): Promise<void> {
