@@ -72,11 +72,7 @@ export async function updateSession(request: NextRequest) {
         return NextResponse.redirect(redirectUrl);
       }
 
-      if (needsMfaSetup) {
-        const redirectUrl = request.nextUrl.clone();
-        redirectUrl.pathname = "/admin/mfa-setup";
-        return NextResponse.redirect(redirectUrl);
-      }
+      // MFA setup is optional — admin can enable it manually from settings
     }
   }
 
