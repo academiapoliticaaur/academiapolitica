@@ -76,7 +76,20 @@ export default function MfaSetupPage() {
   if (step === "loading") {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <p className="text-gray-500">Se generează codul QR...</p>
+        <div className="text-center space-y-3">
+          {error ? (
+            <>
+              <div className="text-4xl">⚠️</div>
+              <p className="text-red-600 font-medium">{error}</p>
+              <p className="text-sm text-gray-500 max-w-sm">
+                Verificați că MFA/TOTP este activat în proiectul Supabase:<br />
+                <span className="font-mono text-xs">Authentication → Sign In → Multi-Factor Auth → Enable TOTP</span>
+              </p>
+            </>
+          ) : (
+            <p className="text-gray-500">Se generează codul QR...</p>
+          )}
+        </div>
       </div>
     );
   }
