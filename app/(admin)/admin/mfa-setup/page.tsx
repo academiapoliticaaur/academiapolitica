@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function MfaSetupPage() {
+  const router = useRouter();
   const [qrSvg, setQrSvg] = useState<string | null>(null);
   const [secret, setSecret] = useState<string>("");
   const [factorId, setFactorId] = useState<string>("");
@@ -19,6 +21,15 @@ export default function MfaSetupPage() {
   useEffect(() => {
     const enroll = async () => {
       const supabase = createClient();
+
+      // Dacă are deja un factor verificat, redirecționează la setări securitate
+      const { data: existing } = await supabase.auth.mfa.listFactors();
+      const hasVerified = existing?.totp?.some((f) => f.status === "verified");
+      if (hasVerified) {
+        router.replace("/admin/settings/security");
+        return;
+      }
+
       const { data, error } = await supabase.auth.mfa.enroll({ factorType: "totp", issuer: "Academia Politica AUR Admin" });
       if (error || !data) {
         setError("Eroare la activarea MFA: " + error?.message);
@@ -30,6 +41,7 @@ export default function MfaSetupPage() {
       setStep("enroll");
     };
     enroll();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleVerify = async () => {

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { BookOpen, LayoutDashboard, LogOut, Users, Baby, ShieldCheck, BarChart2, UserCheck, Video, Route, FileUp, GraduationCap, School, Presentation, HardDrive, Trash2, CreditCard, Shield, Ticket } from "lucide-react";
+import { BookOpen, LayoutDashboard, LogOut, Users, Baby, ShieldCheck, BarChart2, UserCheck, Video, Route, FileUp, GraduationCap, School, Presentation, HardDrive, Trash2, CreditCard, Shield, Ticket, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { InactivityLogout } from "@/components/auth/inactivity-logout";
 
@@ -74,6 +74,7 @@ export default async function AdminLayout({
             { href: "/admin/stats", icon: <BarChart2 size={16} />, label: "Statistici" },
             { href: "/admin/trash", icon: <Trash2 size={16} />, label: "Cos gunoi" },
             { href: "/admin/audit-log", icon: <Shield size={16} />, label: "Audit Log" },
+            { href: "/admin/settings/security", icon: <Lock size={16} />, label: "Securitate" },
           ].map((item) => (
             <Link
               key={item.href}
@@ -169,6 +170,7 @@ export default async function AdminLayout({
                 {[
                   { href: "/admin/stats",      icon: <BarChart2 size={18} />, label: "Statistici" },
                   { href: "/admin/audit-log",  icon: <Shield size={18} />,    label: "Audit Log" },
+                  { href: "/admin/settings/security", icon: <Lock size={18} />, label: "Securitate" },
                 ].map((item) => (
                   <Link
                     key={item.href}
