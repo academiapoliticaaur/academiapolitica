@@ -22,12 +22,17 @@ export default function MfaSetupPage() {
     const enroll = async () => {
       const supabase = createClient();
 
-      // Dacă are deja un factor verificat, redirecționează la setări securitate
       const { data: existing } = await supabase.auth.mfa.listFactors();
-      const hasVerified = existing?.totp?.some((f) => f.status === "verified");
-      if (hasVerified) {
+      const verifiedFactor = existing?.totp?.find((f) => f.status === "verified");
+      if (verifiedFactor) {
         router.replace("/admin/settings/security");
         return;
+      }
+
+      // Curăță factori pending (neconfirmați) pentru a evita conflicte la enroll
+      const pendingFactors = existing?.totp?.filter((f) => f.status !== "verified") ?? [];
+      for (const pf of pendingFactors) {
+        await supabase.auth.mfa.unenroll({ factorId: pf.id });
       }
 
       const { data, error } = await supabase.auth.mfa.enroll({ factorType: "totp", issuer: "Academia Politica AUR Admin" });
