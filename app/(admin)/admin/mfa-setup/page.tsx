@@ -128,7 +128,7 @@ export default function MfaSetupPage() {
             <div className="flex justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`data:image/svg+xml,${encodeURIComponent(qrSvg)}`}
+                src={qrSvg}
                 alt="QR Code pentru autentificare MFA"
                 width={200}
                 height={200}
