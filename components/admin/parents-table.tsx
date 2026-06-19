@@ -81,7 +81,7 @@ export function ParentsTable({ rows }: { rows: ParentRow[] }) {
                   <th className="px-5 py-3 text-left font-semibold text-gray-600">Nume</th>
                   <th className="px-5 py-3 text-left font-semibold text-gray-600">Email</th>
                   <th className="px-5 py-3 text-left font-semibold text-gray-600">Status</th>
-                  <th className="px-5 py-3 text-left font-semibold text-gray-600">Copii</th>
+                  <th className="px-5 py-3 text-left font-semibold text-gray-600">Cursanți</th>
                   <th className="px-5 py-3 text-left font-semibold text-gray-600">Înregistrat</th>
                   <th className="px-5 py-3"></th>
                 </tr>
@@ -118,7 +118,7 @@ export function ParentsTable({ rows }: { rows: ParentRow[] }) {
                     </td>
                     <td className="px-5 py-4">
                       <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full font-medium">
-                        {parent.childCount} copii
+                        {parent.childCount} cursanți
                       </span>
                     </td>
                     <td className="px-5 py-4 text-gray-400 text-xs">
@@ -134,7 +134,7 @@ export function ParentsTable({ rows }: { rows: ParentRow[] }) {
                         </Button>
                         {!parent.isAdmin && (
                           <DeleteButton
-                            confirmMessage={`Ștergi contul lui ${parent.full_name || "acest părinte"} și toți copiii asociați?`}
+                            confirmMessage={`Ștergi contul lui ${parent.full_name || "acest membru"} și toți cursanții asociați?`}
                             action={deleteParent.bind(null, parent.user_id)}
                           />
                         )}

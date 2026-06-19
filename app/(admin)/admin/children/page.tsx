@@ -56,9 +56,9 @@ export default async function AdminChildrenPage({ searchParams }: PageProps) {
             <table className="w-full text-sm">
               <thead className="bg-gray-50 border-b">
                 <tr>
-                  <th className="px-5 py-3 text-left font-semibold text-gray-600">Nume copil</th>
-                  <th className="px-5 py-3 text-left font-semibold text-gray-600">Grupă vârstă</th>
-                  <th className="px-5 py-3 text-left font-semibold text-gray-600">Părinte</th>
+                  <th className="px-5 py-3 text-left font-semibold text-gray-600">Nume cursant</th>
+                  <th className="px-5 py-3 text-left font-semibold text-gray-600">Grupă</th>
+                  <th className="px-5 py-3 text-left font-semibold text-gray-600">Membru</th>
                   <th className="px-5 py-3 text-left font-semibold text-gray-600">Creat</th>
                   <th className="px-5 py-3"></th>
                 </tr>
@@ -83,7 +83,7 @@ export default async function AdminChildrenPage({ searchParams }: PageProps) {
                     </td>
                     <td className="px-5 py-4">
                       <DeleteButton
-                        confirmMessage={`Ștergi profilul copilului "${child.display_name}"?`}
+                        confirmMessage={`Ștergi profilul cursantului "${child.display_name}"?`}
                         action={async () => { "use server"; await deleteChild(child.id); }}
                       />
                     </td>
@@ -96,7 +96,7 @@ export default async function AdminChildrenPage({ searchParams }: PageProps) {
         </>
       ) : (
         <div className="text-center py-16 bg-white rounded-xl border">
-          <p className="text-gray-500">Niciun profil de copil înregistrat încă.</p>
+          <p className="text-gray-500">Niciun profil de cursant înregistrat încă.</p>
         </div>
       )}
     </div>

@@ -37,7 +37,7 @@ export default async function AdminDashboardPage() {
   const stats = [
     { label: "Total cursuri", value: coursesCount || 0, icon: <BookOpen className="text-blue-500" />, color: "bg-blue-50", href: "/admin/courses" },
     { label: "Cursuri publicate", value: publishedCount || 0, icon: <Eye className="text-teal-500" />, color: "bg-teal-50", href: "/admin/courses" },
-    { label: "Părinți înregistrați", value: parentsCount || 0, icon: <Users className="text-indigo-500" />, color: "bg-indigo-50", href: "/admin/parents" },
+    { label: "Membri înregistrați", value: parentsCount || 0, icon: <Users className="text-indigo-500" />, color: "bg-indigo-50", href: "/admin/parents" },
     { label: "Profiluri cursanți", value: childrenCount || 0, icon: <Users className="text-purple-500" />, color: "bg-purple-50", href: "/admin/children" },
     { label: "Administratori", value: adminUsers.length, icon: <ShieldCheck className="text-rose-500" />, color: "bg-rose-50", href: "/admin/administrators" },
   ];
@@ -52,7 +52,7 @@ export default async function AdminDashboardPage() {
         <Button asChild className="bg-blue-100 hover:bg-blue-200 text-blue-700 gap-2 shrink-0 self-start">
           <Link href="/dashboard">
             <LayoutDashboard size={16} />
-            Dashboard Părinte
+            Dashboard Membru
           </Link>
         </Button>
       </div>
