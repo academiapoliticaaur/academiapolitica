@@ -4,6 +4,27 @@ import { requireAdmin } from "@/lib/admin/guard";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 
+export async function cleanMyPendingMfaFactors(): Promise<{ error?: string }> {
+  try {
+    await requireAdmin();
+    const userSupabase = await createClient();
+    const { data: { user } } = await userSupabase.auth.getUser();
+    if (!user) return { error: "Neautorizat" };
+
+    const adminDb = createAdminClient();
+    const { data: factorsData, error: factorsError } = await adminDb.auth.admin.mfa.listFactors({ userId: user.id });
+    if (factorsError) return { error: factorsError.message };
+
+    const pending = (factorsData?.factors ?? []).filter((f) => f.status !== "verified");
+    for (const factor of pending) {
+      await adminDb.auth.admin.mfa.deleteFactor({ id: factor.id, userId: user.id });
+    }
+    return {};
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Eroare" };
+  }
+}
+
 export async function getMyMfaFactors() {
   try {
     await requireAdmin();

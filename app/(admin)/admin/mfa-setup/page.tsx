@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { cleanMyPendingMfaFactors } from "@/lib/admin/mfa-actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -29,10 +30,11 @@ export default function MfaSetupPage() {
         return;
       }
 
-      // Curăță factori pending (neconfirmați) pentru a evita conflicte la enroll
-      const pendingFactors = existing?.totp?.filter((f) => f.status !== "verified") ?? [];
-      for (const pf of pendingFactors) {
-        await supabase.auth.mfa.unenroll({ factorId: pf.id });
+      // Curăță factori pending via admin server action (client unenroll nu funcționează pentru pending)
+      const cleanResult = await cleanMyPendingMfaFactors();
+      if (cleanResult.error) {
+        setError("Nu s-au putut șterge factorii existenți: " + cleanResult.error);
+        return;
       }
 
       const { data, error } = await supabase.auth.mfa.enroll({ factorType: "totp", issuer: "Academia Politica AUR Admin" });
