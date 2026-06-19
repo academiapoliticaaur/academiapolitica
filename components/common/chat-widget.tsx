@@ -13,82 +13,77 @@ interface Message {
 const FAQ: { keywords: string[]; answer: string; helpLink?: string }[] = [
   {
     keywords: ["cont", "inregistrare", "register", "creare", "inregistrez", "creez"],
-    answer: "Exista 3 tipuri de cont:\n• Parinte/tutore — acces la cursuri pentru copii\n• Formator (cls. 0-4) — resurse didactice, necesita aprobare\n• Profesor gimnaziu (cls. 5-8) — resurse didactice, necesita aprobare\nApasa Creeaza cont pe pagina principala si alege tipul potrivit.",
-    helpLink: "/help#parinti",
+    answer: "Exista 3 tipuri de cont:\n• Membru AUR / Simpatizant — acces imediat la toate cursurile, aprobat automat\n• Formator — creeaza grupuri de formare, necesita aprobare admin\n• Lector — conferentiar sau expert, acces extins, necesita aprobare admin\nApasa Inscrie-te gratuit pe pagina principala si alege tipul potrivit.",
+    helpLink: "/help#membri",
   },
   {
-    keywords: ["copil", "profil cursant", "adaug copil", "nou copil", "child"],
-    answer: "Dupa autentificare, mergi la Dashboard si apasa Adauga profil cursant. Completezi numele, grupa de varsta (0-4 sau 5-8) si optional un PIN de 4 cifre. Poti adauga mai multi copii pe acelasi cont.",
-    helpLink: "/help#parinti",
+    keywords: ["cursant", "profil cursant", "adaug cursant", "nou cursant"],
+    answer: "Dupa autentificare ca Membru, profilul de cursant se creeaza automat cu datele tale. Accesezi zona de cursuri direct din dashboard.",
+    helpLink: "/help#membri",
   },
   {
     keywords: ["curs", "cursuri", "ce cursuri", "disponibil", "oferta"],
-    answer: "Cursurile pentru elevi sunt pe pagina /courses, filtrate dupa grupa (0-4 sau 5-8). Cadrele didactice aprobate au acces la resurse suplimentare pe pagina /formatori. Toate cursurile sunt listate alfabetic.",
+    answer: "Cursurile sunt disponibile pe pagina /courses. Membrii aprobati au acces la toate cursurile platformei. Formatorii aprobati au acces la resurse suplimentare pe /formatori.",
     helpLink: "/help#cursuri",
   },
   {
     keywords: ["lectie", "lectii", "acces lectie", "cum intru", "deschid lectia"],
-    answer: "Intri in profilul copilului, selectezi un curs, apoi selectezi lectia dorita. Lectiile pot fi video, prezentari Google Slides/PDF, fise de lucru descarcabile sau quiz-uri interactive.",
-    helpLink: "/help#copii",
+    answer: "Intri in zona ta de cursuri, selectezi un curs, apoi selectezi lectia dorita. Lectiile pot fi video, prezentari Google Slides/PDF, fise de lucru descarcabile sau quiz-uri interactive.",
+    helpLink: "/help#cursanti",
   },
   {
     keywords: ["quiz", "test", "intrebari", "raspuns", "gresit", "incearca"],
     answer: "Quiz-urile necesita minim 80% raspunsuri corecte pentru a trece la lectia urmatoare. Daca nu atingi 80%, poti apasa Incearca din nou si repeti quiz-ul de cate ori vrei.",
-    helpLink: "/help#copii",
+    helpLink: "/help#cursanti",
   },
   {
     keywords: ["xp", "puncte", "experienta", "scor", "recompensa", "badge", "insigna"],
-    answer: "XP-urile se castiga astfel: 10 XP per lectie, 50 XP la finalizarea unui modul, 100 XP bonus la finalizarea cursului. XP-ul este permanent — nu se pierde daca reiei cursul. Exista si 9 insigne de competenta si un daily streak.",
-    helpLink: "/help#copii",
+    answer: "XP-urile se castiga astfel: 10 XP per lectie, 50 XP la finalizarea unui modul, 100 XP bonus la finalizarea cursului. XP-ul este permanent — nu se pierde daca reiei cursul.",
+    helpLink: "/help#cursanti",
   },
   {
     keywords: ["diploma", "certificat", "absolvire", "felicitari", "finalizat"],
-    answer: "La finalizarea unui curs, copilul primeste automat o diploma de absolvire printabila. Parintele primeste si un email de felicitare. Elevii din clase primesc de asemenea diploma la finalizarea unui curs.",
-    helpLink: "/help#copii",
+    answer: "La finalizarea unui curs primesti automat o diploma de absolvire printabila, recunoscuta in structurile AUR. Participantii din grupuri primesc de asemenea diploma la finalizarea unui curs.",
+    helpLink: "/help#cursanti",
   },
   {
-    keywords: ["pin", "protectie", "parola copil", "blocat", "securitate"],
-    answer: "Poti seta un PIN de 4 cifre pe profilul copilului din Dashboard -> Editeaza profil. PIN-ul protejeaza accesul si este valabil 8 ore din sessionStorage. Se poate elimina oricand din aceleasi setari.",
-    helpLink: "/help#parinti",
+    keywords: ["pin", "protectie", "parola cursant", "blocat", "securitate"],
+    answer: "Poti seta un PIN de 4 cifre pe profilul tau din Dashboard -> Editeaza profil. PIN-ul protejeaza accesul si este valabil 8 ore. Se poate elimina oricand din aceleasi setari.",
+    helpLink: "/help#membri",
   },
   {
     keywords: ["progres", "avansare", "urmaresc", "completat", "status"],
-    answer: "Din Dashboard apasa iconita grafic (Progres) de langa profilul copilului. Vei vedea toate lectiile, statusul fiecareia si scorurile de la quiz-uri.",
-    helpLink: "/help#parinti",
+    answer: "Din zona ta de cursuri poti vedea progresul la fiecare curs: lectiile completate, statusul fiecareia si scorurile de la quiz-uri.",
+    helpLink: "/help#membri",
   },
   {
     keywords: ["parola", "schimb parola", "resetez", "am uitat", "contul meu", "profilul meu"],
     answer: "Din Dashboard -> Profilul meu poti schimba numele si parola contului. Pe pagina de login apasa Ai uitat parola? pentru resetare prin email.",
-    helpLink: "/help#parinti",
+    helpLink: "/help#membri",
   },
   {
     keywords: ["email", "notificare", "raport", "saptamanal"],
-    answer: "Parintii primesc automat un raport saptamanal pe email in fiecare luni dimineata, cu lectiile completate de copii. La finalizarea unui curs, se trimite si un email cu diploma.",
-    helpLink: "/help#parinti",
-  },
-  {
-    keywords: ["varsta", "grupa", "0-4", "5-8"],
-    answer: "Platforma are doua grupe: Clasele 0-4 (ciclu primar) si Clasele 5-8 (gimnaziu). Continutul este adaptat fiecarei grupe. Cadrele didactice vad automat cursurile grupei lor.",
-    helpLink: "/help#cursuri",
+    answer: "Membrii primesc notificari pe email la finalizarea unui curs, cu diploma atasata. Formatorii primesc rapoarte despre progresul participantilor din grupurile lor.",
+    helpLink: "/help#membri",
   },
   {
     keywords: ["pret", "gratuit", "cost", "plata", "abonament"],
-    answer: "Platforma Academia Politica AUR este complet gratuita — pentru parinti, copii si formatori. Nu exista abonamente sau costuri ascunse.",
+    answer: "Platforma Academia Politica AUR este gratuita pentru membrii AUR si simpatizanti. Formatorii si lectorii nu platesc pentru accesul la resurse.",
     helpLink: "/help#cursuri",
   },
   {
     keywords: ["contact", "ajutor", "problema", "eroare", "suport"],
-    answer: "Pentru probleme tehnice sau intrebari, consulta Centrul de ajutor (/help). Poti trimite si un mesaj direct la suport@academia-aur.ro sau prin formularul de contact din pagina Ajutor.",
+    answer: "Pentru probleme tehnice sau intrebari, consulta Centrul de ajutor (/help). Poti trimite si un mesaj direct la suport@academiapolitica.ro sau prin formularul de contact din pagina Ajutor.",
     helpLink: "/help#tehnic",
   },
   {
     keywords: ["login", "autentific", "intru in cont", "deconect", "logout"],
     answer: "Accesezi /login si introduci emailul si parola. Pentru deconectare folosesti butonul Deconectare din meniu. Daca ai MFA activat (admin), vei introduce si codul TOTP.",
-    helpLink: "/help#parinti",
+    helpLink: "/help#membri",
   },
   {
-    keywords: ["ami", "moti", "personaj", "caracter"],
-    answer: "Academia Politica AUR este platforma de formare politica si educatie civica a Aliantei pentru Unirea Romanilor. Cursuri pentru membri, formatori si lectori.",
+    keywords: ["aur", "alianta", "romania", "politica", "civica", "misiune"],
+    answer: "Academia Politica AUR este platforma de formare politica si educatie civica a Aliantei pentru Unirea Romanilor. Cursuri pentru membri, formatori si lectori — construita pentru a forma cetateni activi si lideri politici responsabili.",
   },
   {
     keywords: ["video", "film", "youtube", "vizionat", "google drive"],
@@ -97,18 +92,18 @@ const FAQ: { keywords: string[]; answer: string; helpLink?: string }[] = [
   },
   {
     keywords: ["instalare", "instaleaza", "aplicatie", "ecran principal", "pwa", "iphone", "ipad", "android", "telefon"],
-    answer: "Poti adauga Academia Politica AUR pe ecranul principal ca aplicatie:\n• Pe Android/Chrome: apasa butonul Instaleaza care apare automat in josul ecranului.\n• Pe iPhone/iPad (Safari): apasa butonul Distribuie (patratul cu sageata in sus), apoi Adauga pe ecranul principal — pe iOS nu apare un buton automat de instalare, dar functioneaza la fel de bine prin acest pas manual.",
+    answer: "Poti adauga Academia Politica AUR pe ecranul principal ca aplicatie:\n• Pe Android/Chrome: apasa butonul Instaleaza care apare automat in josul ecranului.\n• Pe iPhone/iPad (Safari): apasa butonul Distribuie, apoi Adauga pe ecranul principal.",
     helpLink: "/help#tehnic",
   },
   {
     keywords: ["fisa", "fisa lucru", "pdf", "descarcare", "printeaza"],
     answer: "Fisele de lucru sunt PDF-uri descarcabile din Google Drive, disponibile in lectiile de tip Fisa de lucru. Daca butonul nu apare, optiunea nu este activata pentru lectia respectiva.",
-    helpLink: "/help#copii",
+    helpLink: "/help#cursanti",
   },
   {
     keywords: ["previzualiz", "preview", "vedere prealabila"],
-    answer: "Ca parinte autentificat, pe pagina unui curs apare butonul Previzualizare langa fiecare lectie. Progresul si XP nu se salveaza in modul previzualizare.",
-    helpLink: "/help#parinti",
+    answer: "Ca formator autentificat, pe pagina unui curs apare butonul Previzualizare langa fiecare lectie. Progresul si XP nu se salveaza in modul previzualizare.",
+    helpLink: "/help#formatori",
   },
   {
     keywords: ["reia", "reincepe", "restart", "reluare curs"],
@@ -116,31 +111,31 @@ const FAQ: { keywords: string[]; answer: string; helpLink?: string }[] = [
     helpLink: "/help#cursuri",
   },
   {
-    keywords: ["formator", "lector", "cadre", "didactic", "aprobare", "aprobat", "resurse"],
-    answer: "Conturile de Formator si Profesor necesita aprobare manuala de administrator. Dupa aprobare, ai acces la resurse didactice de pe /formatori, filtrate pe grupa ta (0-4 sau 5-8). Daca esti aprobat dar nu vezi resursele, deconecteaza-te si reconecteaza-te.",
-    helpLink: "/help#cadre",
+    keywords: ["formator", "lector", "aprobare", "aprobat", "resurse", "didactic"],
+    answer: "Conturile de Formator si Lector necesita aprobare manuala de administrator. Dupa aprobare, ai acces la resurse didactice de pe /formatori. Daca esti aprobat dar nu vezi resursele, deconecteaza-te si reconecteaza-te.",
+    helpLink: "/help#formatori",
   },
   {
-    keywords: ["clasa", "clase", "cod clasa", "elev", "elevi", "cod acces", "intru clasa"],
-    answer: "Cadrele didactice pot crea o clasa virtuala cu un cod unic de acces. Elevii intra pe /clasa, introduc codul clasei, selecteaza numele si acceseaza cursurile — fara sa creeze cont. Progresul si diplomele functioneaza identic.",
-    helpLink: "/help#clase",
+    keywords: ["grup", "grupuri", "cod grup", "participant", "participanti", "cod acces", "intru grup"],
+    answer: "Formatorii pot crea un grup de formare cu un cod unic de acces. Participantii intra pe /grup, introduc codul grupului, selecteaza numele si acceseaza cursurile — fara sa creeze cont. Progresul si diplomele functioneaza identic.",
+    helpLink: "/help#grupuri",
   },
   {
-    keywords: ["cod personal", "student code", "nu gasesc numele", "lista clasa"],
-    answer: "Elevii primesc un cod personal de la profesor. Dupa ce introduci codul clasei, selectezi numele din lista clasei. Daca nu gasesti numele, contacteaza profesorul — poate fi adaugat cu un alt prenume.",
-    helpLink: "/help#clase",
+    keywords: ["cod personal", "nu gasesc numele", "lista grup"],
+    answer: "Participantii primesc un cod personal de la formator. Dupa ce introduci codul grupului, selectezi numele din lista grupului. Daca nu gasesti numele, contacteaza formatorul — poate fi adaugat cu un alt prenume.",
+    helpLink: "/help#grupuri",
   },
   {
     keywords: ["streak", "zile consecutive", "activitate zilnica"],
-    answer: "Daily streak-ul numara zilele consecutive in care copilul a completat cel putin o lectie. Mentinerea streak-ului deblocheaza insigne speciale de activitate.",
-    helpLink: "/help#copii",
+    answer: "Daily streak-ul numara zilele consecutive in care ai completat cel putin o lectie. Mentinerea streak-ului deblocheaza insigne speciale de activitate.",
+    helpLink: "/help#cursanti",
   },
 ];
 
-const WELCOME = "Buna! Sunt asistentul platformei Academia Politica AUR 🌟\nCu ce te pot ajuta?\n\n• Parinti: conturi copii, progres, XP, diplome\n• Formatori: aprobare cont, clase virtuale, resurse\n• Elevi: acces cu cod clasa, quiz-uri, certificate\n\nPentru raspunsuri complete consulta Centrul de ajutor.";
+const WELCOME = "Buna! Sunt asistentul platformei Academia Politica AUR 🌟\nCu ce te pot ajuta?\n\n• Membri: cursuri, progres, XP, diplome\n• Formatori: aprobare cont, grupuri de formare, resurse\n• Participanti: acces cu cod grup, quiz-uri, certificate\n\nPentru raspunsuri complete consulta Centrul de ajutor.";
 const FALLBACK_TEXT = "Nu am informatii despre acest subiect. Consulta Centrul de ajutor (/help) pentru raspunsuri complete, sau scrie-ne la suport@academia-aur.ro.";
 const FALLBACK_LINK = "/help";
-const SUGGESTIONS = ["Cum creez un cont?", "Ce sunt clasele virtuale?", "Cum functioneaza quiz-ul?", "Resurse formatori"];
+const SUGGESTIONS = ["Cum creez un cont?", "Ce sunt grupurile de formare?", "Cum functioneaza quiz-ul?", "Resurse formatori"];
 
 interface AnswerResult {
   text: string;
