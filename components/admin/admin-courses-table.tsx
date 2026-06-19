@@ -24,23 +24,23 @@ interface AdminCoursesTableProps {
 
 export function AdminCoursesTable({ courses }: AdminCoursesTableProps) {
   const [titleQ, setTitleQ] = useState("");
-  const [groupQ, setGroupQ] = useState("");
+  const [audienceQ, setAudienceQ] = useState("");
   const [statusQ, setStatusQ] = useState("");
   const [sort, setSort] = useState<"asc" | "desc">("asc");
 
   const filtered = useMemo(() => {
     return courses
       .filter((c) => !titleQ || c.title.toLowerCase().includes(titleQ.toLowerCase()))
-      .filter((c) => !groupQ || c.age_group === groupQ)
+      .filter((c) => !audienceQ || (c.audience ?? "member") === audienceQ)
       .filter((c) => !statusQ || c.status === statusQ)
       .sort((a, b) =>
         sort === "asc"
           ? a.title.localeCompare(b.title, "ro")
           : b.title.localeCompare(a.title, "ro")
       );
-  }, [courses, titleQ, groupQ, statusQ, sort]);
+  }, [courses, titleQ, audienceQ, statusQ, sort]);
 
-  const hasFilter = titleQ || groupQ || statusQ;
+  const hasFilter = titleQ || audienceQ || statusQ;
 
   return (
     <div className="bg-white rounded-xl border overflow-hidden">
@@ -60,7 +60,7 @@ export function AdminCoursesTable({ courses }: AdminCoursesTableProps) {
                 }
               </button>
             </th>
-            <th className="px-4 pt-3 pb-1 text-left font-semibold text-gray-600 w-[16%]">Grupă</th>
+            <th className="px-4 pt-3 pb-1 text-left font-semibold text-gray-600 w-[16%]">Audiență</th>
             <th className="px-4 pt-3 pb-1 text-left font-semibold text-gray-600 w-[16%]">Status</th>
             <th className="px-4 pt-3 pb-1 text-left font-semibold text-gray-600">Acțiuni</th>
           </tr>
@@ -87,13 +87,15 @@ export function AdminCoursesTable({ courses }: AdminCoursesTableProps) {
             </td>
             <td className="px-4 py-2">
               <select
-                value={groupQ}
-                onChange={(e) => setGroupQ(e.target.value)}
+                value={audienceQ}
+                onChange={(e) => setAudienceQ(e.target.value)}
                 className="w-full py-1.5 px-2 border border-gray-200 rounded-md text-xs focus:outline-none focus:ring-2 focus:ring-blue-200 bg-white"
               >
                 <option value="">Toate</option>
-                <option value="0-4">Clasele 0–4</option>
-                <option value="5-8">Clasele 5–8</option>
+                <option value="member">Membri</option>
+                <option value="formator">Formatori</option>
+                <option value="lector">Lectori</option>
+                <option value="all">Toți</option>
               </select>
             </td>
             <td className="px-4 py-2">
@@ -110,7 +112,7 @@ export function AdminCoursesTable({ courses }: AdminCoursesTableProps) {
             <td className="px-4 py-2">
               {hasFilter && (
                 <button
-                  onClick={() => { setTitleQ(""); setGroupQ(""); setStatusQ(""); }}
+                  onClick={() => { setTitleQ(""); setAudienceQ(""); setStatusQ(""); }}
                   className="text-xs text-gray-400 hover:text-red-500 flex items-center gap-1 transition-colors"
                 >
                   <X size={11} />
@@ -141,11 +143,13 @@ export function AdminCoursesTable({ courses }: AdminCoursesTableProps) {
                 </td>
                 <td className="px-4 py-3">
                   <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                    course.age_group === "0-4"
-                      ? "bg-teal-100 text-teal-700"
-                      : "bg-indigo-100 text-indigo-700"
+                    course.audience === "formator" ? "bg-blue-100 text-blue-700"
+                    : course.audience === "lector" ? "bg-purple-100 text-purple-700"
+                    : "bg-green-100 text-green-700"
                   }`}>
-                    Clasele {course.age_group}
+                    {course.audience === "formator" ? "Formatori"
+                     : course.audience === "lector" ? "Lectori"
+                     : "Membri"}
                   </span>
                 </td>
                 <td className="px-4 py-3">

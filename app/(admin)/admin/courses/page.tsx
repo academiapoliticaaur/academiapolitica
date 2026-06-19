@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
@@ -14,12 +14,9 @@ interface PageProps {
 
 export default async function AdminCoursesPage({ searchParams }: PageProps) {
   const { view } = await searchParams;
-  // /admin/courses           -> ambele secțiuni (navigare implicită, link-uri "Înapoi"/redirectTo existente)
-  // /admin/courses?view=cursuri            -> doar cursuri copii/elevi
-  // /admin/courses?view=resurse-didactice  -> doar resurse formatori
-  const showChildren = view !== "resurse-didactice";
+  const showMembers = view !== "resurse-didactice";
   const showTeacher = view !== "cursuri";
-  const pageTitle = view === "cursuri" ? "Cursuri pentru copii / elevi"
+  const pageTitle = view === "cursuri" ? "Cursuri membri AUR"
     : view === "resurse-didactice" ? "Resurse formatori"
     : "Cursuri";
 
@@ -32,17 +29,15 @@ export default async function AdminCoursesPage({ searchParams }: PageProps) {
 
   const allCourses = (courses ?? []) as CourseRow[];
 
-  const childrenCourses = allCourses.filter(
-    (c) => !c.audience || c.audience === "children" || c.audience === "all"
+  const memberCourses = allCourses.filter(
+    (c) => !c.audience || c.audience === "member" || c.audience === "children" || c.audience === "all"
   );
   const teacherCourses = allCourses.filter(
     (c) => c.audience === "formator" || c.audience === "lector"
   );
 
-  const c04 = childrenCourses.filter((c) => c.age_group === "0-4");
-  const c58 = childrenCourses.filter((c) => c.age_group === "5-8");
-  const inv = teacherCourses.filter((c) => c.audience === "formator");
-  const prof = teacherCourses.filter((c) => c.audience === "lector");
+  const formatori = teacherCourses.filter((c) => c.audience === "formator");
+  const lectori = teacherCourses.filter((c) => c.audience === "lector");
 
   const isEmpty = allCourses.length === 0;
 
@@ -72,84 +67,66 @@ export default async function AdminCoursesPage({ searchParams }: PageProps) {
       ) : (
         <div className="space-y-8">
 
-          {/* Secțiunea 1 — Cursuri copii */}
-          {showChildren && childrenCourses.length > 0 && (
+          {/* Secțiunea 1 — Cursuri membri */}
+          {showMembers && memberCourses.length > 0 && (
             <section>
               <div className="flex items-center gap-3 mb-3">
-                <span className="text-xl">🧒</span>
+                <span className="text-xl">📚</span>
                 <div>
-                  <h2 className="text-base font-bold text-gray-800">Cursuri copii / elevi</h2>
-                  <p className="text-xs text-gray-500">Apar la <strong>/cursuri</strong> și sunt accesibile copiilor</p>
+                  <h2 className="text-base font-bold text-gray-800">Cursuri membri AUR</h2>
+                  <p className="text-xs text-gray-500">Apar la <strong>/cursuri</strong> și sunt accesibile membrilor și simpatizanților</p>
                 </div>
                 <span className="ml-auto text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
-                  {childrenCourses.length} cursuri
+                  {memberCourses.length} {memberCourses.length === 1 ? "curs" : "cursuri"}
                 </span>
               </div>
-
-              <div className="space-y-4">
-                {c04.length > 0 && (
-                  <div>
-                    <p className="text-xs font-semibold text-teal-600 mb-2 flex items-center gap-1">
-                      🌱 Clasele 0–4 <span className="font-normal text-gray-400">({c04.length})</span>
-                    </p>
-                    <AdminCoursesTable courses={c04} />
-                  </div>
-                )}
-                {c58.length > 0 && (
-                  <div>
-                    <p className="text-xs font-semibold text-indigo-600 mb-2 flex items-center gap-1">
-                      🔬 Clasele 5–8 <span className="font-normal text-gray-400">({c58.length})</span>
-                    </p>
-                    <AdminCoursesTable courses={c58} />
-                  </div>
-                )}
-              </div>
+              <AdminCoursesTable courses={memberCourses} />
             </section>
           )}
 
-          {/* Secțiunea 2 — Resurse formatori */}
+          {/* Secțiunea 2 — Resurse formatori / lectori */}
           {showTeacher && (
-          <section id="resurse-didactice">
-            <div className="flex items-center gap-3 mb-3">
-              <span className="text-xl">🎓</span>
-              <div>
-                <h2 className="text-base font-bold text-gray-800">Resurse formatori</h2>
-                <p className="text-xs text-gray-500">Apar la <strong>/formatori</strong> — pentru învățători și profesori</p>
+            <section id="resurse-didactice">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-xl">🎓</span>
+                <div>
+                  <h2 className="text-base font-bold text-gray-800">Resurse formatori</h2>
+                  <p className="text-xs text-gray-500">Apar la <strong>/formatori</strong> — pentru formatori și lectori aprobați</p>
+                </div>
+                <span className="ml-auto text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
+                  {teacherCourses.length} resurse
+                </span>
               </div>
-              <span className="ml-auto text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
-                {teacherCourses.length} resurse
-              </span>
-            </div>
 
-            {teacherCourses.length > 0 ? (
-              <div className="space-y-4">
-                {inv.length > 0 && (
-                  <div>
-                    <p className="text-xs font-semibold text-indigo-600 mb-2 flex items-center gap-1">
-                      🌈 Formatori — Clasele 0–4 <span className="font-normal text-gray-400">({inv.length})</span>
-                    </p>
-                    <AdminCoursesTable courses={inv} />
-                  </div>
-                )}
-                {prof.length > 0 && (
-                  <div>
-                    <p className="text-xs font-semibold text-purple-600 mb-2 flex items-center gap-1">
-                      🚀 Profesori gimnaziu — Clasele 5–8 <span className="font-normal text-gray-400">({prof.length})</span>
-                    </p>
-                    <AdminCoursesTable courses={prof} />
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="bg-white rounded-xl border border-dashed p-6 text-center text-gray-400 text-sm">
-                Nicio resursă pentru formatori.{" "}
-                <Link href="/admin/courses/new" className="text-blue-500 underline">Adaugă una</Link>{" "}
-                sau importă cu{" "}
-                <Link href="/admin/curriculum-import" className="text-blue-500 underline">Import AI</Link>{" "}
-                selectând audiența <em>Formatori / Profesori</em>.
-              </div>
-            )}
-          </section>
+              {teacherCourses.length > 0 ? (
+                <div className="space-y-4">
+                  {formatori.length > 0 && (
+                    <div>
+                      <p className="text-xs font-semibold text-blue-600 mb-2 flex items-center gap-1">
+                        🏫 Formatori <span className="font-normal text-gray-400">({formatori.length})</span>
+                      </p>
+                      <AdminCoursesTable courses={formatori} />
+                    </div>
+                  )}
+                  {lectori.length > 0 && (
+                    <div>
+                      <p className="text-xs font-semibold text-purple-600 mb-2 flex items-center gap-1">
+                        🎙️ Lectori <span className="font-normal text-gray-400">({lectori.length})</span>
+                      </p>
+                      <AdminCoursesTable courses={lectori} />
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="bg-white rounded-xl border border-dashed p-6 text-center text-gray-400 text-sm">
+                  Nicio resursă pentru formatori.{" "}
+                  <Link href="/admin/courses/new" className="text-blue-500 underline">Adaugă una</Link>{" "}
+                  sau importă cu{" "}
+                  <Link href="/admin/curriculum-import" className="text-blue-500 underline">Import AI</Link>{" "}
+                  selectând audiența <em>Formatori / Lectori</em>.
+                </div>
+              )}
+            </section>
           )}
         </div>
       )}
