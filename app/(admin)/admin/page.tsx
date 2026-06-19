@@ -15,7 +15,6 @@ export default async function AdminDashboardPage() {
   const allUsers = allUsersData?.users ?? [];
   const adminUsers = allUsers.filter((u) => u.user_metadata?.role === "admin");
   const adminUserIds = adminUsers.map((u) => u.id);
-  const adminEmails = (process.env.ADMIN_EMAILS || "").split(",").map((e) => e.trim()).filter(Boolean);
 
   let parentsQuery = supabase.from("parent_profiles").select("*", { count: "exact", head: true });
   if (adminUserIds.length > 0) {
