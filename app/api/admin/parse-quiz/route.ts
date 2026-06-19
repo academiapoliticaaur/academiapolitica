@@ -38,7 +38,7 @@ async function extractText(file: File): Promise<string> {
   throw new Error("Format nesuportat. Folosește .docx, .txt sau lipește textul.");
 }
 
-// ─── Parser cu AI (Groq sau Anthropic) — returnează secțiuni quiz ─────────────
+// ─── Parser cu AI (Groq) — returnează secțiuni quiz ─────────────
 async function parseWithAI(text: string): Promise<QuizSection[]> {
   const systemPrompt = `Ești expert în extragerea quiz-urilor din documente educaționale românești.
 Extrage TOATE quiz-urile și întrebările din document.
@@ -75,29 +75,6 @@ Reguli:
     const arr = parsed.questions ?? parsed.data ?? (Array.isArray(parsed) ? parsed : []);
     const valid = arr.filter((q: QuizSection) => q.questions?.length >= 2);
     return valid.length > 0 ? [{ title: "Quiz", questions: valid }] : [];
-  }
-
-  if (process.env.ANTHROPIC_API_KEY) {
-    const { default: Anthropic } = await import("@anthropic-ai/sdk");
-    const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-    const message = await client.messages.create({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 4096,
-      messages: [{
-        role: "user",
-        content: `${systemPrompt}\n\nTEXT:\n${text.substring(0, 14000)}`,
-      }],
-    });
-    const raw = (message.content[0] as { type: string; text: string }).text?.trim() || "";
-    const jsonMatch = raw.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) return [];
-    const parsed = JSON.parse(jsonMatch[0]);
-    if (parsed.quizzes && Array.isArray(parsed.quizzes)) {
-      return (parsed.quizzes as QuizSection[]).filter(
-        (q) => q.title && Array.isArray(q.questions) && q.questions.length > 0
-      );
-    }
-    return [];
   }
 
   return [];

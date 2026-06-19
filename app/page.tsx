@@ -137,11 +137,10 @@ export default async function HomePage() {
 
               {/* Dreapta — imagine verticală */}
               <div className="flex justify-center">
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src="/academiapoliticavertical.png"
                   alt="Academia Politica AUR"
-                  width={420}
-                  height={560}
                   style={{ width: "100%", maxWidth: 420, height: "auto" }}
                   className="drop-shadow-xl"
                 />
