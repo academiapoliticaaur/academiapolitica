@@ -81,7 +81,7 @@ export function ParentsTable({ rows }: { rows: ParentRow[] }) {
                   <th className="px-5 py-3 text-left font-semibold text-gray-600">Nume</th>
                   <th className="px-5 py-3 text-left font-semibold text-gray-600">Email</th>
                   <th className="px-5 py-3 text-left font-semibold text-gray-600">Status</th>
-                  <th className="px-5 py-3 text-left font-semibold text-gray-600">Cursanți</th>
+                  <th className="px-5 py-3 text-left font-semibold text-gray-600">Profil curs</th>
                   <th className="px-5 py-3 text-left font-semibold text-gray-600">Înregistrat</th>
                   <th className="px-5 py-3"></th>
                 </tr>
@@ -117,8 +117,8 @@ export function ParentsTable({ rows }: { rows: ParentRow[] }) {
                       )}
                     </td>
                     <td className="px-5 py-4">
-                      <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full font-medium">
-                        {parent.childCount} cursanți
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${parent.childCount > 0 ? "bg-teal-100 text-teal-700" : "bg-gray-100 text-gray-400"}`}>
+                        {parent.childCount > 0 ? "Activ" : "Inactiv"}
                       </span>
                     </td>
                     <td className="px-5 py-4 text-gray-400 text-xs">

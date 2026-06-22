@@ -6,7 +6,7 @@ import { ParentsTable, type ParentRow } from "@/components/admin/parents-table";
 import { Pagination } from "@/components/admin/pagination";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Membri înregistrați" };
+export const metadata: Metadata = { title: "Cursanți înregistrați" };
 
 const PAGE_SIZE = 25;
 
@@ -65,7 +65,7 @@ export default async function AdminParentsPage({ searchParams }: PageProps) {
       </Button>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">
-          Membri înregistrați{count != null ? ` (${count})` : ""}
+          Cursanți înregistrați{count != null ? ` (${count})` : ""}
         </h1>
         <Button asChild className="bg-blue-100 hover:bg-blue-200 text-blue-700 gap-2">
           <Link href="/admin/parents/add">
@@ -77,7 +77,7 @@ export default async function AdminParentsPage({ searchParams }: PageProps) {
 
       {rows.length === 0 ? (
         <div className="text-center py-16 bg-white rounded-xl border">
-          <p className="text-gray-500">Niciun membru înregistrat încă.</p>
+          <p className="text-gray-500">Niciun cursant înregistrat încă.</p>
         </div>
       ) : (
         <>

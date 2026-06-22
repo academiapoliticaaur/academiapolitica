@@ -29,7 +29,7 @@ export default async function AdminClassesPage() {
         <h1 className="text-2xl font-bold mb-6">Grupuri de formare</h1>
         <div className="text-center py-16 bg-white rounded-xl border">
           <div className="text-5xl mb-3">🏫</div>
-          <p className="text-gray-500">Nicio clasă creată încă.</p>
+          <p className="text-gray-500">Niciun grup de formare creat încă.</p>
         </div>
       </div>
     );
@@ -70,19 +70,19 @@ export default async function AdminClassesPage() {
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold mb-1">Grupuri de formare</h1>
-          <p className="text-gray-500 text-sm">Toate clasele create de formatori.</p>
+          <p className="text-gray-500 text-sm">Toate grupurile create de formatori.</p>
         </div>
-        <span className="text-sm text-gray-400">{classes.length} {classes.length === 1 ? "clasă" : "clase"}</span>
+        <span className="text-sm text-gray-400">{classes.length} {classes.length === 1 ? "grup" : "grupuri"}</span>
       </div>
 
       <div className="bg-white rounded-xl border overflow-hidden">
         <table className="w-full text-sm">
           <thead className="bg-gray-50 border-b">
             <tr>
-              <th className="px-5 py-3 text-left font-semibold text-gray-600">Clasă</th>
-              <th className="px-5 py-3 text-left font-semibold text-gray-600">Profesor</th>
+              <th className="px-5 py-3 text-left font-semibold text-gray-600">Grup</th>
+              <th className="px-5 py-3 text-left font-semibold text-gray-600">Formator</th>
               <th className="px-5 py-3 text-left font-semibold text-gray-600">Cod</th>
-              <th className="px-5 py-3 text-left font-semibold text-gray-600">Elevi</th>
+              <th className="px-5 py-3 text-left font-semibold text-gray-600">Participanți</th>
               <th className="px-5 py-3 text-left font-semibold text-gray-600">Cursuri</th>
               <th className="px-5 py-3 text-left font-semibold text-gray-600">Status</th>
               <th className="px-5 py-3"></th>
@@ -93,7 +93,7 @@ export default async function AdminClassesPage() {
               <tr key={cls.id} className="hover:bg-gray-50">
                 <td className="px-5 py-4">
                   <p className="font-medium text-gray-900">{cls.name}</p>
-                  <p className="text-xs text-gray-400">{cls.school_year}{cls.grade ? ` · Clasa ${cls.grade}` : ""}</p>
+                  <p className="text-xs text-gray-400">{cls.school_year || ""}</p>
                 </td>
                 <td className="px-5 py-4 text-gray-500 text-xs">
                   {teacherNames[cls.teacher_id] || "—"}
@@ -127,7 +127,7 @@ export default async function AdminClassesPage() {
                 </td>
                 <td className="px-5 py-4">
                   <DeleteButton
-                    confirmMessage={`Ștergi clasa "${cls.name}"? Se vor șterge toți elevii și progresul din această clasă.`}
+                    confirmMessage={`Ștergi grupul "${cls.name}"? Se vor șterge toți participanții și progresul din acest grup.`}
                     action={async () => {
                       "use server";
                       await deleteClassAction(cls.id);

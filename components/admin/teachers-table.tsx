@@ -10,8 +10,9 @@ import { approveUser, deleteTeacher } from "@/lib/admin/actions";
 const PAGE_SIZE = 25;
 
 const TEACHER_LABELS: Record<string, string> = {
-  formator: "Formator (cls. 0–4)",
-  profesor: "Profesor gimnaziu (cls. 5–8)",
+  formator: "Formator",
+  lector: "Lector",
+  profesor: "Lector",
 };
 
 export type TeacherRow = {

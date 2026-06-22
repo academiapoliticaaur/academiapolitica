@@ -65,8 +65,8 @@ export default async function AdminTeachersPage({ searchParams }: PageProps) {
           <GraduationCap className="mx-auto mb-3 text-gray-300" size={40} />
           <p className="text-gray-400 mb-2">Niciun formator înregistrat încă.</p>
           <p className="text-sm text-gray-400">
-            Cadrele didactice se înregistrează selectând tipul de cont{" "}
-            <strong>Formator</strong> sau <strong>Profesor gimnaziu</strong> la creare cont.
+            Formatorii și lectorii se înregistrează selectând tipul de cont{" "}
+            <strong>Formator</strong> sau <strong>Lector</strong> la creare cont.
           </p>
         </div>
       ) : (
