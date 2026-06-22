@@ -183,8 +183,10 @@ export default async function CoursesPage({ searchParams }: PageProps) {
 
   const isDemo = params.demo === "1";
   const groupFilter = forcedAgeGroup ?? (params.group as AgeGroup | undefined);
-  const validGroup =
-    groupFilter === "0-4" || groupFilter === "5-8" ? groupFilter : undefined;
+  const VALID_GROUPS = ["0-4", "5-8", "modul-1", "modul-2", "modul-3", "modul-4", "adult"] as const;
+  const validGroup = VALID_GROUPS.includes(groupFilter as typeof VALID_GROUPS[number])
+    ? groupFilter as AgeGroup
+    : undefined;
   const sortOption: SortOption = params.sort === "newest" ? "newest" : "alpha";
 
   const demoCourses = await getDemoCourses().catch(() => []);
@@ -256,8 +258,22 @@ export default async function CoursesPage({ searchParams }: PageProps) {
             href={sortOption === "newest" ? "/courses?sort=newest" : "/courses"}
             className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${!validGroup && !isDemo ? "bg-blue-100 text-blue-700 border-blue-300" : "bg-white text-gray-600 border-gray-200 hover:border-blue-300"}`}
           >
-            Toate grupele
+            Toate modulele
           </Link>
+          {[
+            { group: "modul-1", label: "Modulul I",   active: "bg-yellow-500 text-white border-yellow-500", hover: "hover:border-yellow-300" },
+            { group: "modul-2", label: "Modulul II",  active: "bg-blue-500 text-white border-blue-500",    hover: "hover:border-blue-300" },
+            { group: "modul-3", label: "Modulul III", active: "bg-gray-500 text-white border-gray-500",    hover: "hover:border-gray-300" },
+            { group: "modul-4", label: "Modulul IV",  active: "bg-indigo-500 text-white border-indigo-500",hover: "hover:border-indigo-300" },
+          ].map(({ group, label, active, hover }) => (
+            <Link
+              key={group}
+              href={`/courses?group=${group}${sortOption === "newest" ? "&sort=newest" : ""}`}
+              className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${validGroup === group && !isDemo ? active : `bg-white text-gray-600 border-gray-200 ${hover}`}`}
+            >
+              {label}
+            </Link>
+          ))}
           {demoCourses.length > 0 && (
             <Link
               href="/courses?demo=1"

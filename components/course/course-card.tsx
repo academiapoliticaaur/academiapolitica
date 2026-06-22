@@ -13,10 +13,15 @@ interface CourseCardProps {
 }
 
 export function CourseCard({ course, progressPercentage, href }: CourseCardProps) {
-  const ageLabel = course.age_group === "0-4" ? "Clasele 0–4" : "Clasele 5–8";
-  const ageBg = course.age_group === "0-4"
-    ? "bg-teal-100 text-teal-700"
-    : "bg-indigo-100 text-indigo-700";
+  const MODULE_BADGE: Record<string, { label: string; bg: string }> = {
+    "modul-1": { label: "Modulul I",   bg: "bg-yellow-100 text-yellow-800" },
+    "modul-2": { label: "Modulul II",  bg: "bg-blue-100 text-blue-800" },
+    "modul-3": { label: "Modulul III", bg: "bg-gray-100 text-gray-600" },
+    "modul-4": { label: "Modulul IV",  bg: "bg-indigo-100 text-indigo-800" },
+    "adult":   { label: "Curs AUR",    bg: "bg-green-100 text-green-700" },
+  };
+  const badge = MODULE_BADGE[course.age_group] ?? { label: "Demo", bg: "bg-amber-100 text-amber-700" };
+  const { label: ageLabel, bg: ageBg } = badge;
 
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow group h-full flex flex-col">

@@ -1,4 +1,4 @@
-export type AgeGroup = "0-4" | "5-8";
+export type AgeGroup = "0-4" | "5-8" | "9-12" | "modul-1" | "modul-2" | "modul-3" | "modul-4" | "adult";
 export type CourseStatus = "draft" | "published";
 export type LessonStatus = "draft" | "reviewed" | "published";
 export type LessonType = "video" | "presentation" | "worksheet" | "quiz" | "mixed";

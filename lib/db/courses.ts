@@ -7,7 +7,7 @@ import type { Course, Module, Lesson } from "@/types";
 // nu depinde de sesiunea utilizatorului — folosim admin client (fără cookies) ca să fie
 // cacheable cu unstable_cache. Tag "courses" e invalidat din mutațiile admin (revalidateTag).
 export const getPublishedCourses = unstable_cache(
-  async (ageGroup?: "0-4" | "5-8") => {
+  async (ageGroup?: import("@/types").AgeGroup) => {
     const supabase = createAdminClient();
 
     // Pagina /courses arată DOAR cursuri pentru copii (nu resurse formatori)
