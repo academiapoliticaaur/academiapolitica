@@ -21,27 +21,27 @@ const TYPE_INFO: Record<string, { icon: string; title: string; headline: string;
   video: {
     icon: "🎬",
     title: "Lecții video",
-    headline: "Învață prin film educațional",
+    headline: "Învață prin conținut video",
     description:
-      "Lecțiile video sunt create special pentru a capta atenția copiilor și a explica conceptele complexe într-un mod vizual, clar și atractiv. Fiecare video este însoțit de activități și materiale de consolidare.",
+      "Lecțiile video prezintă conceptele politice și civice într-un mod vizual, clar și structurat. Fiecare video este însoțit de activități și materiale de consolidare.",
     details: [
-      "Durate adaptate grupei de vârstă (5–15 minute)",
-      "Limbaj simplu, animații și exemple din viața de zi cu zi",
+      "Durate optime pentru adulți (10–30 minute)",
+      "Limbaj accesibil cu exemple din realitatea politică românească",
       "Compatibil cu YouTube și Google Drive",
-      "Progresul se salvează automat în contul copilului",
+      "Progresul se salvează automat în contul tău",
     ],
   },
   presentation: {
     icon: "📋",
     title: "Prezentări interactive",
-    headline: "Slide-uri colorate și structurate",
+    headline: "Slide-uri structurate și clare",
     description:
-      "Prezentările sunt create în Google Slides și integrate direct în platformă. Sunt ideale pentru recapitulare, lecturi ghidate sau pentru copiii care preferă să citească și să exploreze în ritmul lor.",
+      "Prezentările sunt create în Google Slides și integrate direct în platformă. Sunt ideale pentru recapitulare, lecturi ghidate sau pentru cei care preferă să citească și să exploreze în ritmul lor.",
     details: [
       "Vizualizare direct în browser, fără download",
-      "Design colorat și adaptat fiecărei grupe de vârstă",
+      "Design profesional adaptat conținutului politic și civic",
       "Funcționează pe orice dispozitiv (tabletă, telefon, PC)",
-      "Posibilitate de descărcare dacă este activată de profesor",
+      "Posibilitate de descărcare dacă este activată de lector",
     ],
   },
   worksheet: {
@@ -49,25 +49,25 @@ const TYPE_INFO: Record<string, { icon: string; title: string; headline: string;
     title: "Activități și fișe de lucru",
     headline: "Exersează și consolidează cunoștințele",
     description:
-      "Fișele de lucru sunt documente PDF descărcabile, create de echipa noastră de educatori. Pot fi tipărite sau completate digital, oferind copilului o activitate practică după fiecare lecție.",
+      "Fișele de lucru sunt documente PDF descărcabile, create de echipa noastră de formatori. Pot fi tipărite sau completate digital, oferind o activitate practică după fiecare lecție.",
     details: [
       "Descărcabile în format PDF",
       "Activități practice legate de lecția curentă",
-      "Adaptate pentru grupele 0–4 și 5–8",
+      "Teme de analiză politică și civică",
       "Pot fi tipărite sau completate pe tabletă cu stylus",
     ],
   },
   quiz: {
     icon: "🎯",
     title: "Quiz-uri interactive",
-    headline: "Testează ce ai învățat în mod jucăuș",
+    headline: "Testează ce ai învățat",
     description:
-      "Quiz-urile sunt integrate direct în fluxul lecției și oferă feedback imediat, pozitiv și încurajator. Nu există note — scopul este să ajute copilul să înțeleagă și să repete, nu să îl streseze.",
+      "Quiz-urile sunt integrate direct în fluxul lecției și oferă feedback imediat. Scopul este să consolidezi cunoștințele și să identifici zonele care necesită aprofundare.",
     details: [
       "Răspunsuri multiple cu feedback vizual imediat",
-      "Fără note sau penalizări — focus pe înțelegere",
-      "Progresul se salvează și poate fi revizuit de părinte",
-      "Gamificat: puncte, steluțe și mesaje de encouragement",
+      "Minim 80% pentru a trece la lecția următoare",
+      "Progresul se salvează și poate fi revizuit oricând",
+      "Puncte XP și insigne la finalizarea modulelor",
     ],
   },
 };
@@ -176,8 +176,8 @@ export default async function CoursesPage({ searchParams }: PageProps) {
       .single();
 
     if (profile?.approved) {
-      if (profile.account_type === "formator") { forcedAgeGroup = "0-4"; teacherAccountType = "formator"; }
-      if (profile.account_type === "lector") { forcedAgeGroup = "5-8"; teacherAccountType = "lector"; }
+      if (profile.account_type === "formator") { teacherAccountType = "formator"; }
+      if (profile.account_type === "lector") { teacherAccountType = "lector"; }
     }
   }
 
@@ -194,7 +194,7 @@ export default async function CoursesPage({ searchParams }: PageProps) {
       <div className="mb-10">
         <h1 className="text-3xl font-bold mb-2">Cursuri disponibile 📚</h1>
         <p className="text-gray-500">
-          Alege grupa potrivită și începe să explorezi împreună cu Academia Politica AUR.
+          Formare politică și educație civică pentru membri, simpatizanți și activiști AUR.
         </p>
       </div>
 
@@ -239,8 +239,8 @@ export default async function CoursesPage({ searchParams }: PageProps) {
           <div className="flex items-start gap-3">
             <GraduationCap size={22} className="text-indigo-500 shrink-0 mt-0.5" />
             <p className="text-indigo-800 text-sm">
-              <span className="font-semibold">Cursurile de mai jos sunt pentru elevii tăi.</span>{" "}
-              Ghidurile și resursele tale de pregătire ca {teacherAccountType === "formator" ? "învățător" : "lector"} sunt într-o secțiune dedicată.
+              <span className="font-semibold">Cursurile de mai jos sunt pentru participanții grupurilor tale.</span>{" "}
+              Resursele tale de pregătire ca {teacherAccountType === "formator" ? "formator" : "lector"} sunt într-o secțiune dedicată.
             </p>
           </div>
           <Button asChild size="sm" className="bg-indigo-100 hover:bg-indigo-200 text-indigo-700 shrink-0">
@@ -257,18 +257,6 @@ export default async function CoursesPage({ searchParams }: PageProps) {
             className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${!validGroup && !isDemo ? "bg-blue-100 text-blue-700 border-blue-300" : "bg-white text-gray-600 border-gray-200 hover:border-blue-300"}`}
           >
             Toate grupele
-          </Link>
-          <Link
-            href={`/courses?group=0-4${sortOption === "newest" ? "&sort=newest" : ""}`}
-            className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${validGroup === "0-4" && !isDemo ? "bg-teal-500 text-white border-teal-500" : "bg-white text-gray-600 border-gray-200 hover:border-teal-300"}`}
-          >
-            🌱 Clasele 0–4
-          </Link>
-          <Link
-            href={`/courses?group=5-8${sortOption === "newest" ? "&sort=newest" : ""}`}
-            className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${validGroup === "5-8" && !isDemo ? "bg-indigo-500 text-white border-indigo-500" : "bg-white text-gray-600 border-gray-200 hover:border-indigo-300"}`}
-          >
-            🔬 Clasele 5–8
           </Link>
           {demoCourses.length > 0 && (
             <Link
@@ -296,16 +284,6 @@ export default async function CoursesPage({ searchParams }: PageProps) {
         </div>
       )}
 
-      {forcedAgeGroup && (
-        <div className="mb-8 flex items-center gap-2">
-          <span className={`px-4 py-2 rounded-full text-sm font-medium border ${
-            forcedAgeGroup === "0-4" ? "bg-teal-500 text-white border-teal-500" : "bg-indigo-500 text-white border-indigo-500"
-          }`}>
-            {forcedAgeGroup === "0-4" ? "🌱 Clasele 0–4" : "🔬 Clasele 5–8"}
-          </span>
-          <span className="text-xs text-gray-400">Cursuri filtrate pentru grupa ta</span>
-        </div>
-      )}
 
       {!isDemo && (
         <Suspense
