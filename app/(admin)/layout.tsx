@@ -146,7 +146,6 @@ export default async function AdminLayout({
                   { href: "/admin/vouchers", icon: <Ticket size={18} />, label: "Vouchere" },
                   { href: "/admin/administrators", icon: <ShieldCheck size={18} />, label: "Administratori" },
                   { href: "/admin/parents", icon: <Users size={18} />, label: "Cursanți" },
-                  { href: "/admin/children", icon: <Baby size={18} />, label: "Cursanți" },
                   { href: "/admin/teachers", icon: <GraduationCap size={18} />, label: "Formatori" },
                   { href: "/admin/classes", icon: <School size={18} />, label: "Grupuri" },
                 ].map((item) => (
