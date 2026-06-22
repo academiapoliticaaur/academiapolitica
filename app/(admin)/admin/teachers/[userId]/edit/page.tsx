@@ -123,8 +123,8 @@ export default async function EditTeacherPage({
               <Label>Tip cont</Label>
               <div className="grid gap-2">
                 {[
-                  { value: "formator", label: "🌈 Formator", desc: "Clasele 0–4 — Ciclul primar" },
-                  { value: "lector", label: "🚀 Profesor gimnaziu", desc: "Clasele 5–8 — Ciclul gimnazial" },
+                  { value: "formator", label: "🌈 Formator", desc: "Creează grupuri de formare, resurse formatori" },
+                  { value: "lector", label: "🚀 Lector", desc: "Conferențiar / expert, resurse lectori" },
                 ].map((opt) => (
                   <label
                     key={opt.value}

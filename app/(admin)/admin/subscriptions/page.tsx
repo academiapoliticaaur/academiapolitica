@@ -15,9 +15,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = { title: "Abonamente — Admin" };
 
 const ACCOUNT_TYPE_LABELS: Record<string, string> = {
-  family: "Părinte",
+  family: "Cursant",
+  member: "Cursant",
   formator: "Formator",
-  profesor: "Profesor",
+  profesor: "Lector",
+  lector: "Lector",
 };
 
 type FilterType = "all" | "active" | "expired" | "none";

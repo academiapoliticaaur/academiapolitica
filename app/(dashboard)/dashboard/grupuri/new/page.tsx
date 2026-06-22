@@ -1,4 +1,4 @@
-﻿import { redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { AcademiaGuide } from "@/components/common/academia-guide";
@@ -10,7 +10,7 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Clasă nouă — Academia Politica AUR" };
+export const metadata: Metadata = { title: "Grup nou — Academia Politica AUR" };
 
 async function createClass(formData: FormData) {
   "use server";
@@ -27,7 +27,6 @@ async function createClass(formData: FormData) {
     redirect("/dashboard/grupuri/new?error=campuri_obligatorii");
   }
 
-  // Cod de acces: 4-12 caractere alfanumerice
   if (!/^[A-Z0-9]{4,12}$/.test(access_code)) {
     redirect("/dashboard/grupuri/new?error=cod_invalid");
   }
@@ -65,8 +64,8 @@ export default async function NewClassPage({
 
   const errorMessages: Record<string, string> = {
     campuri_obligatorii: "Completează toate câmpurile obligatorii.",
-    cod_invalid: "Codul clasei trebuie să aibă 4–12 caractere (litere mari și cifre).",
-    cod_existent: "Acest cod de clasă există deja. Alege un cod unic.",
+    cod_invalid: "Codul grupului trebuie să aibă 4–12 caractere (litere mari și cifre).",
+    cod_existent: "Acest cod de grup există deja. Alege un cod unic.",
     eroare_server: "Eroare de server. Încearcă din nou.",
   };
 
@@ -78,10 +77,10 @@ export default async function NewClassPage({
       <div className="mb-6">
         <Link href="/dashboard/grupuri" className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700 mb-4">
           <ArrowLeft size={16} />
-          Înapoi la clase
+          Înapoi la grupuri
         </Link>
-        <h1 className="text-2xl font-bold">Clasă nouă</h1>
-        <p className="text-gray-500 text-sm mt-1">Creează o clasă și invită elevii cu codul de acces.</p>
+        <h1 className="text-2xl font-bold">Grup nou</h1>
+        <p className="text-gray-500 text-sm mt-1">Creează un grup de formare și invită participanții cu codul de acces.</p>
       </div>
 
       {error && errorMessages[error] && (
@@ -93,23 +92,23 @@ export default async function NewClassPage({
       <AcademiaGuide
         variant="info"
         className="mb-6"
-        message="Codul de acces este cheia clasei tale! Alege ceva ușor de memorat pentru elevi — de exemplu CLASA3B sau MATE5A. Îl comunici verbal, pe tablă sau în grupul de părinți, și elevii intră instant fără cont."
+        message="Codul de acces este cheia grupului tău! Alege ceva ușor de memorat — de exemplu GRUP1AUR sau FORM2025. Îl comunici participanților, iar aceștia intră instant fără cont."
       />
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Detalii clasă</CardTitle>
+          <CardTitle className="text-base">Detalii grup</CardTitle>
         </CardHeader>
         <CardContent>
           <form action={createClass} className="space-y-5">
             <div className="space-y-1.5">
               <Label htmlFor="name">
-                Numele clasei <span className="text-red-500">*</span>
+                Numele grupului <span className="text-red-500">*</span>
               </Label>
               <Input
                 id="name"
                 name="name"
-                placeholder="ex. Clasa a 3-a B"
+                placeholder="ex. Formare politică — Iași 2025"
                 required
                 maxLength={60}
               />
@@ -117,17 +116,17 @@ export default async function NewClassPage({
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <Label htmlFor="grade">Clasa (an de studiu)</Label>
+                <Label htmlFor="grade">Nivel (opțional)</Label>
                 <Input
                   id="grade"
                   name="grade"
-                  placeholder="ex. 3"
-                  maxLength={5}
+                  placeholder="ex. Introductiv"
+                  maxLength={20}
                 />
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="school_year">
-                  An școlar <span className="text-red-500">*</span>
+                  An formare <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="school_year"
@@ -147,19 +146,19 @@ export default async function NewClassPage({
               <Input
                 id="access_code"
                 name="access_code"
-                placeholder="ex. CLASA3B"
+                placeholder="ex. GRUP1AUR"
                 required
                 maxLength={12}
                 className="font-mono uppercase"
               />
               <p className="text-xs text-gray-400">
-                4–12 caractere, litere mari și cifre. Elevii vor folosi acest cod pentru a intra în clasă.
+                4–12 caractere, litere mari și cifre. Participanții vor folosi acest cod pentru a intra în grup.
               </p>
             </div>
 
             <div className="flex gap-3 pt-2">
               <Button type="submit" className="bg-indigo-600 hover:bg-indigo-700 text-white">
-                Creează clasa
+                Creează grupul
               </Button>
               <Button type="button" variant="outline" asChild>
                 <Link href="/dashboard/grupuri">Anulează</Link>

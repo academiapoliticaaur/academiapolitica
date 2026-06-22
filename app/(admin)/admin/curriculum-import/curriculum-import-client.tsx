@@ -42,14 +42,17 @@ interface ParsedCurriculum {
 }
 
 const AGE_GROUPS = [
-  { value: "0-4", label: "Clasele 0–4" },
-  { value: "5-8", label: "Clasele 5–8" },
+  { value: "modul-1", label: "Modulul I" },
+  { value: "modul-2", label: "Modulul II" },
+  { value: "modul-3", label: "Modulul III" },
+  { value: "modul-4", label: "Modulul IV" },
+  { value: "adult", label: "General (adulți)" },
 ];
 
 const AUDIENCE_OPTIONS = [
-  { value: "children", label: "🧒 Copii / Elevi", desc: "Apare la Cursuri" },
-  { value: "formator", label: "🌈 Formatori (cls. 0–4)", desc: "Apare la Resurse Cadre Didactice" },
-  { value: "lector", label: "🚀 Profesori gimnaziu (cls. 5–8)", desc: "Apare la Resurse Cadre Didactice" },
+  { value: "member", label: "🎓 Cursanți / Membri AUR", desc: "Apare la Cursuri" },
+  { value: "formator", label: "🌈 Formatori", desc: "Apare la Resurse Formatori" },
+  { value: "lector", label: "🚀 Lectori", desc: "Apare la Resurse Formatori" },
 ];
 
 export function CurriculumImportClient() {
@@ -58,8 +61,8 @@ export function CurriculumImportClient() {
   const [error, setError] = useState<string | null>(null);
   const [isRateLimited, setIsRateLimited] = useState(false);
   const [curriculum, setCurriculum] = useState<ParsedCurriculum | null>(null);
-  const [selectedAgeGroup, setSelectedAgeGroup] = useState("5-8");
-  const [selectedAudience, setSelectedAudience] = useState("children");
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState("modul-1");
+  const [selectedAudience, setSelectedAudience] = useState("member");
   const [isDemo, setIsDemo] = useState(false);
   const [importing, setImporting] = useState(false);
   const [importSuccess, setImportSuccess] = useState(false);
@@ -96,12 +99,11 @@ export function CurriculumImportClient() {
     setCurriculum(data.curriculum);
     setQuizzesDetected(data.quizzesDetected ?? 0);
 
-    const detectedAudience = data.curriculum.audience ?? "children";
-    setSelectedAudience(["children", "formator", "lector"].includes(detectedAudience) ? detectedAudience : "children");
+    const detectedAudience = data.curriculum.audience ?? "member";
+    setSelectedAudience(["member", "formator", "lector", "children"].includes(detectedAudience) ? (detectedAudience === "children" ? "member" : detectedAudience) : "member");
 
     const rawAge: string = data.curriculum.age_group ?? "";
-    const normalizedAge: "0-4" | "5-8" =
-      rawAge.includes("0-4") || rawAge.includes("0–4") || rawAge.includes("primar") ? "0-4" : "5-8";
+    const normalizedAge = ["modul-1", "modul-2", "modul-3", "modul-4"].includes(rawAge) ? rawAge : "modul-1";
     setSelectedAgeGroup(normalizedAge);
   }
 
@@ -273,7 +275,7 @@ export function CurriculumImportClient() {
               ✅ Confirmă audiența cursului:
             </Label>
             <p className="text-xs text-indigo-600 mb-3">
-              AI-ul a detectat: <strong>{AUDIENCE_OPTIONS.find(a => a.value === (curriculum.audience ?? "children"))?.label ?? curriculum.audience}</strong>
+              AI-ul a detectat: <strong>{AUDIENCE_OPTIONS.find(a => a.value === (curriculum.audience ?? "member"))?.label ?? curriculum.audience}</strong>
             </p>
             <div className="grid gap-2">
               {AUDIENCE_OPTIONS.map((opt) => (

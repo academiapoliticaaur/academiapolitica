@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { Users, Baby, BookOpen, CheckCircle, GraduationCap, Zap } from "lucide-react";
+import { Users, UserCheck, BookOpen, CheckCircle, GraduationCap, Zap } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Statistici — Admin" };
@@ -42,8 +42,8 @@ export default async function AdminStatsPage() {
   const totalXP = (completionsCount ?? 0) * 10;
 
   const stats = [
-    { icon: <Users size={22} className="text-blue-500" />, label: "Conturi de părinți", value: parentsCount ?? 0, bg: "bg-blue-50" },
-    { icon: <Baby size={22} className="text-teal-500" />, label: "Profiluri de copii", value: childrenCount ?? 0, bg: "bg-teal-50" },
+    { icon: <Users size={22} className="text-blue-500" />, label: "Cursanți înregistrați", value: parentsCount ?? 0, bg: "bg-blue-50" },
+    { icon: <UserCheck size={22} className="text-teal-500" />, label: "Profiluri active", value: childrenCount ?? 0, bg: "bg-teal-50" },
     { icon: <BookOpen size={22} className="text-purple-500" />, label: "Cursuri publicate", value: coursesCount ?? 0, bg: "bg-purple-50" },
     { icon: <CheckCircle size={22} className="text-green-500" />, label: "Lecții completate", value: completionsCount ?? 0, bg: "bg-green-50" },
     { icon: <GraduationCap size={22} className="text-yellow-500" />, label: "Certificate emise", value: certificatesCount ?? 0, bg: "bg-yellow-50" },

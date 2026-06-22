@@ -83,7 +83,7 @@ export default async function ClassesPage() {
           <div>
             <p className="font-semibold text-indigo-800">Abonament necesar</p>
             <p className="text-sm text-indigo-700 mt-0.5">
-              Elevii din clasele tale nu pot accesa lecțiile fără un abonament activ. Contactează administratorul platformei pentru activare.
+              Participanții din grupurile tale nu pot accesa lecțiile fără un abonament activ. Contactează administratorul platformei pentru activare.
             </p>
           </div>
         </div>
@@ -103,12 +103,12 @@ export default async function ClassesPage() {
       <div className="mb-8 flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold mb-1">Grupurile mele</h1>
-          <p className="text-gray-500">Gestionează clasele, elevii și cursurile asignate.</p>
+          <p className="text-gray-500">Gestionează grupurile, participanții și cursurile asignate.</p>
         </div>
         <Button asChild className="bg-indigo-600 hover:bg-indigo-700 text-white gap-2 shrink-0">
           <Link href="/dashboard/grupuri/new">
             <Plus size={16} />
-            Clasă nouă
+            Grup nou
           </Link>
         </Button>
       </div>
@@ -117,14 +117,14 @@ export default async function ClassesPage() {
         <Card className="border-dashed border-2">
           <CardContent className="p-10 text-center">
             <div className="text-5xl mb-3">🏫</div>
-            <p className="font-semibold text-gray-700 mb-2">Nu ai creat nicio clasă încă</p>
+            <p className="font-semibold text-gray-700 mb-2">Nu ai creat niciun grup încă</p>
             <p className="text-sm text-gray-500 mb-5">
-              Creează prima ta clasă, adaugă elevi și asignează cursuri.
+              Creează primul tău grup, adaugă participanți și asignează cursuri.
             </p>
             <Button asChild className="bg-indigo-600 hover:bg-indigo-700 text-white gap-2">
               <Link href="/dashboard/grupuri/new">
                 <Plus size={16} />
-                Creează prima clasă
+                Creează primul grup
               </Link>
             </Button>
           </CardContent>
@@ -149,7 +149,7 @@ export default async function ClassesPage() {
           )}
           <AcademiaGuide
             variant="info"
-            message="Elevii intră la /clasa cu codul clasei, selectează numele din listă și introduc PIN-ul personal. Nu au nevoie de cont sau email — totul e simplu și rapid!"
+            message="Participanții intră la /grup cu codul grupului, selectează numele din listă și introduc PIN-ul personal. Nu au nevoie de cont sau email — totul e simplu și rapid!"
           />
         </div>
       )}
@@ -174,7 +174,7 @@ function ClassCard({ cls, archived = false }: { cls: ClassRow; archived?: boolea
           <div className="flex items-center gap-4 text-sm text-gray-500">
             <span className="flex items-center gap-1">
               <Users size={14} />
-              {cls.studentCount} elevi
+              {cls.studentCount} participanți
             </span>
             <span className="flex items-center gap-1">
               <BookOpen size={14} />

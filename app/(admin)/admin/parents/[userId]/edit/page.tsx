@@ -13,9 +13,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = { title: "Editează utilizator — Admin" };
 
 const ACCOUNT_TYPE_OPTIONS = [
-  { value: "member", label: "👨‍👩‍👧 Părinte / Tutore", desc: "Cont de familie, acces la cursuri copii" },
-  { value: "formator", label: "🌈 Formator", desc: "Clasele 0–4 — Resurse formatori" },
-  { value: "lector", label: "🚀 Profesor gimnaziu", desc: "Clasele 5–8 — Resurse formatori" },
+  { value: "member", label: "🎓 Cursant / Membru AUR", desc: "Acces la toate cursurile platformei, aprobat automat" },
+  { value: "formator", label: "🌈 Formator", desc: "Creează grupuri de formare, necesită aprobare admin" },
+  { value: "lector", label: "🚀 Lector", desc: "Conferențiar / expert, acces extins, necesită aprobare admin" },
 ];
 
 async function saveUser(userId: string, formData: FormData) {
@@ -160,7 +160,7 @@ export default async function EditUserPage({
               </div>
               {(profile.account_type === "formator" || profile.account_type === "lector") && (
                 <p className="text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
-                  ⚠️ Dacă schimbi tipul la <strong>Părinte</strong>, contul dispare din Formatori.
+                  ⚠️ Dacă schimbi tipul la <strong>Cursant</strong>, contul dispare din lista Formatori/Lectori.
                 </p>
               )}
             </div>

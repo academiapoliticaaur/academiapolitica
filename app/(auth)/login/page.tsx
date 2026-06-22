@@ -64,11 +64,11 @@ export default function LoginPage() {
     <div className="w-full max-w-md space-y-4">
       <AcademiaGuide
         variant="tip"
-        message=" Intră în cont ca să explorezi lecțiile și să urmărești progresul copilului tău."
+        message="Intră în cont ca să accesezi cursurile de formare politică și să urmărești progresul tău."
       />
       <Card className="w-full max-w-md shadow-lg">
       <CardHeader className="text-center pb-4">
-        <div className="text-4xl mb-2">👧🐱</div>
+        <div className="text-4xl mb-2">🏛️</div>
         <CardTitle className="text-2xl">Intră în contul tău</CardTitle>
         <CardDescription>
           Platforma Academia Politica AUR — cont de utilizator
@@ -85,7 +85,7 @@ export default function LoginPage() {
             <Input
               id="email"
               type="email"
-              placeholder="parinte@exemplu.com"
+              placeholder="email@exemplu.com"
               autoComplete="email"
               {...register("email")}
             />
