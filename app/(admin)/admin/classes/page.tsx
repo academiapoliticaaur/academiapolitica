@@ -5,7 +5,7 @@ import { Users, BookOpen, Archive } from "lucide-react";
 import { DeleteButton } from "@/components/admin/delete-button";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Clase — Admin" };
+export const metadata: Metadata = { title: "Grupuri — Admin" };
 
 async function deleteClassAction(classId: string) {
   "use server";
@@ -26,7 +26,7 @@ export default async function AdminClassesPage() {
   if (!classes || classes.length === 0) {
     return (
       <div className="max-w-4xl">
-        <h1 className="text-2xl font-bold mb-6">Clase</h1>
+        <h1 className="text-2xl font-bold mb-6">Grupuri de formare</h1>
         <div className="text-center py-16 bg-white rounded-xl border">
           <div className="text-5xl mb-3">🏫</div>
           <p className="text-gray-500">Nicio clasă creată încă.</p>
@@ -69,7 +69,7 @@ export default async function AdminClassesPage() {
     <div className="max-w-5xl">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold mb-1">Clase</h1>
+          <h1 className="text-2xl font-bold mb-1">Grupuri de formare</h1>
           <p className="text-gray-500 text-sm">Toate clasele create de formatori.</p>
         </div>
         <span className="text-sm text-gray-400">{classes.length} {classes.length === 1 ? "clasă" : "clase"}</span>

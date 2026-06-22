@@ -67,8 +67,8 @@ export default async function AdminLayout({
             { href: "/admin/administrators", icon: <ShieldCheck size={16} />, label: "Admini" },
             { href: "/admin/parents", icon: <Users size={16} />, label: "Membri" },
             { href: "/admin/children", icon: <Baby size={16} />, label: "Cursanți" },
-            { href: "/admin/teachers", icon: <GraduationCap size={16} />, label: "Cadre did." },
-            { href: "/admin/classes", icon: <School size={16} />, label: "Clase" },
+            { href: "/admin/teachers", icon: <GraduationCap size={16} />, label: "Formatori" },
+            { href: "/admin/classes", icon: <School size={16} />, label: "Grupuri" },
             { href: "/admin/subscriptions", icon: <CreditCard size={16} />, label: "Abonamente" },
             { href: "/admin/vouchers", icon: <Ticket size={16} />, label: "Vouchere" },
             { href: "/admin/stats", icon: <BarChart2 size={16} />, label: "Statistici" },
@@ -149,7 +149,7 @@ export default async function AdminLayout({
                   { href: "/admin/parents", icon: <Users size={18} />, label: "Membri" },
                   { href: "/admin/children", icon: <Baby size={18} />, label: "Cursanți" },
                   { href: "/admin/teachers", icon: <GraduationCap size={18} />, label: "Formatori" },
-                  { href: "/admin/classes", icon: <School size={18} />, label: "Clase" },
+                  { href: "/admin/classes", icon: <School size={18} />, label: "Grupuri" },
                 ].map((item) => (
                   <Link
                     key={item.href}
